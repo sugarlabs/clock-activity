@@ -30,3 +30,5 @@ test_timewriter/en_rules.py
 test_timewriter/es_rules.py
 test_timewriter/__init__.py
 test_timewriter/fr_rules.py
+misc/activity-clock.svg
+.DS_Store

@@ -1,4 +1,3 @@
-#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Code released in the Public Domain. You can do whatever you want with this package.

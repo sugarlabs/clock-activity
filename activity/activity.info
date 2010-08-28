@@ -1,7 +1,7 @@
 [Activity]
 name = Clock
 service_name = tv.alterna.Clock
-class = clock.ClockActivity
+exec = sugar-activity clock.ClockActivity
 icon = activity-clock
 activity_version = 5
 host_version = 1

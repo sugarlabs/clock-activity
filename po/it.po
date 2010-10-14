@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-17 10:59-0500\n"
-"PO-Revision-Date: 2009-12-17 05:16-0400\n"
+"PO-Revision-Date: 2010-10-14 15:35+0200\n"
 "Last-Translator: Carlo Falciola <cfalciola@yahoo.it>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it\n"
@@ -15,12 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 1.2.1\n"
+"X-Generator: Pootle 2.0.3\n"
 
 #: activity/activity.info:2
 msgid "Clock"
 msgstr "Orologio"
 
+# BLLZse  <a href="http://cazgugrfqajl.com/">cazgugrfqajl</a>, [url=http://caczxjihwjfe.com/]caczxjihwjfe[/url], [link=http://yidjplrxfvnf.com/]yidjplrxfvnf[/link], http://cdnoergtvdoy.com/
 #. TRANS: The rules to print the time in the localized language.
 #.
 #. Example syntax:
@@ -63,7 +64,7 @@ msgstr "Orologio"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr ""
+msgstr "time(h, m) => What Time Is It?"
 
 #~ msgctxt "Activity"
 #~ msgid "What Time Is It?"

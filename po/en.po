@@ -1,19 +1,56 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # What Time Is It? OLPC activity
 # This file is Public Domain.
 # Pierre Métras <pierre@alterna.tv>, 2008
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Clock 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2008-10-26 18:14-0400\n"
-"Last-Translator:  <pierre@alterna.tv>\n"
+"PO-Revision-Date: 2011-03-08 05:24+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.1\n"
 
 #. TRANS: Title of the activity
 #: clock.py:98
@@ -44,9 +81,9 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
-"%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
-"\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:166
 msgctxt "Toolbar"
@@ -100,16 +137,15 @@ msgid ""
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
-"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #. TRANS: The format of the font used to print hour numbers, from 1 to 12.
 #: clock.py:636
 #, python-format
 msgctxt "Hour Number"
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 
 #. TRANS: The rules to print the time in the localized language.
 #.
@@ -160,8 +196,8 @@ msgstr ""
 "am_pm(h) |\n"
 "        time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> "
 "past <span foreground=\"\\#005FE4\">hour(h)</span> am_pm(h) |\n"
-"        time(h, m) [30 < m] => <span foreground=\"\\#00B20D\">min(m)</span> "
-"to <span foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |\n"
+"        time(h, m) [30 < m] => <span foreground=\"\\#00B20D\">min(m)</span> to "
+"<span foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |\n"
 "        min(1) => one minute |\n"
 "        min(2) => two minutes |\n"
 "        min(3) => three minutes |\n"

@@ -75,6 +75,7 @@ OLD_TOOLBAR = False
 try:
     from sugar.graphics.toolbarbox import ToolbarBox
     from sugar.activity.widgets import StopButton
+    from sugar.activity.widgets import ActivityToolbarButton
 except ImportError:
     OLD_TOOLBAR = True
 
@@ -191,18 +192,15 @@ class ClockActivity(activity.Activity):
 
         else:
             toolbar_box = ToolbarBox()
-            activity_button = ToolButton()
-            color = XoColor(profile.get_color())
-            bundle = ActivityBundle(activity.get_bundle_path())
-            icon = Icon(file=bundle.get_icon(), xo_color=color)
-            activity_button.set_icon_widget(icon)
+            activity_button = ActivityToolbarButton(self)
             activity_button.show()
-
             toolbar_box.toolbar.insert(activity_button, 0)
+
             self._add_clock_controls(toolbar_box.toolbar)
 
             separator = gtk.SeparatorToolItem()
             separator.props.draw = False
+            separator.set_size_request(0, -1)
             separator.set_expand(True)
             toolbar_box.toolbar.insert(separator, -1)
 

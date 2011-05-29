@@ -363,6 +363,9 @@ class ClockFace(gtk.DrawingArea):
         """
         super(ClockFace, self).__init__()
 
+        # Set to True when the variables to draw the clock are set:
+        self.initialized = False
+
         # The time on the clock face
         self._time = datetime.now()
         self._old_minute = self._time.minute
@@ -429,6 +432,7 @@ class ClockFace(gtk.DrawingArea):
             self._cache_pixbuf = gdk.pixbuf_new_from_file_at_size("clock.svg", 2 * self._radius, 2 * self._radius)
             gc.collect() # Reclaim memory from old pixbuf
 
+            self.initialized = True
 
     def _expose_cb(self, widget, event):
         """The widget is exposed and must draw itself on the graphic context.
@@ -436,6 +440,9 @@ class ClockFace(gtk.DrawingArea):
         automatically created to draw on it before the expose event is called and
         it prevents the screen from flickering.
         """
+        if not self.initialized and self.window:
+            self.queue_resize()
+
         if self._active:
             self._gc = self.window.new_gc()
 

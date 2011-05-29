@@ -191,6 +191,7 @@ class ClockActivity(activity.Activity):
             return toolbox
 
         else:
+            self.max_participants = 1
             toolbar_box = ToolbarBox()
             activity_button = ActivityToolbarButton(self)
             activity_button.show()

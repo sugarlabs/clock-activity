@@ -63,6 +63,19 @@ import gtk
 from gtk import gdk
 import pango
 
+OLD_TOOLBAR = False
+try:
+    from sugar.graphics.toolbarbox import ToolbarBox
+    from sugar.activity.widgets import StopButton
+except ImportError:
+    OLD_TOOLBAR = True
+
+from sugar.graphics.toolbutton import ToolButton
+from sugar.graphics.xocolor import XoColor
+from sugar import profile
+from sugar.bundle.activitybundle import ActivityBundle
+from sugar.graphics.icon import Icon
+
 import math
 from datetime import datetime
 import threading
@@ -130,9 +143,10 @@ class ClockActivity(activity.Activity):
         # Show the activity on the screen
         self.show_all()
 
-        # Hide the tools we don't use from the activity toolbar
-        toolbox.get_activity_toolbar().share.hide()
-        toolbox.get_activity_toolbar().keep.hide()
+        if OLD_TOOLBAR:
+            # Hide the tools we don't use from the activity toolbar
+            toolbox.get_activity_toolbar().share.hide()
+            toolbox.get_activity_toolbar().keep.hide()
 
         # We want to be notified when the minutes change
         self._clock.connect("time_minute", self._minutes_changed_cb)
@@ -147,20 +161,44 @@ class ClockActivity(activity.Activity):
         Load and show icons. Associate them to the call back methods.
         """
         # Default toolbar
-        toolbox = activity.ActivityToolbox(self)
-        self.set_toolbox(toolbox)
+        if OLD_TOOLBAR:
+            toolbox = activity.ActivityToolbox(self)
+            self.set_toolbox(toolbox)
+            display_toolbar = gtk.Toolbar()
 
-        # In the activity toolbar, we find first, the name of the activity field, a
-        # spring separator, the share combobox, the keep and quit buttons.
-        #activity_toolbar = toolbox.get_activity_toolbar()
-        # Hide the tools we don't use
-        #activity_toolbar.share.set_no_show_all(True)
-        #activity_toolbar.keep.set_no_show_all(True)
+            # Add the toolbar to the activity menu
+            self._add_clock_controls(display_toolbar)
+            toolbox.add_toolbar(_p("Toolbar", "Clock"), display_toolbar)
+            toolbox.set_current_toolbar(1)
 
+            return toolbox
 
-        # Create the display tool bar
-        display_toolbar = gtk.Toolbar()
-        
+        else:
+            toolbar_box = ToolbarBox()
+            activity_button = ToolButton()
+            color = XoColor(profile.get_color())
+            bundle = ActivityBundle(activity.get_bundle_path())
+            icon = Icon(file=bundle.get_icon(), xo_color=color)
+            activity_button.set_icon_widget(icon)
+            activity_button.show()
+
+            toolbar_box.toolbar.insert(activity_button, 0)
+            self._add_clock_controls(toolbar_box.toolbar)
+
+            separator = gtk.SeparatorToolItem()
+            separator.props.draw = False
+            separator.set_expand(True)
+            toolbar_box.toolbar.insert(separator, -1)
+
+            toolbar_box.toolbar.insert(StopButton(self), -1)
+
+            self.set_toolbar_box(toolbar_box)
+            toolbar_box.show_all()
+            display_toolbar = toolbar_box.toolbar
+            return toolbar_box
+
+    def _add_clock_controls(self, display_toolbar):
+
         # First group of radio button to select the type of clock to display
         button1 = RadioToolButton(named_icon = "simple-clock")
         button1.set_tooltip(_p("Toolbar", "Simple Clock"))
@@ -174,12 +212,12 @@ class ClockActivity(activity.Activity):
         button3.set_tooltip(_p("Toolbar", "Digital Clock"))
         button3.connect("toggled", self._display_mode_changed_cb, _MODE_DIGITAL_CLOCK)
         display_toolbar.insert(button3, -1)
-        
+
         # A separator between the two groups of buttons
         separator = gtk.SeparatorToolItem()
         separator.set_draw(True)
         display_toolbar.insert(separator, -1)
-        
+
         # Now the options buttons to display other elements: date, day of week...
         # A button in the toolbar to write the time in full letters
         button = ToggleToolButton("write-time")
@@ -197,21 +235,12 @@ class ClockActivity(activity.Activity):
         separator = gtk.SeparatorToolItem()
         separator.set_draw(True)
         display_toolbar.insert(separator, -1)
-        
+
         # Another button to speak aloud the time
         button = ToggleToolButton("speak-time")
         button.set_tooltip(_p("Toolbar", "Talking clock"))
         button.connect("toggled", self._speak_time_clicked_cb)
         display_toolbar.insert(button, -1)
-
-        # Add the toolbar to the activity menu
-        toolbox.add_toolbar(_p("Toolbar", "Clock"), display_toolbar)
-        toolbox.set_current_toolbar(1)
-
-        # Return the toolbox (this is necessary because there is no activity.get_toolbox()
-        # method).
-        return toolbox
-
 
     def _make_display(self):
         """Prepare the display of the clock.

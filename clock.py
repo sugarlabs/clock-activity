@@ -484,22 +484,21 @@ class ClockFace(gtk.DrawingArea):
         the parameters which are important for our rendering (center
         of the clock, radius).
         """
-        if widget.window:
-            # Store the measures of the clock face widget
-            self._center_x = int(allocation.x + allocation.width / 2.0)
-            self._center_y = int(allocation.y + allocation.height / 2.0)
-            self._radius = max(min(int(allocation.width / 2.0), \
-                    int(allocation.height / 2.0)) - 20, 0)
-            self._width = allocation.width
-            self._height = allocation.height
-            self._line_width = int(self._radius / 150)
+        # Store the measures of the clock face widget
+        self._center_x = int(allocation.x + allocation.width / 2.0)
+        self._center_y = int(allocation.y + allocation.height / 2.0)
+        self._radius = max(min(int(allocation.width / 2.0), \
+                int(allocation.height / 2.0)) - 20, 0)
+        self._width = allocation.width
+        self._height = allocation.height
+        self._line_width = int(self._radius / 150)
 
-            # Reload the cached pixbuf
-            self._cache_pixbuf = gdk.pixbuf_new_from_file_at_size("clock.svg",
-              2 * self._radius, 2 * self._radius)
-            gc.collect()  # Reclaim memory from old pixbuf
+        # Reload the cached pixbuf
+        self._cache_pixbuf = gdk.pixbuf_new_from_file_at_size("clock.svg",
+          2 * self._radius, 2 * self._radius)
+        gc.collect()  # Reclaim memory from old pixbuf
 
-            self.initialized = True
+        self.initialized = True
 
     def _expose_cb(self, widget, event):
         """The widget is exposed and must draw itself on the graphic

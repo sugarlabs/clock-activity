@@ -38,25 +38,26 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2011-04-24 12:15+0200\n"
+"Last-Translator: Christian <kryskaka@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.3.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Translate Toolkit 1.6.0\n"
 
 #. TRANS: Title of the activity
 #: clock.py:98
 msgctxt "Activity"
 msgid "What Time Is It?"
-msgstr ""
+msgstr "saha ngapi hiyi"
 
 #. TRANS: The format used when writing the time in full letters.
 #. You must take care to use a font size large enough so that kids can read it easily,
@@ -85,38 +86,39 @@ msgstr ""
 #: clock.py:166
 msgctxt "Toolbar"
 msgid "Simple Clock"
-msgstr ""
+msgstr "saa rahisi"
 
 #: clock.py:170
 msgctxt "Toolbar"
 msgid "Nice Clock"
-msgstr ""
+msgstr "saa nzuri"
 
 #: clock.py:174
 msgctxt "Toolbar"
 msgid "Digital Clock"
-msgstr ""
+msgstr "saa ya digital"
 
 #: clock.py:186
 msgctxt "Toolbar"
 msgid "Display time in full letters"
-msgstr ""
+msgstr "Kuonyesha muda kwa herufi zote; Kuandika muda kwa herufi"
 
 #: clock.py:192
 msgctxt "Toolbar"
 msgid "Display weekday and date"
-msgstr ""
+msgstr "Kuonyesha siku ya wiki na tarehe, kuandika siku ya wiki na tarehe"
 
 #: clock.py:203
 msgctxt "Toolbar"
 msgid "Talking clock"
-msgstr ""
+msgstr "Kuzungumuza saa"
 
 #. Add the toolbar to the activity menu
 #: clock.py:208
+#, fuzzy
 msgctxt "Toolbar"
 msgid "Clock"
-msgstr ""
+msgstr "saa"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example "%I:%M:%S %p".
@@ -183,28 +185,28 @@ msgstr ""
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr ""
+msgstr "Saa(s,d)=> saa ngapi?    (s,d)= (saa,dakika)"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgctxt "espeak-pitch"
 msgid "50"
-msgstr ""
+msgstr "50 or hamsini"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgctxt "espeak-speed"
 msgid "170"
-msgstr ""
+msgstr "mia moja na sabini=170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
 msgctxt "espeak-wgap"
 msgid "0"
-msgstr ""
+msgstr "sifuri"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
@@ -212,4 +214,4 @@ msgstr ""
 #: speaker.py:51
 msgctxt "espeak-voice"
 msgid "en"
-msgstr ""
+msgstr "sw"

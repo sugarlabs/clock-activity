@@ -79,12 +79,6 @@ try:
 except ImportError:
     OLD_TOOLBAR = True
 
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.xocolor import XoColor
-from sugar import profile
-from sugar.bundle.activitybundle import ActivityBundle
-from sugar.graphics.icon import Icon
-
 import math
 from datetime import datetime
 import threading

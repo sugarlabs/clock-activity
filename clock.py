@@ -79,12 +79,6 @@ try:
 except ImportError:
     OLD_TOOLBAR = True
 
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.xocolor import XoColor
-from sugar import profile
-from sugar.bundle.activitybundle import ActivityBundle
-from sugar.graphics.icon import Icon
-
 import math
 from datetime import datetime
 import threading
@@ -100,12 +94,17 @@ from sugar.graphics.radiotoolbutton import RadioToolButton
 from speaker import Speaker
 from timewriter import TimeWriter
 
+import dbus
+import os
 
 # The display modes of the clock
 _MODE_SIMPLE_CLOCK = 0
 _MODE_NICE_CLOCK = 1
 _MODE_DIGITAL_CLOCK = 2
 
+# directory exists if powerd is running.  create a file here,
+# named after our pid, to inhibit suspend.
+POWERD_INHIBIT_DIR = '/var/run/powerd-inhibit-suspend'
 
 class ClockActivity(activity.Activity):
     """The clock activity displays a simple clock widget.
@@ -171,6 +170,50 @@ class ClockActivity(activity.Activity):
         # or loses it.  When it is not active, we don't need to update
         # the clock.
         self.connect("notify::active", self._notify_active_cb)
+
+        if not self.powerd_running():
+            try:
+                bus = dbus.SystemBus()
+                proxy = bus.get_object('org.freedesktop.ohm',
+                                       '/org/freedesktop/ohm/Keystore')
+                self.ohm_keystore = dbus.Interface(proxy,
+                                                   'org.freedesktop.ohm.Keystore')
+            except dbus.DBusException, e:
+                self.ohm_keystore = None
+
+    def powerd_running(self):
+        self.using_powerd = os.access(POWERD_INHIBIT_DIR, os.W_OK)
+        return self.using_powerd
+    
+    def _inhibit_suspend(self):
+        if self.using_powerd:
+            fd = open(POWERD_INHIBIT_DIR + "/%u" % os.getpid(), 'w')
+            fd.close()
+            return True
+        
+        if self.ohm_keystore is not None:
+            try:
+                self.ohm_keystore.SetKey('suspend.inhibit', 1)
+                return self.ohm_keystore.GetKey('suspend.inhibit')
+            except dbus.exceptions.DBusException:
+                return False
+        else:
+            return False
+    
+    def _allow_suspend(self):
+        if self.using_powerd:
+            os.unlink(POWERD_INHIBIT_DIR + "/%u" % os.getpid())
+            return True
+        
+        if self.ohm_keystore is not None:
+            try:
+                self.ohm_keystore.SetKey('suspend.inhibit', 0)
+                return self.ohm_keystore.GetKey('suspend.inhibit')
+            except dbus.exceptions.DBusException:
+                return False
+        else:
+            return False
+
 
     def _make_toolbars(self):
         """Prepare and set the toolbars of the activity.
@@ -352,6 +395,10 @@ class ClockActivity(activity.Activity):
         clock face widget, so that it can stop updating every seconds.
         """
         self._clock.active = self.props.active
+        if self.props.active:
+            self._inhibit_suspend()
+        else:
+            self._allow_suspend()
 
     def _write_and_speak(self, speak):
         """

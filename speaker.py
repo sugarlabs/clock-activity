@@ -57,9 +57,7 @@ class Speaker:
         text = text.replace("\"", "\\\"")
         child = os.popen("espeak -p%s -s%s -g%s -v%s \"%s\"" % (Speaker.PITCH, Speaker.SPEED, Speaker.WORD_GAP, Speaker.VOICE, text))
         data = child.read()
-        err = child.close()
-        if err:
-            print "espeak terminated with return code %d" % err
+        child.close()
 
 
 if __name__ == "__main__":

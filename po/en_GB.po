@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-07-14 20:08+0200\n"
+"PO-Revision-Date: 2011-08-24 07:59+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_GB\n"
@@ -173,7 +173,6 @@ msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
-#, fuzzy
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
 "        time(12, 0) => <span foreground=\"\\#005FE4\">hour(12)</span> |\n"

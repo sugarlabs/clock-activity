@@ -1,6 +1,6 @@
 [Activity]
 name = Clock
-service_name = tv.alterna.Clock
+bundle_id = tv.alterna.Clock
 exec = sugar-activity clock.ClockActivity
 icon = activity-clock
 activity_version = 6

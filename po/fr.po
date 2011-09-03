@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Clock 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-03-09 10:12+0200\n"
+"PO-Revision-Date: 2011-07-30 00:49+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -117,7 +117,6 @@ msgstr "L'horloge parlante"
 
 #. Add the toolbar to the activity menu
 #: clock.py:208
-#, fuzzy
 msgctxt "Toolbar"
 msgid "Clock"
 msgstr "Horloge"

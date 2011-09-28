@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-01-19 05:37+0200\n"
-"Last-Translator: Danishka Navin <danishka@gmail.com>\n"
+"PO-Revision-Date: 2011-07-14 22:46+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: si\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: clock.py:98
 msgctxt "Activity"
 msgid "What Time Is It?"
-msgstr ""
+msgstr "වෙලාව කීයද?"
 
 #. TRANS: The format used when writing the time in full letters.
 #. You must take care to use a font size large enough so that kids can read it easily,
@@ -60,7 +60,7 @@ msgstr ""
 #, python-format
 msgctxt "Write Time"
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date (example: Tuesday 10/21/2008)
 #. We recommend to use the same font size as for the time display.
@@ -74,40 +74,42 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:166
 msgctxt "Toolbar"
 msgid "Simple Clock"
-msgstr ""
+msgstr "සරල ඔරලෝසුව"
 
 #: clock.py:170
 msgctxt "Toolbar"
 msgid "Nice Clock"
-msgstr ""
+msgstr "වෙලාව 9යි"
 
 #: clock.py:174
 msgctxt "Toolbar"
 msgid "Digital Clock"
-msgstr ""
+msgstr "අංකිත ඔරලෝසුව"
 
 #: clock.py:186
 msgctxt "Toolbar"
 msgid "Display time in full letters"
-msgstr ""
+msgstr "පෙරනිමි වෙලාව සම්පූර්ණ අකුරු වලින්"
 
 #: clock.py:192
 msgctxt "Toolbar"
 msgid "Display weekday and date"
-msgstr ""
+msgstr "සතියේ දිනය සහ දිනය පෙන්වන්න"
 
 #: clock.py:203
 msgctxt "Toolbar"
 msgid "Talking clock"
-msgstr ""
+msgstr "කතාකරන ඔරලෝසුව"
 
 #. Add the toolbar to the activity menu
 #: clock.py:208
-#, fuzzy
 msgctxt "Toolbar"
 msgid "Clock"
 msgstr "ඔරලෝසුව"
@@ -127,14 +129,21 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #. TRANS: The format of the font used to print hour numbers, from 1 to 12.
 #: clock.py:636
 #, python-format
 msgctxt "Hour Number"
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 
+# This string should look something like this English template, but with the words "o'clock" and the words after the arrows translated.  Do not translate min(1), hour(1), etc., those are internal names.  See Spanish string for another example.
+#
+# http://translate.sugarlabs.org/es/honey/clock.po?item=12&view_mode=translate
+#
 #. TRANS: The rules to print the time in the localized language.
 #.
 #. Example syntax:
@@ -177,28 +186,28 @@ msgstr ""
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "time(h, m) => වේලාව කීයද?"
+msgstr "වෙලාව(h, m) => වේලාව කීයද?"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgctxt "espeak-pitch"
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgctxt "espeak-speed"
 msgid "170"
-msgstr ""
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
 msgctxt "espeak-wgap"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
@@ -206,4 +215,4 @@ msgstr ""
 #: speaker.py:51
 msgctxt "espeak-voice"
 msgid "en"
-msgstr ""
+msgstr "en"

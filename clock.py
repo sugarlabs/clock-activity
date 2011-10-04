@@ -85,7 +85,7 @@ import threading
 import gc
 import re
 
-from pgettext import pgettext as _p
+from pgettext import pgettext as _
 
 from sugar.activity import activity
 from sugar.graphics.toggletoolbutton import ToggleToolButton
@@ -116,7 +116,7 @@ class ClockActivity(activity.Activity):
         super(ClockActivity, self).__init__(handle)
 
         # TRANS: Title of the activity
-        self.set_title(_p("Activity", "What Time Is It?"))
+        self.set_title(_("Activity", "What Time Is It?"))
 
         # TRANS: The format used when writing the time in full
         # letters.  You must take care to use a font size large enough
@@ -124,7 +124,7 @@ class ClockActivity(activity.Activity):
         # that all times combination fit on the screen, even when the
         # screen is rotated.  Pango markup:
         # http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-        self._TIME_LETTERS_FORMAT = _p("Write Time",
+        self._TIME_LETTERS_FORMAT = _("Write Time",
           '<markup><span lang="en" font_desc="Sans 20">%s</span></markup>')
 
         # TRANS: The format used to display the weekday and date
@@ -132,7 +132,7 @@ class ClockActivity(activity.Activity):
         # font size as for the time display.  See
         # http://docs.python.org/lib/module-time.html for available
         # strftime formats.  xgettext:no-python-format
-        self._DATE_SHORT_FORMAT = _p("Write Date",
+        self._DATE_SHORT_FORMAT = _("Write Date",
           '<markup><span lang="en" font_desc="Sans 20">' +
           '<span foreground="#B20008">%A</span>, ' +
           '<span foreground="#5E008C">%m</span>/' +
@@ -228,7 +228,7 @@ class ClockActivity(activity.Activity):
 
             # Add the toolbar to the activity menu
             self._add_clock_controls(display_toolbar)
-            toolbox.add_toolbar(_p("Toolbar", "Clock"), display_toolbar)
+            toolbox.add_toolbar(_("Toolbar", "Clock"), display_toolbar)
             toolbox.set_current_toolbar(1)
 
             return toolbox
@@ -259,19 +259,19 @@ class ClockActivity(activity.Activity):
 
         # First group of radio button to select the type of clock to display
         button1 = RadioToolButton(named_icon="simple-clock")
-        button1.set_tooltip(_p("Toolbar", "Simple Clock"))
+        button1.set_tooltip(_("Toolbar", "Simple Clock"))
         button1.connect("toggled", self._display_mode_changed_cb,
                         _MODE_SIMPLE_CLOCK)
         display_toolbar.insert(button1, -1)
         button2 = RadioToolButton(named_icon="nice-clock",
                                   group=button1)
-        button2.set_tooltip(_p("Toolbar", "Nice Clock"))
+        button2.set_tooltip(_("Toolbar", "Nice Clock"))
         button2.connect("toggled", self._display_mode_changed_cb,
                         _MODE_NICE_CLOCK)
         display_toolbar.insert(button2, -1)
         button3 = RadioToolButton(named_icon="digital-clock",
                                   group=button1)
-        button3.set_tooltip(_p("Toolbar", "Digital Clock"))
+        button3.set_tooltip(_("Toolbar", "Digital Clock"))
         button3.connect("toggled", self._display_mode_changed_cb,
                         _MODE_DIGITAL_CLOCK)
         display_toolbar.insert(button3, -1)
@@ -285,13 +285,13 @@ class ClockActivity(activity.Activity):
         # of week...  A button in the toolbar to write the time in
         # full letters
         button = ToggleToolButton("write-time")
-        button.set_tooltip(_p("Toolbar", "Display time in full letters"))
+        button.set_tooltip(_("Toolbar", "Display time in full letters"))
         button.connect("toggled", self._write_time_clicked_cb)
         display_toolbar.insert(button, -1)
 
         # The button to display the weekday and date
         button = ToggleToolButton("write-date")
-        button.set_tooltip(_p("Toolbar", "Display weekday and date"))
+        button.set_tooltip(_("Toolbar", "Display weekday and date"))
         button.connect("toggled", self._write_date_clicked_cb)
         display_toolbar.insert(button, -1)
 
@@ -302,7 +302,7 @@ class ClockActivity(activity.Activity):
 
         # Another button to speak aloud the time
         button = ToggleToolButton("speak-time")
-        button.set_tooltip(_p("Toolbar", "Talking clock"))
+        button.set_tooltip(_("Toolbar", "Talking clock"))
         button.connect("toggled", self._speak_time_clicked_cb)
         display_toolbar.insert(button, -1)
 
@@ -648,7 +648,7 @@ class ClockFace(gtk.DrawingArea):
         # horizontally, it means that the glyphs of the digits used in
         # the font don't have the same width. Try to use a Monospace
         # font.  xgettext:no-python-format
-        markup = _p("Digital Clock",
+        markup = _("Digital Clock",
           '<markup><span lang="en" font_desc="Sans,Monospace Bold 48">' +
           '<span foreground="#005FE4">%I</span>:' +
           '<span foreground="#00B20D">%M</span>:' +
@@ -771,7 +771,7 @@ class ClockFace(gtk.DrawingArea):
         for i in xrange(12):
             # TRANS: The format of the font used to print hour
             # numbers, from 1 to 12.
-            hour_number = _p("Hour Number",
+            hour_number = _("Hour Number",
               '<markup><span lang="en" ' +
               'font_desc="Sans Bold 20">%d</span></markup>') % (i + 1)
             self._draw_markup(self._center_x + 0.75 * \

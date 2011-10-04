@@ -31,7 +31,7 @@ def pgettext(msgctxt, msgid):
     else:
         return gettext(msgid)
 
-# Map our pgettext() custom function to _p()
-_p = lambda msgctxt, msgid: pgettext(msgctxt, msgid)
+# Map our pgettext() custom function to _()
+_ = lambda msgctxt, msgid: pgettext(msgctxt, msgid)
 
 

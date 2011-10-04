@@ -15,7 +15,7 @@ Controls the espeak program available on the OLPC XO laptop.
 import sys
 import os
 
-from pgettext import pgettext as _p
+from pgettext import pgettext as _
 
 
 class Speaker:
@@ -26,21 +26,21 @@ class Speaker:
     """
     # TRANS: The language pitch (range [0 - 99], default 50 for English)
     # Look at http://espeak.sourceforge.net/commands.html for details
-    PITCH = _p("espeak-pitch", "50")
+    PITCH = _("espeak-pitch", "50")
 
 
     """espeak parameter: diction speed (average words per minute).
     """
     # TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
     # Look at http://espeak.sourceforge.net/commands.html for details
-    SPEED = _p("espeak-speed", "170")
+    SPEED = _("espeak-speed", "170")
 
 
     """espeak parameter: word gap in units of 10 ms.
     """
     # TRANS: The pause duration between words, in units of 10 ms.
     # Look at http://espeak.sourceforge.net/commands.html for details
-    WORD_GAP = _p("espeak-wgap", "0")
+    WORD_GAP = _("espeak-wgap", "0")
 
 
     """espeak parameter: the language and voice variant.
@@ -48,7 +48,7 @@ class Speaker:
     # TRANS: The language and voice variant
     # Look at http://espeak.sourceforge.net/commands.html for details, and
     # http://espeak.sourceforge.net/languages.html to see if your language is supported.
-    VOICE = _p("espeak-voice", "en")
+    VOICE = _("espeak-voice", "en")
 
 
     def speak(self, text):

@@ -346,9 +346,9 @@ class ClockActivity(activity.Activity):
         current weekday and date.
         """
         if button.get_active():
-            gobject.idle_add(self._date.show)
+            self._date.show()
         else:
-            gobject.idle_add(self._date.hide)
+            self._date.hide()
 
     def _display_mode_changed_cb(self, radiobutton, display_mode):
         """The user selected a clock display mode (simple clock, nice
@@ -362,10 +362,10 @@ class ClockActivity(activity.Activity):
         """
         self._write_time = button.get_active()
         if self._write_time:
-            gobject.idle_add(self._time_letters.show)
+            self._time_letters.show()
             self._write_and_speak(False)
         else:
-            gobject.idle_add(self._time_letters.hide)
+            self._time_letters.hide()
 
     def _speak_time_clicked_cb(self, button):
         """The user clicked on the "speak time" button to hear the
@@ -384,8 +384,7 @@ class ClockActivity(activity.Activity):
         self._write_and_speak(True)
 
         # Update the weekday and date in case it was midnight
-        gobject.idle_add(self._date.set_markup, \
-                clock.get_time().strftime(self._DATE_SHORT_FORMAT))
+        self._date.set_markup(clock.get_time().strftime(self._DATE_SHORT_FORMAT))
 
     def _notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or
@@ -427,8 +426,7 @@ class ClockActivity(activity.Activity):
         hour = self._clock.get_time().hour
         minute = self._clock.get_time().minute
         self._time_in_letters = self._time_writer.write_time(hour, minute)
-        gobject.idle_add(self._time_letters.set_markup, \
-                self._TIME_LETTERS_FORMAT % self._time_in_letters)
+        self._time_letters.set_markup(self._TIME_LETTERS_FORMAT % self._time_in_letters)
 
     def _do_speak_time(self):
         """Speak aloud the current time.

@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-10-27 12:07+0200\n"
+"PO-Revision-Date: 2011-10-27 12:10+0200\n"
 "Last-Translator: Jakub <jamarat@o2.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pl\n"
@@ -50,7 +50,7 @@ msgstr ""
 #: clock.py:98
 msgctxt "Activity"
 msgid "What Time Is It?"
-msgstr "Która Godzina?"
+msgstr "Która godzina?"
 
 #. TRANS: The format used when writing the time in full letters.
 #. You must take care to use a font size large enough so that kids can read it easily,
@@ -82,17 +82,17 @@ msgstr ""
 #: clock.py:166
 msgctxt "Toolbar"
 msgid "Simple Clock"
-msgstr "Prosty Zegarek"
+msgstr "Prosty zegarek"
 
 #: clock.py:170
 msgctxt "Toolbar"
 msgid "Nice Clock"
-msgstr "Fajny Zegarek"
+msgstr "Ładny zegarek"
 
 #: clock.py:174
 msgctxt "Toolbar"
 msgid "Digital Clock"
-msgstr "Zegarek Elektroniczny"
+msgstr "Zegarek elektroniczny"
 
 #: clock.py:186
 msgctxt "Toolbar"

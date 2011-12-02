@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2011-12-02 03:45+0200\n"
-"Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
+"PO-Revision-Date: 2011-12-02 06:38+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -110,32 +110,32 @@ msgstr "Timetal"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "tid(t, m) => Hvad er klokken?"
+msgstr ""
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgid "espeak-pitch"
-msgstr "espeak-toneleje"
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgid "espeak-speed"
-msgstr "espeak-hastighed"
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
 msgid "espeak-wgap"
-msgstr "espeak-ordafstand"
+msgstr "1"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:51
 msgid "espeak-voice"
-msgstr "espeak-stemme"
+msgstr "da"
 
 #~ msgctxt "Activity"
 #~ msgid "What Time Is It?"

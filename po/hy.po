@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2011-12-03 08:41+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2011-12-21 21:01+0200\n"
+"Last-Translator: Jasmine <udea_jasmine@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: hy\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "Գրել ամսաթիվը"
 #: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
 #: clock.py:294 clock.py:305
 msgid "Toolbar"
-msgstr "գործիքաշերտ"
+msgstr "Գործիքաշերտ"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -133,32 +133,36 @@ msgstr "Ժամի Թիվը"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "ժամանակ(ժ, ր) => ժամը քա՞նիսն է"
+msgstr "ժամանակ(ժ, ր) => ժամը քանի՞սն է"
 
+# Արժեքը վերաբերվոիւմ է անգլերեն լեզվին:
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgid "espeak-pitch"
 msgstr "50"
 
+# Մեկ րոպեում արտասանվող բառերի միջին թիվը: Հաշվարկված է անգլերեն լեզվի համար: 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgid "espeak-speed"
 msgstr "170"
 
+# Բառերի միջև դադարի տևողությունը միկրովայկյաններով: հաշվարկը հիմնված է անգլերեն լեզվի բնականոն արագության վրա: 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
 msgid "espeak-wgap"
 msgstr "1"
 
+# Ավտոմատ վերարտադրման դեպքում, եթե լեզուն չի ներմուծված, արտասանությունը կլինի անգլիական հնչողությամբ:
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:51
 msgid "espeak-voice"
-msgstr "hy"
+msgstr "Լեզու - հնչյուն"
 
 #~ msgctxt "Activity"
 #~ msgid "What Time Is It?"

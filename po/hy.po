@@ -46,7 +46,7 @@ msgstr "ժամացույց"
 msgid "Activity"
 msgstr "Գործունեություն"
 
-# Ուշադրություն. ժամերը ամբողջապես տառերով գրելիս հարկ է օգտագործել  բավականաչափ խոշոր տառեր, որպեսզի երեխայի համար դյուրին լինի դրանք ընթերցելը, սակայն պետք է չափն ընտրել այնպես, որ ամբողջը տեղավորվի էկրանի վրա, նույնիսկ էկրանը պտտելու, շրջելու դեպքում:  
+# Ուշադրություն. ժամերը ամբողջապես տառերով գրելիս հարկ է օգտագործել  բավականաչափ խոշոր տառեր, որպեսզի երեխայի համար դյուրին լինի դրանք ընթերցելը, սակայն պետք է չափն ընտրել այնպես, որ ամբողջը տեղավորվի էկրանի վրա, նույնիսկ էկրանը պտտելու, շրջելու դեպքում:
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
 #. so that kids can read it easily, but also small enough so
@@ -142,14 +142,14 @@ msgstr "ժամանակ(ժ, ր) => ժամը քանի՞սն է"
 msgid "espeak-pitch"
 msgstr "50"
 
-# Մեկ րոպեում արտասանվող բառերի միջին թիվը: Հաշվարկված է անգլերեն լեզվի համար: 
+# Մեկ րոպեում արտասանվող բառերի միջին թիվը: Հաշվարկված է անգլերեն լեզվի համար:
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgid "espeak-speed"
 msgstr "170"
 
-# Բառերի միջև դադարի տևողությունը միկրովայկյաններով: հաշվարկը հիմնված է անգլերեն լեզվի բնականոն արագության վրա: 
+# Բառերի միջև դադարի տևողությունը միկրովայկյաններով: հաշվարկը հիմնված է անգլերեն լեզվի բնականոն արագության վրա:
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43

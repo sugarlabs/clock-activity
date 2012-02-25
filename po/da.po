@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2012-01-24 06:57+0200\n"
+"PO-Revision-Date: 2012-02-25 10:43+0200\n"
 "Last-Translator: Aputsiaq Niels <aj@isit.gl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: da\n"
@@ -240,7 +240,7 @@ msgstr "50"
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgid "espeak-speed"
-msgstr "170"
+msgstr "70"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details

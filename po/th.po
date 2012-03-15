@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2012-02-29 07:54+0200\n"
-"Last-Translator: sit_Yo5EpocH <yo5epoch.toho@gmail.com>\n"
+"PO-Revision-Date: 2012-03-15 09:16+0200\n"
+"Last-Translator: Meechai <malaku38@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "กิจกรรม"
 #. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
 #: clock.py:127
 msgid "Write Time"
-msgstr "เขียนเวลา"
+msgstr "เวลาเขียน"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -71,7 +71,7 @@ msgstr "เขียนเวลา"
 #: clock.py:135
 #, no-python-format
 msgid "Write Date"
-msgstr "เขียนวันที่"
+msgstr "วันที่เขียน"
 
 #: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
 #: clock.py:294 clock.py:305
@@ -138,19 +138,19 @@ msgstr "จำนวนชั่วโมง"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "เวลา(h, m) => เวลาเท่าไหร่?"
+msgstr "time(h, m) => เวลาอะไร?"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgid "espeak-pitch"
-msgstr "ระดับเสียง espeak"
+msgstr "espeak-พิตช์"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
 msgid "espeak-speed"
-msgstr "ความเร็ว espeak"
+msgstr "espeak-ความเร็ว"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
@@ -163,7 +163,7 @@ msgstr "espeak-wgap"
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:51
 msgid "espeak-voice"
-msgstr "เสียง espeak"
+msgstr "espeak-เสียง"
 
 #~ msgctxt "espeak-pitch"
 #~ msgid "50"

@@ -192,7 +192,8 @@ msgstr "Escribir la hora"
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
 #: clock.py:135
-#, no-python-format, 
+#, no-python-format
+#, no-python-format,
 msgid "Write Date"
 msgstr "Escribir la fecha"
 

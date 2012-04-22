@@ -43,8 +43,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2012-02-05 22:31+0200\n"
-"Last-Translator: ganesh <ganeshgajre@gmail.com>\n"
+"PO-Revision-Date: 2012-02-06 01:40+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "घडयाळ"
 #. TRANS: Title of the activity
 #: clock.py:119
 msgid "Activity"
-msgstr "क्रिया "
+msgstr "क्रिया"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough

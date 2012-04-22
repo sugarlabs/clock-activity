@@ -34,116 +34,70 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-07-31 17:18+0200\n"
-"Last-Translator: Thangamani <thangam.arunx@gmail.com>\n"
+"POT-Creation-Date: 2011-11-09 00:33-0500\n"
+"PO-Revision-Date: 2012-03-28 17:07+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Translate Toolkit 1.6.0\n"
+"X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: Title of the activity
-#: clock.py:98
-msgctxt "Activity"
-msgid "What Time Is It?"
-msgstr "இப்போது என்ன நேரம் இருக்கும்?"
-
-#. TRANS: The format used when writing the time in full letters.
-#. You must take care to use a font size large enough so that kids can read it easily,
-#. but also small enough so that all times combination fit on the screen, even
-#. when the screen is rotated.
-#. Pango markup: http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:105
-#, python-format
-msgctxt "Write Time"
-msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-
-#. TRANS: The format used to display the weekday and date (example: Tuesday 10/21/2008)
-#. We recommend to use the same font size as for the time display.
-#. See http://docs.python.org/lib/module-time.html for
-#. available strftime formats.
-#: clock.py:112
-#, no-python-format
-msgctxt "Write Date"
-msgid ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
-"%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
-"\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
-msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
-"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
-"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
-
-#: clock.py:166
-msgctxt "Toolbar"
-msgid "Simple Clock"
-msgstr "சாதாரண நேரம் காட்டி"
-
-#: clock.py:170
-msgctxt "Toolbar"
-msgid "Nice Clock"
-msgstr "அருமையான கடிகாரம்"
-
-#: clock.py:174
-msgctxt "Toolbar"
-msgid "Digital Clock"
-msgstr "மின்னியல் கடிகாரம்"
-
-#: clock.py:186
-msgctxt "Toolbar"
-msgid "Display time in full letters"
-msgstr "நேரத்தை முழு எழுத்துக்களில் காட்டு"
-
-#: clock.py:192
-msgctxt "Toolbar"
-msgid "Display weekday and date"
-msgstr "வார நாள் மற்றும் திகதியை காட்டு"
-
-#: clock.py:203
-msgctxt "Toolbar"
-msgid "Talking clock"
-msgstr "பேசும் கடிகாரம்"
-
-#. Add the toolbar to the activity menu
-#: clock.py:208
-msgctxt "Toolbar"
+#: activity/activity.info:2
 msgid "Clock"
 msgstr "கடிகாரம்"
 
-#. TRANS: The format used to display the time for digital clock
-#. You can add AM/PM indicator or use 12/24 format, for example "%I:%M:%S %p".
-#. See http://docs.python.org/lib/module-time.html for
-#. available strftime formats
-#. If the display of the time is moving horizontally, it means that the glyphs
-#. of the digits used in the font don't have the same width. Try to use a
-#. Monospace font.
-#: clock.py:527
-#, no-python-format
-msgctxt "Digital Clock"
-msgid ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
-"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
-msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
-"foreground=\"#E6000A\">%S</span>%p</span></markup>"
+#. TRANS: Title of the activity
+#: clock.py:119
+msgid "Activity"
+msgstr "செயற்பாடு"
 
-#. TRANS: The format of the font used to print hour numbers, from 1 to 12.
-#: clock.py:636
-#, python-format
-msgctxt "Hour Number"
-msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+#. TRANS: The format used when writing the time in full
+#. letters.  You must take care to use a font size large enough
+#. so that kids can read it easily, but also small enough so
+#. that all times combination fit on the screen, even when the
+#. screen is rotated.  Pango markup:
+#. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
+#: clock.py:127
+msgid "Write Time"
+msgstr "நேரத்தை எழுது"
+
+#. TRANS: The format used to display the weekday and date
+#. (example: Tuesday 10/21/2008) We recommend to use the same
+#. font size as for the time display.  See
+#. http://docs.python.org/lib/module-time.html for available
+#: clock.py:135
+#, no-python-format
+msgid "Write Date"
+msgstr "திகதியை எழுது"
+
+#: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
+#: clock.py:294 clock.py:305
+msgid "Toolbar"
+msgstr "கருவிப்பட்டை"
+
+#. TRANS: The format used to display the time for digital clock
+#. You can add AM/PM indicator or use 12/24 format, for example
+#. "%I:%M:%S %p".  See
+#. http://docs.python.org/lib/module-time.html for available
+#. strftime formats If the display of the time is moving
+#. horizontally, it means that the glyphs of the digits used in
+#. the font don't have the same width. Try to use a Monospace
+#: clock.py:649
+#, no-python-format
+msgid "Digital Clock"
+msgstr "மின்னியல் கடிகாரம்"
+
+#. TRANS: The format of the font used to print hour
+#. numbers, from 1 to 12.
+#: clock.py:772
+msgid "Hour Number"
+msgstr "மணித்தியால எண்"
 
 # This string should look something like this English template, but with the words "o'clock" and the words after the arrows translated.  Do not translate min(1), hour(1), etc., those are internal names.  See Spanish string for another example.
-#
 # http://translate.sugarlabs.org/es/honey/clock.po?item=12&view_mode=translate
-#
 #. TRANS: The rules to print the time in the localized language.
 #.
 #. Example syntax:
@@ -179,94 +133,227 @@ msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 #. rule must be placed first in the list.
 #.
 #. You can validate your set of rules by running the command line:
-#. python timewriter.py
+#. python timewriter.py LANG
 #.
 #. You should use pango markup to respect the same colors as for the clock hands.
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
+#, fuzzy
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
-"        time(12, 0) => <span foreground=\"\\#005FE4\">hour(12)</span> |        "
-"time(0, 0) => <span foreground=\"\\#005FE4\">hour(0)</span> |        time(h, 0) "
-"=> <span foreground=\"\\#005FE4\">hour(h)</span> o'clock am_pm(h) |        "
-"time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> past <span "
-"foreground=\"\\#005FE4\">hour(h)</span> am_pm(h) |        time(h, m) [30 < m] "
-"=> <span foreground=\"\\#00B20D\">min(m)</span> to <span "
-"foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |        min(1) => one minute "
-"|        min(2) => two minutes |        min(3) => three minutes |        "
-"min(4) => four minutes |        min(5) => five minutes |        min(6) => "
-"six minutes |        min(7) => seven minutes |        min(8) => eight "
-"minutes |        min(9) => nine minutes |        min(10) => ten minutes | "
-"       min(11) => eleven minutes |        min(12) => twelve minutes | "
-"       min(13) => thirteen minutes |        min(14) => fourteen minutes | "
-"       min(15) => a quarter |        min(16) => sixteen minutes |        "
-"min(17) => seventeen minutes |        min(18) => eighteen minutes |        "
-"min(19) => nineteen minutes |        min(20) => twenty minutes |        "
-"min(21) => twenty-one minutes |        min(22) => twenty-two minutes | "
-"       min(23) => twenty-three minutes |        min(24) => twenty-four "
-"minutes |        min(25) => twenty-five minutes |        min(26) => twenty-"
-"six minutes |        min(27) => twenty-seven minutes |        min(28) => "
-"twenty-eight minutes |        min(29) => twenty-nine minutes |        "
-"min(30) => half |        min(31) => twenty-nine minutes |        min(32) => "
-"twenty-eight minutes |        min(33) => twenty-seven minutes |        "
-"min(34) => twenty-six minutes |        min(35) => twenty-five minutes | "
-"       min(36) => twenty-four minutes |        min(37) => twenty-three "
-"minutes |        min(38) => twenty-two minutes |        min(39) => twenty-"
-"one minutes |        min(40) => twenty minutes |        min(41) => nineteen "
-"minutes |        min(42) => eighteen minutes |        min(43) => seventeen "
-"minutes |        min(44) => thirteen minutes |        min(45) => a quarter | "
-"       min(46) => fourteen minutes |        min(47) => thirteen minutes | "
-"       min(48) => twelve minutes |        min(49) => eleven minutes | "
-"       min(50) => ten minutes |        min(51) => nine minutes |        "
-"min(52) => eight minutes |        min(53) => seven minutes |        min(54) "
-"=> six minutes |        min(55) => five minutes |        min(56) => four "
-"minutes |        min(57) => three minutes |        min(58) => two minutes | "
-"       min(59) => one minute |        min(60) => sixty minutes |        "
-"hour(0) => midnight |        hour(1) => one |        hour(2) => two | "
-"       hour(3) => three |        hour(4) => four |        hour(5) => five | "
-"       hour(6) => six |        hour(7) => seven |        hour(8) => eight | "
-"       hour(9) => nine |        hour(10) => ten |        hour(11) => eleven "
-"|        hour(12) => noon |        hour(13) => one |        hour(14) => two "
-"|        hour(15) => three |        hour(16) => four |        hour(17) => "
-"five |        hour(18) => six |        hour(19) => seven |        hour(20) "
-"=> eight |        hour(21) => nine |        hour(22) => ten |        "
-"hour(23) => eleven |        hour1(0) => one |        hour1(1) => two | "
-"       hour1(2) => three |        hour1(3) => four |        hour1(4) => "
-"five |        hour1(5) => six |        hour1(6) => seven |        hour1(7) "
-"=> eight |        hour1(8) => nine |        hour1(9) => ten |        "
-"hour1(10) => eleven |        hour1(11) => noon |        hour1(12) => one | "
-"       hour1(13) => two |        hour1(14) => three |        hour1(15) => "
-"four |        hour1(16) => five |        hour1(17) => six |        hour1(18) "
-"=> seven |        hour1(19) => eight |        hour1(20) => nine |        "
-"hour1(21) => ten |        hour1(22) => eleven |        hour1(23) => midnight "
-"|        am_pm(h) [ h < 12] => AM |        am_pm(_) => PM"
+"        time(12, 0) => <span foreground=\"\\#005FE4\">hour(12)</span> |\n"
+"        time(0, 0) => <span foreground=\"\\#005FE4\">hour(0)</span> |\n"
+"        time(h, 0) => <span foreground=\"\\#005FE4\">hour(h)</span> o'clock "
+"am_pm(h) |\n"
+"        time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> "
+"past <span foreground=\"\\#005FE4\">hour(h)</span> am_pm(h) |\n"
+"        time(h, m) [30 < m] => <span foreground=\"\\#00B20D\">min(m)</span> to "
+"<span foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |\n"
+"        min(1) => one minute |\n"
+"        min(2) => two minutes |\n"
+"        min(3) => three minutes |\n"
+"        min(4) => four minutes |\n"
+"        min(5) => five minutes |\n"
+"        min(6) => six minutes |\n"
+"        min(7) => seven minutes |\n"
+"        min(8) => eight minutes |\n"
+"        min(9) => nine minutes |\n"
+"        min(10) => ten minutes |\n"
+"        min(11) => eleven minutes |\n"
+"        min(12) => twelve minutes |\n"
+"        min(13) => thirteen minutes |\n"
+"        min(14) => fourteen minutes |\n"
+"        min(15) => a quarter |\n"
+"        min(16) => sixteen minutes |\n"
+"        min(17) => seventeen minutes |\n"
+"        min(18) => eighteen minutes |\n"
+"        min(19) => nineteen minutes |\n"
+"        min(20) => twenty minutes |\n"
+"        min(21) => twenty-one minutes |\n"
+"        min(22) => twenty-two minutes |\n"
+"        min(23) => twenty-three minutes |\n"
+"        min(24) => twenty-four minutes |\n"
+"        min(25) => twenty-five minutes |\n"
+"        min(26) => twenty-six minutes |\n"
+"        min(27) => twenty-seven minutes |\n"
+"        min(28) => twenty-eight minutes |\n"
+"        min(29) => twenty-nine minutes |\n"
+"        min(30) => half |\n"
+"        min(31) => twenty-nine minutes |\n"
+"        min(32) => twenty-eight minutes |\n"
+"        min(33) => twenty-seven minutes |\n"
+"        min(34) => twenty-six minutes |\n"
+"        min(35) => twenty-five minutes |\n"
+"        min(36) => twenty-four minutes |\n"
+"        min(37) => twenty-three minutes |\n"
+"        min(38) => twenty-two minutes |\n"
+"        min(39) => twenty-one minutes |\n"
+"        min(40) => twenty minutes |\n"
+"        min(41) => nineteen minutes |\n"
+"        min(42) => eighteen minutes |\n"
+"        min(43) => seventeen minutes |\n"
+"        min(44) => thirteen minutes |\n"
+"        min(45) => a quarter |\n"
+"        min(46) => fourteen minutes |\n"
+"        min(47) => thirteen minutes |\n"
+"        min(48) => twelve minutes |\n"
+"        min(49) => eleven minutes |\n"
+"        min(50) => ten minutes |\n"
+"        min(51) => nine minutes |\n"
+"        min(52) => eight minutes |\n"
+"        min(53) => seven minutes |\n"
+"        min(54) => six minutes |\n"
+"        min(55) => five minutes |\n"
+"        min(56) => four minutes |\n"
+"        min(57) => three minutes |\n"
+"        min(58) => two minutes |\n"
+"        min(59) => one minute |\n"
+"        min(60) => sixty minutes |\n"
+"        hour(0) => midnight |\n"
+"        hour(1) => one |\n"
+"        hour(2) => two |\n"
+"        hour(3) => three |\n"
+"        hour(4) => four |\n"
+"        hour(5) => five |\n"
+"        hour(6) => six |\n"
+"        hour(7) => seven |\n"
+"        hour(8) => eight |\n"
+"        hour(9) => nine |\n"
+"        hour(10) => ten |\n"
+"        hour(11) => eleven |\n"
+"        hour(12) => noon |\n"
+"        hour(13) => one |\n"
+"        hour(14) => two |\n"
+"        hour(15) => three |\n"
+"        hour(16) => four |\n"
+"        hour(17) => five |\n"
+"        hour(18) => six |\n"
+"        hour(19) => seven |\n"
+"        hour(20) => eight |\n"
+"        hour(21) => nine |\n"
+"        hour(22) => ten |\n"
+"        hour(23) => eleven |\n"
+"        hour1(0) => one |\n"
+"        hour1(1) => two |\n"
+"        hour1(2) => three |\n"
+"        hour1(3) => four |\n"
+"        hour1(4) => five |\n"
+"        hour1(5) => six |\n"
+"        hour1(6) => seven |\n"
+"        hour1(7) => eight |\n"
+"        hour1(8) => nine |\n"
+"        hour1(9) => ten |\n"
+"        hour1(10) => eleven |\n"
+"        hour1(11) => noon |\n"
+"        hour1(12) => one |\n"
+"        hour1(13) => two |\n"
+"        hour1(14) => three |\n"
+"        hour1(15) => four |\n"
+"        hour1(16) => five |\n"
+"        hour1(17) => six |\n"
+"        hour1(18) => seven |\n"
+"        hour1(19) => eight |\n"
+"        hour1(20) => nine |\n"
+"        hour1(21) => ten |\n"
+"        hour1(22) => eleven |\n"
+"        hour1(23) => midnight |\n"
+"        am_pm(h) [ h < 12] => AM |\n"
+"        am_pm(_) => PM"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
-msgctxt "espeak-pitch"
-msgid "50"
+msgid "espeak-pitch"
 msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
-msgctxt "espeak-speed"
-msgid "170"
+msgid "espeak-speed"
 msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
-msgctxt "espeak-wgap"
-msgid "0"
-msgstr "0"
+msgid "espeak-wgap"
+msgstr "1"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:51
-msgctxt "espeak-voice"
-msgid "en"
+msgid "espeak-voice"
 msgstr "ta"
+
+#~ msgctxt "Activity"
+#~ msgid "What Time Is It?"
+#~ msgstr "இப்போது என்ன நேரம் இருக்கும்?"
+
+#, python-format
+#~ msgctxt "Write Time"
+#~ msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+#~ msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+
+#, no-python-format
+#~ msgctxt "Write Date"
+#~ msgid ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
+#~ "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
+#~ "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+#~ msgstr ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+#~ "A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+#~ "d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Simple Clock"
+#~ msgstr "சாதாரண நேரம் காட்டி"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Nice Clock"
+#~ msgstr "அருமையான கடிகாரம்"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Display time in full letters"
+#~ msgstr "நேரத்தை முழு எழுத்துக்களில் காட்டு"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Display weekday and date"
+#~ msgstr "வார நாள் மற்றும் திகதியை காட்டு"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Talking clock"
+#~ msgstr "பேசும் கடிகாரம்"
+
+#, no-python-format
+#~ msgctxt "Digital Clock"
+#~ msgid ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+#~ "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
+#~ "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
+#~ msgstr ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+#~ "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+#~ "foreground=\"#E6000A\">%S</span>%p</span></markup>"
+
+#, python-format
+#~ msgctxt "Hour Number"
+#~ msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+#~ msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+
+#~ msgctxt "espeak-pitch"
+#~ msgid "50"
+#~ msgstr "50"
+
+#~ msgctxt "espeak-speed"
+#~ msgid "170"
+#~ msgstr "170"
+
+#~ msgctxt "espeak-wgap"
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgctxt "espeak-voice"
+#~ msgid "en"
+#~ msgstr "ta"

@@ -34,112 +34,70 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-10-27 22:49-0400\n"
-"PO-Revision-Date: 2011-06-06 00:26+0200\n"
-"Last-Translator: Yuan Chao <yuanchao@gmail.com>\n"
+"POT-Creation-Date: 2011-11-09 00:33-0500\n"
+"PO-Revision-Date: 2012-03-22 02:31+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.1\n"
+"X-Generator: Pootle 2.0.5\n"
 
-#. TRANS: Title of the activity
-#: clock.py:98
-msgctxt "Activity"
-msgid "What Time Is It?"
-msgstr "小時鐘"
-
-#. TRANS: The format used when writing the time in full letters.
-#. You must take care to use a font size large enough so that kids can read it easily,
-#. but also small enough so that all times combination fit on the screen, even
-#. when the screen is rotated.
-#. Pango markup: http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:105
-#, python-format
-msgctxt "Write Time"
-msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-
-#. TRANS: The format used to display the weekday and date (example: Tuesday 10/21/2008)
-#. We recommend to use the same font size as for the time display.
-#. See http://docs.python.org/lib/module-time.html for
-#. available strftime formats.
-#: clock.py:112
-#, no-python-format
-msgctxt "Write Date"
-msgid ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
-"%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
-"\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
-msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
-"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
-"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
-
-#: clock.py:166
-msgctxt "Toolbar"
-msgid "Simple Clock"
-msgstr "精簡時鐘"
-
-#: clock.py:170
-msgctxt "Toolbar"
-msgid "Nice Clock"
-msgstr "典雅時鐘"
-
-#: clock.py:174
-msgctxt "Toolbar"
-msgid "Digital Clock"
-msgstr "數位時鐘"
-
-#: clock.py:186
-msgctxt "Toolbar"
-msgid "Display time in full letters"
-msgstr "以文字顯示時間"
-
-#: clock.py:192
-msgctxt "Toolbar"
-msgid "Display weekday and date"
-msgstr "顯示日期"
-
-#: clock.py:203
-msgctxt "Toolbar"
-msgid "Talking clock"
-msgstr "語音時鐘"
-
-#. Add the toolbar to the activity menu
-#: clock.py:208
-msgctxt "Toolbar"
+#: activity/activity.info:2
 msgid "Clock"
 msgstr "小時鐘"
 
-#. TRANS: The format used to display the time for digital clock
-#. You can add AM/PM indicator or use 12/24 format, for example "%I:%M:%S %p".
-#. See http://docs.python.org/lib/module-time.html for
-#. available strftime formats
-#. If the display of the time is moving horizontally, it means that the glyphs
-#. of the digits used in the font don't have the same width. Try to use a
-#. Monospace font.
-#: clock.py:527
+#. TRANS: Title of the activity
+#: clock.py:119
+msgid "Activity"
+msgstr "活動"
+
+#. TRANS: The format used when writing the time in full
+#. letters.  You must take care to use a font size large enough
+#. so that kids can read it easily, but also small enough so
+#. that all times combination fit on the screen, even when the
+#. screen is rotated.  Pango markup:
+#. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
+#: clock.py:127
+msgid "Write Time"
+msgstr "寫出時間"
+
+#. TRANS: The format used to display the weekday and date
+#. (example: Tuesday 10/21/2008) We recommend to use the same
+#. font size as for the time display.  See
+#. http://docs.python.org/lib/module-time.html for available
+#: clock.py:135
 #, no-python-format
-msgctxt "Digital Clock"
-msgid ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
-"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
-msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
-"foreground=\"#E6000A\">%S</span>%p</span></markup>"
+msgid "Write Date"
+msgstr "寫出日期"
 
-#. TRANS: The format of the font used to print hour numbers, from 1 to 12.
-#: clock.py:636
-#, python-format
-msgctxt "Hour Number"
-msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+#: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
+#: clock.py:294 clock.py:305
+msgid "Toolbar"
+msgstr "工具列"
 
+#. TRANS: The format used to display the time for digital clock
+#. You can add AM/PM indicator or use 12/24 format, for example
+#. "%I:%M:%S %p".  See
+#. http://docs.python.org/lib/module-time.html for available
+#. strftime formats If the display of the time is moving
+#. horizontally, it means that the glyphs of the digits used in
+#. the font don't have the same width. Try to use a Monospace
+#: clock.py:649
+#, no-python-format
+msgid "Digital Clock"
+msgstr "數位時鐘"
+
+#. TRANS: The format of the font used to print hour
+#. numbers, from 1 to 12.
+#: clock.py:772
+msgid "Hour Number"
+msgstr "小時數字"
+
+# This string should look something like this English template, but with the words "o'clock" and the words after the arrows translated.  Do not translate min(1), hour(1), etc., those are internal names.  See Spanish string for another example.
+# http://translate.sugarlabs.org/es/honey/clock.po?item=12&view_mode=translate
 #. TRANS: The rules to print the time in the localized language.
 #.
 #. Example syntax:
@@ -175,40 +133,227 @@ msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 #. rule must be placed first in the list.
 #.
 #. You can validate your set of rules by running the command line:
-#. python timewriter.py
+#. python timewriter.py LANG
 #.
 #. You should use pango markup to respect the same colors as for the clock hands.
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "time(h, m) => 現在幾點？"
+msgstr ""
+"        time(12, 0) => <span foreground=\"\\#005FE4\">hour(12)</span> |\n"
+"        time(0, 0) => <span foreground=\"\\#005FE4\">hour(0)</span> |\n"
+"        time(h, 0) => am_pm(h) <span foreground=\"\\#005FE4\">hour(h)</span> 點整 "
+"|\n"
+"        time(h, m) [m < 31] => am_pm(h) <span "
+"foreground=\"\\#005FE4\">hour(h)</span> 點 <span "
+"foreground=\"\\#00B20D\">min(m)</span> |\n"
+"        time(h, m) [44 < m] => 還有 <span foreground=\"\\#00B20D\">min(m)</span> "
+"鐘到 am_pm(h) <span foreground=\"\\#005FE4\">hour1(h)</span> 點 |\n"
+"        min(1) => 一 分 |\n"
+"        min(2) => 兩 分 |\n"
+"        min(3) => 三 分 |\n"
+"        min(4) => 四 分 |\n"
+"        min(5) => 五 分 |\n"
+"        min(6) => 六 分 |\n"
+"        min(7) => 七 分 |\n"
+"        min(8) => 八 分 |\n"
+"        min(9) => 九 分 |\n"
+"        min(10) => 十 分 |\n"
+"        min(11) => 十一 分 |\n"
+"        min(12) => 十二 分 |\n"
+"        min(13) => 十三 分 |\n"
+"        min(14) => 十四 分 |\n"
+"        min(15) => 一刻鐘 |\n"
+"        min(16) => 十六 分 |\n"
+"        min(17) => 十七 分 |\n"
+"        min(18) => 十八 分 |\n"
+"        min(19) => 十九 分 |\n"
+"        min(20) => 二十 分 |\n"
+"        min(21) => 二十一 分 |\n"
+"        min(22) => 二十二 分 |\n"
+"        min(23) => 二十三 分 |\n"
+"        min(24) => 二十四 分 |\n"
+"        min(25) => 二十五 分 |\n"
+"        min(26) => 二十六 分 |\n"
+"        min(27) => 二十七 分 |\n"
+"        min(28) => 二十八 分 |\n"
+"        min(29) => 二十九 分 |\n"
+"        min(30) => 半 |\n"
+"        min(31) => 三十一 分 |\n"
+"        min(32) => 三十二 分 |\n"
+"        min(33) => 三十三 分 |\n"
+"        min(34) => 三十四 分 |\n"
+"        min(35) => 三十五 分 |\n"
+"        min(36) => 三十六 分 |\n"
+"        min(37) => 三十七 分 |\n"
+"        min(38) => 三十八 分 |\n"
+"        min(39) => 三十九 分 |\n"
+"        min(40) => 四十 分 |\n"
+"        min(41) => 四十一 分 |\n"
+"        min(42) => 四十二 分 |\n"
+"        min(43) => 四十三 分 |\n"
+"        min(44) => 四十四 分 |\n"
+"        min(45) => 一刻鐘 |\n"
+"        min(46) => 十四 分 |\n"
+"        min(47) => 十三 分 |\n"
+"        min(48) => 十二 分 |\n"
+"        min(49) => 十一 分 |\n"
+"        min(50) => 十 分 |\n"
+"        min(51) => 九 分 |\n"
+"        min(52) => 八 分 |\n"
+"        min(53) => 七 分 |\n"
+"        min(54) => 六 分 |\n"
+"        min(55) => 五 分 |\n"
+"        min(56) => 四 分 |\n"
+"        min(57) => 三 分 |\n"
+"        min(58) => 二 分 |\n"
+"        min(59) => 一 分 |\n"
+"        min(60) => 六十 分 |\n"
+"        hour(0) => 午夜零 |\n"
+"        hour(1) => 一 |\n"
+"        hour(2) => 二 |\n"
+"        hour(3) => 三 |\n"
+"        hour(4) => 四 |\n"
+"        hour(5) => 五 |\n"
+"        hour(6) => 六 |\n"
+"        hour(7) => 七 |\n"
+"        hour(8) => 八 |\n"
+"        hour(9) => 九 |\n"
+"        hour(10) => 十 |\n"
+"        hour(11) => 十一 |\n"
+"        hour(12) => 正午十二 |\n"
+"        hour(13) => 一 |\n"
+"        hour(14) => 二 |\n"
+"        hour(15) => 三 |\n"
+"        hour(16) => 四 |\n"
+"        hour(17) => 五 |\n"
+"        hour(18) => 六 |\n"
+"        hour(19) => 七 |\n"
+"        hour(20) => 八 |\n"
+"        hour(21) => 九 |\n"
+"        hour(22) => 十 |\n"
+"        hour(23) => 十一 |\n"
+"        hour1(0) => 一 |\n"
+"        hour1(1) => 二 |\n"
+"        hour1(2) => 三 |\n"
+"        hour1(3) => 四 |\n"
+"        hour1(4) => 五 |\n"
+"        hour1(5) => 六 |\n"
+"        hour1(6) => 七 |\n"
+"        hour1(7) => 八 |\n"
+"        hour1(8) => 九 |\n"
+"        hour1(9) => 十 |\n"
+"        hour1(10) => 十一 |\n"
+"        hour1(11) => 十二 |\n"
+"        hour1(12) => 一 |\n"
+"        hour1(13) => 二 |\n"
+"        hour1(14) => 三 |\n"
+"        hour1(15) => 四 |\n"
+"        hour1(16) => 五 |\n"
+"        hour1(17) => 六 |\n"
+"        hour1(18) => 七 |\n"
+"        hour1(19) => 八 |\n"
+"        hour1(20) => 九 |\n"
+"        hour1(21) => 十 |\n"
+"        hour1(22) => 十一 |\n"
+"        hour1(23) => 零 |\n"
+"        am_pm(h) [ h < 12] => 上午 |\n"
+"        am_pm(_) => 下午"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
-msgctxt "espeak-pitch"
-msgid "50"
+msgid "espeak-pitch"
 msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:36
-msgctxt "espeak-speed"
-msgid "170"
+msgid "espeak-speed"
 msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:43
-msgctxt "espeak-wgap"
-msgid "0"
-msgstr "0"
+msgid "espeak-wgap"
+msgstr "1"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:51
-msgctxt "espeak-voice"
-msgid "en"
-msgstr "en"
+msgid "espeak-voice"
+msgstr "zh"
+
+#~ msgctxt "Activity"
+#~ msgid "What Time Is It?"
+#~ msgstr "小時鐘"
+
+#, python-format
+#~ msgctxt "Write Time"
+#~ msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+#~ msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+
+#, no-python-format
+#~ msgctxt "Write Date"
+#~ msgid ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
+#~ "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
+#~ "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+#~ msgstr ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+#~ "A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+#~ "d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Simple Clock"
+#~ msgstr "精簡時鐘"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Nice Clock"
+#~ msgstr "典雅時鐘"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Display time in full letters"
+#~ msgstr "以文字顯示時間"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Display weekday and date"
+#~ msgstr "顯示日期"
+
+#~ msgctxt "Toolbar"
+#~ msgid "Talking clock"
+#~ msgstr "語音時鐘"
+
+#, no-python-format
+#~ msgctxt "Digital Clock"
+#~ msgid ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+#~ "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
+#~ "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
+#~ msgstr ""
+#~ "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+#~ "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+#~ "foreground=\"#E6000A\">%S</span>%p</span></markup>"
+
+#, python-format
+#~ msgctxt "Hour Number"
+#~ msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+#~ msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+
+#~ msgctxt "espeak-pitch"
+#~ msgid "50"
+#~ msgstr "50"
+
+#~ msgctxt "espeak-speed"
+#~ msgid "170"
+#~ msgstr "170"
+
+#~ msgctxt "espeak-wgap"
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgctxt "espeak-voice"
+#~ msgid "en"
+#~ msgstr "en"

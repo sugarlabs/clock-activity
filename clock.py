@@ -530,8 +530,8 @@ class ClockFace(gtk.DrawingArea):
         of the clock, radius).
         """
         # Store the measures of the clock face widget
-        self._center_x = int(allocation.x + allocation.width / 2.0)
-        self._center_y = int(allocation.y + allocation.height / 2.0)
+        self._center_x = int(allocation.width / 2.0)
+        self._center_y = int(allocation.height / 2.0)
         self._radius = max(min(int(allocation.width / 2.0), \
                 int(allocation.height / 2.0)) - 20, 0)
         self._width = allocation.width

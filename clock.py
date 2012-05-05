@@ -70,6 +70,7 @@ import pygtk
 import gtk
 from gtk import gdk
 import pango
+import gst
 
 OLD_TOOLBAR = False
 try:
@@ -431,9 +432,22 @@ class ClockActivity(activity.Activity):
     def _do_speak_time(self):
         """Speak aloud the current time.
         """
-        if self._time_speaker is None:
-            self._time_speaker = Speaker()
-        self._time_speaker.speak(self._untag(self._time_in_letters))
+
+        def gstmessage_cb(bus, message, pipe):
+            if message.type in (gst.MESSAGE_EOS, gst.MESSAGE_ERROR):
+                pipe.set_state(gst.STATE_NULL)
+
+        pipeline = 'espeak text="%s" ! autoaudiosink' % self._untag(self._time_in_letters)
+        try:
+            pipe = gst.parse_launch(pipeline)
+            bus = pipe.get_bus()
+            bus.add_signal_watch()
+            bus.connect('message', gstmessage_cb, pipe)
+            pipe.set_state(gst.STATE_PLAYING)
+        except:
+            if self._time_speaker is None:
+                self._time_speaker = Speaker()
+            self._time_speaker.speak(self._untag(self._time_in_letters))
 
     def _untag(self, text):
         """Remove all the tags (pango markup) from a text.

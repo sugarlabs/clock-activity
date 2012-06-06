@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2011-12-02 08:33+0200\n"
+"PO-Revision-Date: 2012-04-28 06:36+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nah\n"
@@ -23,8 +23,9 @@ msgstr ""
 
 #. TRANS: Title of the activity
 #: clock.py:119
+#, fuzzy
 msgid "Activity"
-msgstr ""
+msgstr "Tekitlachiualistli"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough

@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2011-12-02 07:07+0200\n"
+"PO-Revision-Date: 2012-05-21 18:30+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: id\n"
@@ -51,8 +51,9 @@ msgstr ""
 
 #. TRANS: Title of the activity
 #: clock.py:119
+#, fuzzy
 msgid "Activity"
-msgstr ""
+msgstr "Aktivitas"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -75,8 +76,9 @@ msgstr ""
 
 #: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
 #: clock.py:294 clock.py:305
+#, fuzzy
 msgid "Toolbar"
-msgstr ""
+msgstr "Bilah alat"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example

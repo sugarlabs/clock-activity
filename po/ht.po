@@ -39,7 +39,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2011-12-02 08:24+0200\n"
+"PO-Revision-Date: 2012-06-12 19:27+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ht\n"
@@ -131,20 +131,20 @@ msgstr ""
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:29
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:37
 msgid "170"
-msgstr ""
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:44
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and

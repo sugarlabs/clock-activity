@@ -158,7 +158,7 @@ msgstr ""
 "Project-Id-Version: Clock 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2012-06-12 20:04+0200\n"
+"PO-Revision-Date: 2012-06-12 22:12+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -277,7 +277,7 @@ msgstr "0"
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:52
 msgid "en"
-msgstr "es-la"
+msgstr "es"
 
 #. TRANS: The rules to print the time in the localized language.
 #.

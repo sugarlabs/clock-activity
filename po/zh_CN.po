@@ -39,7 +39,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2012-06-12 22:16+0200\n"
+"PO-Revision-Date: 2012-06-13 06:38+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -55,9 +55,8 @@ msgstr "时钟"
 
 #. TRANS: Title of the activity
 #: clock.py:120
-#, fuzzy
 msgid "What Time Is It?"
-msgstr "它是什么时间？"
+msgstr "是什么时间？"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -68,7 +67,7 @@ msgstr "它是什么时间？"
 #: clock.py:128
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -81,14 +80,15 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:263
-#, fuzzy
 msgid "Simple Clock"
 msgstr "简单的时钟"
 
 #: clock.py:269
-#, fuzzy
 msgid "Nice Clock"
 msgstr "漂亮的时钟"
 
@@ -99,15 +99,15 @@ msgstr "数字时钟"
 
 #: clock.py:289
 msgid "Display time in full letters"
-msgstr ""
+msgstr "以文字显示时间"
 
 #: clock.py:295
 msgid "Display weekday and date"
-msgstr ""
+msgstr "显示星期几和时间"
 
 #: clock.py:306
 msgid "Talking clock"
-msgstr ""
+msgstr "语音时钟"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -123,13 +123,16 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:786
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

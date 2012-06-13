@@ -437,7 +437,16 @@ class ClockActivity(activity.Activity):
             if message.type in (gst.MESSAGE_EOS, gst.MESSAGE_ERROR):
                 pipe.set_state(gst.STATE_NULL)
 
-        pipeline = 'espeak text="%s" ! autoaudiosink' % self._untag(self._time_in_letters)
+        if self._time_speaker is None:
+            self._time_speaker = Speaker()
+
+        pipeline = 'espeak text="%(text)s" voice="%(voice)s" pitch="%(pitch)s" \
+            rate="%(rate)s" gap="%(gap)s" ! autoaudiosink' % {
+            'text':self._untag(self._time_in_letters),
+            'voice':self._time_speaker.VOICE,
+            'pitch':self._time_speaker.PITCH,
+            'rate':self._time_speaker.SPEED,
+            'gap':self._time_speaker.WORD_GAP}
         try:
             pipe = gst.parse_launch(pipeline)
             bus = pipe.get_bus()
@@ -445,8 +454,6 @@ class ClockActivity(activity.Activity):
             bus.connect('message', gstmessage_cb, pipe)
             pipe.set_state(gst.STATE_PLAYING)
         except:
-            if self._time_speaker is None:
-                self._time_speaker = Speaker()
             self._time_speaker.speak(self._untag(self._time_in_letters))
 
     def _untag(self, text):

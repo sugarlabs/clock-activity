@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2012-06-13 06:38+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2012-06-16 05:33+0200\n"
+"Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -201,9 +201,8 @@ msgstr "zh"
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
-#, fuzzy
 msgid "time(h, m) => What Time Is It?"
-msgstr "time(h, m) => 是什么时间？"
+msgstr "time(h, m) => h小时m分钟"
 
 #~ msgid "Activity"
 #~ msgstr "活动"

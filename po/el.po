@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2012-06-13 07:27+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2012-07-30 10:39+0200\n"
+"Last-Translator: Yannis <kiolalis@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,6 @@ msgstr "el"
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
-#, fuzzy
 msgid "time(h, m) => What Time Is It?"
 msgstr "ώρα(ω, λ) => Τι ώρα είναι;"
 

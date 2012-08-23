@@ -59,7 +59,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-12 00:33-0400\n"
-"PO-Revision-Date: 2012-06-13 07:15+0200\n"
+"PO-Revision-Date: 2012-08-23 03:43+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: de\n"
@@ -116,7 +116,7 @@ msgstr "Schöne Uhr"
 # Entspricht den Hinweisen zur Übersetzung. Hier geht es um das Zahlenformat.
 #: clock.py:275
 #, no-python-format
-#, no-python-format, 
+#, no-python-format,
 msgid "Digital Clock"
 msgstr "Digitaluhr"
 
@@ -155,7 +155,7 @@ msgstr ""
 #: clock.py:786
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr "Stundenziffer"
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

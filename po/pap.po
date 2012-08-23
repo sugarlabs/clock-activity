@@ -121,8 +121,9 @@ msgstr ""
 #. numbers, from 1 to 12.
 #: clock.py:786
 #, python-format
+#, python-format, fuzzy
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

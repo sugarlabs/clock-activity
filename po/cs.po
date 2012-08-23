@@ -38,9 +38,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-09 00:33-0500\n"
-"PO-Revision-Date: 2011-12-02 08:17+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2012-06-12 00:33-0400\n"
+"PO-Revision-Date: 2012-07-04 15:39+0200\n"
+"Last-Translator: jui <appukonrad@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -49,14 +49,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Pootle 2.0.5\n"
 
-#: activity/activity.info:2
+#: activity/activity.info:2 clock.py:232
 msgid "Clock"
-msgstr ""
+msgstr "Hodiny"
 
 #. TRANS: Title of the activity
-#: clock.py:119
-msgid "Activity"
-msgstr ""
+#: clock.py:120
+msgid "What Time Is It?"
+msgstr "Kolik je hodin?"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -64,23 +64,49 @@ msgstr ""
 #. that all times combination fit on the screen, even when the
 #. screen is rotated.  Pango markup:
 #. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:127
-msgid "Write Time"
-msgstr ""
+#: clock.py:128
+#, python-format
+msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+msgstr "<markup><span lang=\"cs\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
-#: clock.py:135
+#: clock.py:136
 #, no-python-format
-msgid "Write Date"
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
+"%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
+"\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"cs\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+"A</span>, <span foreground=\"#B20008\">%d</span>/<span foreground=\"#5E008C\">%"
+"m</span>/<spanforeground=\"#9A5200\">%Y</span></span></markup>"
 
-#: clock.py:231 clock.py:262 clock.py:268 clock.py:274 clock.py:288
-#: clock.py:294 clock.py:305
-msgid "Toolbar"
-msgstr ""
+#: clock.py:263
+msgid "Simple Clock"
+msgstr "Jednoduché hodiny"
+
+#: clock.py:269
+msgid "Nice Clock"
+msgstr "Pěkné hodiny"
+
+#: clock.py:275
+msgid "Digital Clock"
+msgstr "Digitální hodiny"
+
+#: clock.py:289
+msgid "Display time in full letters"
+msgstr "Zobrazovat čas v plném rozsahu písmen"
+
+#: clock.py:295
+msgid "Display weekday and date"
+msgstr "Zobrazovat den v týdnu a datum"
+
+#: clock.py:306
+msgid "Talking clock"
+msgstr "Mluvící hodiny"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -89,16 +115,49 @@ msgstr ""
 #. strftime formats If the display of the time is moving
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
-#: clock.py:649
+#: clock.py:663
 #, no-python-format
-msgid "Digital Clock"
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
+"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"cs\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
-#: clock.py:772
-msgid "Hour Number"
-msgstr ""
+#: clock.py:786
+#, python-format
+msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr "<markup><span lang=\"cs\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+
+#. TRANS: The language pitch (range [0 - 99], default 50 for English)
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:29
+msgid "50"
+msgstr "50"
+
+#. TRANS: The diction speed, in average words per minute (range [80 - 390],
+#. default 170 for English).
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:37
+msgid "170"
+msgstr "170"
+
+#. TRANS: The pause duration between words, in units of 10 ms.
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:44
+msgid "0"
+msgstr "0"
+
+#. TRANS: The language and voice variant
+#. Look at http://espeak.sourceforge.net/commands.html for details, and
+#. http://espeak.sourceforge.net/languages.html to see if your language is supported.
+#: speaker.py:52
+msgid "en"
+msgstr "cs"
 
 #. TRANS: The rules to print the time in the localized language.
 #.
@@ -143,32 +202,104 @@ msgstr ""
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
+"time(12, 0) => <span foreground=\"\\#005FE4\">hodin(12)</span> |\n"
+"time(0, 0) => <span foreground=\"\\#005FE4\">hodin(0)</span> |\n"
+"time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> past <span "
+"foreground=\"\\#005FE4\">hour(h)</span> am_pm(h) |\n"
+"time(h, m) [30 < m] => <span foreground=\"\\#00B20D\">min(m)</span> to <span "
+"foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |\n"
+"min(1) => jedna minuta |\n"
+"min(2) => dvě minuty |\n"
+"min(3) => tři minuty |\n"
+"min(4) => čtyři minuty |\n"
+"min(5) => pět minut |\n"
+"min(6) => šest minut |\n"
+"min(7) => sedm minut |\n"
+"min(8) => osm minut |\n"
+"min(9) => devět minut |\n"
+"min(10) => deset minut |\n"
+"min(11) => jedenáct minut |\n"
+"min(12) => dvanáct minut |\n"
+"min(13) => třináct minut |\n"
+"min(14) => čtrnáct minut |\n"
+"min(15) => a čtvrt |\n"
+"min(16) => šestnáct minut |\n"
+"min(17) => sedmnáct minut |\n"
+"min(18) => osmnáct minut |\n"
+"min(19) => devatenáct minut |\n"
+"min(20) => dvacet minut |\n"
+"min(21) => dvacet jedna minut |\n"
+"min(22) => davcet dva minut |\n"
+"min(23) => dvacet tři minut |\n"
+"min(24) => dvacet čtyři minuts |\n"
+"min(25) => dvacet pět minut |\n"
+"min(26) => dvacet šest minut |\n"
+"min(27) => dvacet sedm minut |\n"
+"min(28) => dvacet osm minut |\n"
+"min(29) => dvacet devět minut |\n"
+"min(30) => půl |\n"
+"min(31) => třicet jedna minut |\n"
+"min(32) => třicet dva minut |\n"
+"min(33) => třicet tři minut |\n"
+"min(34) => třecet čtyři minut |\n"
+"min(35) => třicet pět minut |\n"
+"min(36) => třicet šest minut |\n"
+"min(37) => třicet sedm minut |\n"
+"min(38) => třicet osm minut |\n"
+"min(39) => třicet devět minut |\n"
+"min(40) => čtyřicet minut |\n"
+"min(41) => čtyřicet jedna minut |\n"
+"min(42) => čtyřicet dva minut |\n"
+"min(43) => čtyřicet tři minut |\n"
+"min(44) => čtyřicet čtyři minut |\n"
+"min(45) => třičtvrtě |\n"
+"min(46) => čtyřicet šest minut |\n"
+"min(47) => čtyřicet sedm minut\n"
+"min(48) => čtyřicet osm minut |\n"
+"min(49) => čtyřicet devět minut |\n"
+"min(50) => padesát minut |\n"
+"min(51) => padesát jedna minut |\n"
+"min(52) => padesát dva minut |\n"
+"min(53) => padesát tři minut |\n"
+"min(54) => padesát čtyři minut |\n"
+"min(55) => padesát pět minut |\n"
+"min(56) => padesát šest minut |\n"
+"min(57) => padesát sedm minut |\n"
+"min(58) => padesát osm minut |\n"
+"min(59) => Padesát devět minut |\n"
+"min(60) => šedesát minut |\n"
+"hour(0) => půlnoc |\n"
+"hour(1) => jedna |\n"
+"hour(2) => dvě |\n"
+"hour(3) => tři |\n"
+"hour(4) => čtyři |\n"
+"hour(5) => pět |\n"
+"hour(6) => šest |\n"
+"hour(7) => sedm |\n"
+"hour(8) => osm |\n"
+"hour(9) => devět |\n"
+"hour(10) => deset |\n"
+"hour(11) => jedenáct |\n"
+"hour(12) => poledne |\n"
+"hour(13) => jedna |\n"
+"hour(14) => dvě |\n"
+"hour(15) => tři |\n"
+"hour(16) => čtyři |\n"
+"hour(17) => pět |\n"
+"hour(18) => šest |\n"
+"hour(19) => sedm |\n"
+"hour(20) => osm |\n"
+"hour(21) => devět |\n"
+"hour(22) => deset |\n"
+"hour(23) => jedenáct |\n"
+"am_pm(h) [ h < 12] => Dop |\n"
+"am_pm(_) => Odp"
 
-#. TRANS: The language pitch (range [0 - 99], default 50 for English)
-#. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:29
-msgid "espeak-pitch"
-msgstr "50"
+#~ msgid "espeak-pitch"
+#~ msgstr "50"
 
-#. TRANS: The diction speed, in average words per minute (range [80 - 390], default 170 for English).
-#. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:36
-msgid "espeak-speed"
-msgstr "170"
+#~ msgid "espeak-speed"
+#~ msgstr "170"
 
-#. TRANS: The pause duration between words, in units of 10 ms.
-#. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:43
-msgid "espeak-wgap"
-msgstr "1"
-
-#. TRANS: The language and voice variant
-#. Look at http://espeak.sourceforge.net/commands.html for details, and
-#. http://espeak.sourceforge.net/languages.html to see if your language is supported.
-#: speaker.py:51
-msgid "espeak-voice"
-msgstr ""
-
-#~ msgctxt "espeak-voice"
-#~ msgid "en"
-#~ msgstr "cs"
+#~ msgid "espeak-wgap"
+#~ msgstr "1"

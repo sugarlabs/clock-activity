@@ -627,30 +627,30 @@ class ClockFace(gtk.DrawingArea):
         # Fill background
         cr = self.window.cairo_create()
         cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
-        cr.rectangle(int(self._center_x - 1.1 * self._radius),
-                     int(self._center_y - 0.8 * self._radius),
-                     int(2.2 * self._radius),
-                     int(0.55 * self._radius))
+        cr.rectangle(round(self._center_x - 1.1 * self._radius),
+                     round(self._center_y - 0.8 * self._radius),
+                     round(2.2 * self._radius),
+                     round(0.55 * self._radius))
         cr.fill()
 
-        h = int(0.15 * self._radius)
-        x = int(self._center_x - self._radius)
+        h = round(0.15 * self._radius)
+        x = round(self._center_x - self._radius)
 
         # Hours scale
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
-        y = int(self._center_y - 0.75 * self._radius)
+        y = round(self._center_y - 0.75 * self._radius)
         cr.rectangle(x, y, hours_length, h)
         cr.fill()
 
         # Minutes scale
         cr.set_source_rgba(*style.Color(self._COLOR_MINUTES).get_rgba())
-        y = int(self._center_y - 0.60 * self._radius)
+        y = round(self._center_y - 0.60 * self._radius)
         cr.rectangle(x, y, minutes_length, h)
         cr.fill()
 
         # Seconds scale
         cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
-        y = int(self._center_y - 0.45 * self._radius)
+        y = round(self._center_y - 0.45 * self._radius)
         cr.rectangle(x, y, seconds_length, h)
         cr.fill()
 

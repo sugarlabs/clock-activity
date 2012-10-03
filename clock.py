@@ -806,12 +806,12 @@ class ClockFace(gtk.DrawingArea):
             hour_number = _('<markup><span lang="en" \
 font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             cr.save()
+            pango_layout.set_markup(hour_number)
             dx, dy = pango_layout.get_pixel_size()
             cr.translate(- dx / 2.0 + self._center_x + 0.75 *
                 self._radius * math.cos((i - 2) * math.pi / 6.0),
                 - dy / 2.0 + self._center_y + 0.75 * self._radius *
                 math.sin((i - 2) * math.pi / 6.0))
-            pango_layout.set_markup(hour_number)
             cr.update_layout(pango_layout)
             cr.show_layout(pango_layout)
             cr.restore()

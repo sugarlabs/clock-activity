@@ -71,6 +71,9 @@ import gtk
 from gtk import gdk
 import pango
 import gst
+import cairo
+import pangocairo
+import rsvg
 
 OLD_TOOLBAR = False
 try:
@@ -83,7 +86,6 @@ except ImportError:
 import math
 from datetime import datetime
 import threading
-import gc
 import re
 
 from gettext import gettext as _
@@ -91,6 +93,7 @@ from gettext import gettext as _
 from sugar.activity import activity
 from sugar.graphics.toggletoolbutton import ToggleToolButton
 from sugar.graphics.radiotoolbutton import RadioToolButton
+from sugar.graphics import style
 
 from speaker import Speaker
 from timewriter import TimeWriter
@@ -498,32 +501,29 @@ class ClockFace(gtk.DrawingArea):
         # The display mode of the clock
         self._mode = _MODE_SIMPLE_CLOCK
 
-        # SVG Background cache
-        self._cache_pixbuf = None
-        self._radius = -1
+        # SVG Background handle
+        self._svg_handle = None
 
-        # The graphic context used for drawings
-        self._gc = None
+        self._radius = -1
         self._line_width = 2
 
         # Color codes (approved colors for XO screen:
         # http://wiki.laptop.org/go/XO_colors)
-        colormap = self.get_colormap()
 
         # XO Medium Blue
-        self._COLOR_HOURS = colormap.alloc_color("#005FE4")
+        self._COLOR_HOURS = "#005FE4"
 
         # XO Medium Green
-        self._COLOR_MINUTES = colormap.alloc_color("#00B20D")
+        self._COLOR_MINUTES = "#00B20D"
 
         # XO Medium Red
-        self._COLOR_SECONDS = colormap.alloc_color("#E6000A")
+        self._COLOR_SECONDS = "#E6000A"
 
         # White
-        self._COLOR_WHITE = colormap.alloc_color("#FFFFFF")
+        self._COLOR_WHITE = "#FFFFFF"
 
         # Black
-        self._COLOR_BLACK = colormap.alloc_color("#000000")
+        self._COLOR_BLACK = "#000000"
 
         # gtk.Widget signals
         self.connect("expose-event", self._expose_cb)
@@ -559,10 +559,8 @@ class ClockFace(gtk.DrawingArea):
         self._height = allocation.height
         self._line_width = int(self._radius / 150)
 
-        # Reload the cached pixbuf
-        self._cache_pixbuf = gdk.pixbuf_new_from_file_at_size("clock.svg",
-          2 * self._radius, 2 * self._radius)
-        gc.collect()  # Reclaim memory from old pixbuf
+        # Reload the svg handle
+        self._svg_handle = rsvg.Handle(file="clock.svg")
 
         self.initialized = True
 
@@ -579,8 +577,6 @@ class ClockFace(gtk.DrawingArea):
             self.queue_resize()
 
         if self._active:
-            self._gc = self.window.new_gc()
-
             if self._mode == _MODE_NICE_CLOCK:
                 self._draw_nice_clock()
             elif self._mode == _MODE_SIMPLE_CLOCK:
@@ -629,32 +625,34 @@ class ClockFace(gtk.DrawingArea):
         seconds_length = 2 * self._radius / 60 * self._time.second
 
         # Fill background
-        self._gc.set_line_attributes(self._line_width, gdk.LINE_SOLID, \
-                gdk.CAP_BUTT, gdk.JOIN_BEVEL)
-        self._gc.set_foreground(self._COLOR_WHITE)
-        self.window.draw_rectangle(self._gc, True, \
-                int(self._center_x - 1.1 * self._radius), \
-                int(self._center_y - 0.8 * self._radius), \
-                int(2.2 * self._radius), \
-                int(0.55 * self._radius))
+        cr = self.window.cairo_create()
+        cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
+        cr.rectangle(int(self._center_x - 1.1 * self._radius),
+                     int(self._center_y - 0.8 * self._radius),
+                     int(2.2 * self._radius),
+                     int(0.55 * self._radius))
+        cr.fill()
 
         h = int(0.15 * self._radius)
         x = int(self._center_x - self._radius)
 
         # Hours scale
-        self._gc.set_foreground(self._COLOR_HOURS)
+        cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         y = int(self._center_y - 0.75 * self._radius)
-        self.window.draw_rectangle(self._gc, True, x, y, hours_length, h)
+        cr.rectangle(x, y, hours_length, h)
+        cr.fill()
 
         # Minutes scale
-        self._gc.set_foreground(self._COLOR_MINUTES)
+        cr.set_source_rgba(*style.Color(self._COLOR_MINUTES).get_rgba())
         y = int(self._center_y - 0.60 * self._radius)
-        self.window.draw_rectangle(self._gc, True, x, y, minutes_length, h)
+        cr.rectangle(x, y, minutes_length, h)
+        cr.fill()
 
         # Seconds scale
-        self._gc.set_foreground(self._COLOR_SECONDS)
+        cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
         y = int(self._center_y - 0.45 * self._radius)
-        self.window.draw_rectangle(self._gc, True, x, y, seconds_length, h)
+        cr.rectangle(x, y, seconds_length, h)
+        cr.fill()
 
     def _draw_time(self):
         """Draw the time in colors (digital display).
@@ -676,9 +674,16 @@ class ClockFace(gtk.DrawingArea):
         markup_time = self._time.strftime(markup)
         #markup_time = time.strftime(markup)
 
-        self._gc.set_foreground(self._COLOR_BLACK)
+        cr = self.window.cairo_create()
+        cr = pangocairo.CairoContext(cr)
+        cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
+        pango_layout = cr.create_layout()
         d = int(self._center_y + 0.3 * self._radius)
-        self._draw_markup(self._center_x, d, markup_time)
+        pango_layout.set_markup(markup_time)
+        dx, dy = pango_layout.get_pixel_size()
+        pango_layout.set_alignment(pango.ALIGN_CENTER)
+        cr.translate(self._center_x - dx / 2.0, d - dy / 2.0)
+        cr.show_layout(pango_layout)
 
     def _draw_simple_clock(self):
         """Draw the simple clock variants.
@@ -692,22 +697,17 @@ class ClockFace(gtk.DrawingArea):
         The simple clock background is a white disk, with hours and minutes
         ticks, and the hour numbers.
         """
-        # Simple clock background
-        self._gc.set_foreground(self._COLOR_WHITE)
-        x_delta = self._center_x - self._radius
-        y_delta = self._center_y - self._radius
+        cr = self.window.cairo_create()
+        cr.set_line_width(4 * self._line_width)
 
-        self.window.draw_arc(self._gc, True, x_delta, y_delta,
-          2 * self._radius, 2 * self._radius, 0, 360 * 64)
-        self._gc.set_foreground(self.get_style().fg[gtk.STATE_NORMAL])
-        self._gc.set_line_attributes(4 * self._line_width,
-          gdk.LINE_SOLID, gdk.CAP_ROUND, gdk.JOIN_ROUND)
-        self.window.draw_arc(self._gc, False, x_delta, y_delta,
-          2 * self._radius, 2 * self._radius, 0, 360 * 64)
+        # Simple clock background
+        cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
+        cr.arc(self._width / 2, self._height / 2, self._radius, 0, 2 * math.pi)
+        cr.fill_preserve()
+        cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
+        cr.stroke()
 
         # Clock ticks
-        self._gc.set_line_attributes(4 * self._line_width,
-          gdk.LINE_SOLID, gdk.CAP_ROUND, gdk.JOIN_ROUND)
         for i in xrange(60):
             if i % 15 == 0:
                 inset = 0.175 * self._radius
@@ -718,22 +718,28 @@ class ClockFace(gtk.DrawingArea):
 
             cos = math.cos(i * math.pi / 30.0)
             sin = math.sin(i * math.pi / 30.0)
-            self.window.draw_line(self._gc,
-              int(self._center_x + (self._radius - inset) * cos),
-              int(self._center_y + (self._radius - inset) * sin),
-              int(self._center_x + self._radius * cos),
-              int(self._center_y + self._radius * sin))
+            cr.move_to(int(self._center_x + (self._radius - inset) * cos),
+                       int(self._center_y + (self._radius - inset) * sin))
+            cr.line_to(int(self._center_x + self._radius * cos),
+                       int(self._center_y + self._radius * sin))
+            cr.stroke()
 
     def _draw_nice_background(self):
         """Draw the nice clock background.
 
         The background has been loaded from the clock.svg file to a
-        pixbuf, and we just draw this pixbuf onto the pixmap where we
-        will be drawing the hands.
+        rsvg handle, and we just transform this handle and render it
+        with cairo.
         """
-        # We draw the background from the SVG pixbuf
-        self.window.draw_pixbuf(None, self._cache_pixbuf,
-          0, 0, self._center_x - self._radius, self._center_y - self._radius)
+        # We transform the background SVG
+        cr = self.window.cairo_create()
+        scale_x = self._radius * 2.0 / self._svg_handle.props.width
+        scale_y = self._radius * 2.0 / self._svg_handle.props.height
+        matrix = cairo.Matrix(xx=scale_x, yy=scale_y,
+                              x0=self._center_x - self._radius,
+                              y0=self._center_y - self._radius)
+        cr.transform(matrix)
+        self._svg_handle.render_cairo(cr)
 
     def _draw_nice_clock(self):
         """Draw the nice clock.
@@ -748,54 +754,66 @@ class ClockFace(gtk.DrawingArea):
         minutes = self._time.minute
         seconds = self._time.second
 
+        cr = self.window.cairo_create()
+        cr.set_line_cap(cairo.LINE_CAP_ROUND)
+
         # Hour hand:
         # The hour hand is rotated 30 degrees (pi/6 r) per hour +
         # 1/2 a degree (pi/360) per minute
-        self._gc.set_foreground(self._COLOR_HOURS)
-        self._gc.set_line_attributes(8 * self._line_width,
-          gdk.LINE_SOLID, gdk.CAP_ROUND, gdk.JOIN_ROUND)
-        self.window.draw_line(self._gc, self._center_x, self._center_y,
-          int(self._center_x + self._radius * 0.5 *
-          math.sin(math.pi / 6 * hours + math.pi / 360 * minutes)),
-          int(self._center_y + self._radius * 0.5 *
-          - math.cos(math.pi / 6 * hours + math.pi / 360 * minutes)))
+        cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
+        cr.set_line_width(8 * self._line_width)
+        cr.move_to(self._center_x, self._center_y)
+        cr.line_to(int(self._center_x + self._radius * 0.5 *
+            math.sin(math.pi / 6 * hours + math.pi / 360 * minutes)),
+            int(self._center_y + self._radius * 0.5 *
+            - math.cos(math.pi / 6 * hours + math.pi / 360 * minutes)))
+        cr.stroke()
 
         # Minute hand:
         # The minute hand is rotated 6 degrees (pi/30 r) per minute
-        self._gc.set_foreground(self._COLOR_MINUTES)
-        self._gc.set_line_attributes(6 * self._line_width,
-          gdk.LINE_SOLID, gdk.CAP_ROUND, gdk.JOIN_ROUND)
-        self.window.draw_line(self._gc, self._center_x, self._center_y,
-                int(self._center_x + self._radius * 0.8 *
+        cr.set_source_rgba(*style.Color(self._COLOR_MINUTES).get_rgba())
+        cr.set_line_width(6 * self._line_width)
+        cr.move_to(self._center_x, self._center_y)
+        cr.line_to(int(self._center_x + self._radius * 0.8 *
                 math.sin(math.pi / 30 * minutes)),
-                int(self._center_y + self._radius * 0.8 *
+                   int(self._center_y + self._radius * 0.8 *
                 - math.cos(math.pi / 30 * minutes)))
+        cr.stroke()
 
         # Seconds hand:
         # Operates identically to the minute hand
-        self._gc.set_foreground(self._COLOR_SECONDS)
-        self._gc.set_line_attributes(2 * self._line_width,
-          gdk.LINE_SOLID, gdk.CAP_ROUND, gdk.JOIN_ROUND)
-        self.window.draw_line(self._gc, self._center_x, self._center_y,
-                int(self._center_x + self._radius * 0.7 *
+        cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
+        cr.set_line_width(2 * self._line_width)
+        cr.move_to(self._center_x, self._center_y)
+        cr.line_to(int(self._center_x + self._radius * 0.7 *
                 math.sin(math.pi / 30 * seconds)),
                 int(self._center_y + self._radius * 0.7 *
                 - math.cos(math.pi / 30 * seconds)))
+        cr.stroke()
 
     def _draw_numbers(self):
         """Draw the numbers of the hours.
         """
-        self._gc.set_foreground(self._COLOR_HOURS)
+        cr = self.window.cairo_create()
+        cr = pangocairo.CairoContext(cr)
+        cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
+        pango_layout = cr.create_layout()
 
         for i in xrange(12):
             # TRANS: The format of the font used to print hour
             # numbers, from 1 to 12.
             hour_number = _('<markup><span lang="en" \
 font_desc="Sans Bold 20">%d</span></markup>') % (i + 1)
-            self._draw_markup(self._center_x + 0.75 * \
-            self._radius * math.cos((i - 2) * math.pi / 6.0), \
-            self._center_y + 0.75 * self._radius * \
-            math.sin((i - 2) * math.pi / 6.0), hour_number)
+            cr.save()
+            dx, dy = pango_layout.get_pixel_size()
+            cr.translate(- dx / 2.0 + self._center_x + 0.75 *
+                self._radius * math.cos((i - 2) * math.pi / 6.0),
+                - dy / 2.0 + self._center_y + 0.75 * self._radius *
+                math.sin((i - 2) * math.pi / 6.0))
+            pango_layout.set_markup(hour_number)
+            cr.update_layout(pango_layout)
+            cr.show_layout(pango_layout)
+            cr.restore()
 
     def _redraw_canvas(self):
         """Force a redraw of the clock on the screen.

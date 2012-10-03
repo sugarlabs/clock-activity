@@ -766,6 +766,8 @@ class ClockFace(gtk.DrawingArea):
         # 1/2 a degree (pi/360) per minute
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         cr.set_line_width(9 * self._line_width)
+        cr.arc(self._center_x, self._center_y, 5 * self._line_width, 0, 2 * math.pi)
+        cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         cr.line_to(int(self._center_x + self._radius * 0.5 *
             math.sin(math.pi / 6 * hours + math.pi / 360 * minutes)),
@@ -777,6 +779,8 @@ class ClockFace(gtk.DrawingArea):
         # The minute hand is rotated 6 degrees (pi/30 r) per minute
         cr.set_source_rgba(*style.Color(self._COLOR_MINUTES).get_rgba())
         cr.set_line_width(6 * self._line_width)
+        cr.arc(self._center_x, self._center_y, 4 * self._line_width, 0, 2 * math.pi)
+        cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         cr.line_to(int(self._center_x + self._radius * 0.8 *
                 math.sin(math.pi / 30 * minutes)),
@@ -788,6 +792,8 @@ class ClockFace(gtk.DrawingArea):
         # Operates identically to the minute hand
         cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
         cr.set_line_width(2 * self._line_width)
+        cr.arc(self._center_x, self._center_y, 3 * self._line_width, 0, 2 * math.pi)
+        cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         cr.line_to(int(self._center_x + self._radius * 0.7 *
                 math.sin(math.pi / 30 * seconds)),

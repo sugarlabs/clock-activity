@@ -804,7 +804,7 @@ class ClockFace(gtk.DrawingArea):
             # TRANS: The format of the font used to print hour
             # numbers, from 1 to 12.
             hour_number = _('<markup><span lang="en" \
-font_desc="Sans Bold 20">%d</span></markup>') % (i + 1)
+font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             cr.save()
             dx, dy = pango_layout.get_pixel_size()
             cr.translate(- dx / 2.0 + self._center_x + 0.75 *

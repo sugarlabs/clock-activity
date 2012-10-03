@@ -762,7 +762,7 @@ class ClockFace(gtk.DrawingArea):
         # The hour hand is rotated 30 degrees (pi/6 r) per hour +
         # 1/2 a degree (pi/360) per minute
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
-        cr.set_line_width(8 * self._line_width)
+        cr.set_line_width(9 * self._line_width)
         cr.move_to(self._center_x, self._center_y)
         cr.line_to(int(self._center_x + self._radius * 0.5 *
             math.sin(math.pi / 6 * hours + math.pi / 360 * minutes)),

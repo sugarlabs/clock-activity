@@ -666,7 +666,7 @@ class ClockFace(gtk.DrawingArea):
         # the font don't have the same width. Try to use a Monospace
         # font.  xgettext:no-python-format
         markup = _('<markup>\
-<span lang="en" font_desc="Sans,Monospace Bold 48">\
+<span lang="en" font_desc="Sans,Monospace Bold 96">\
 <span foreground="#005FE4">%I</span>:\
 <span foreground="#00B20D">%M</span>:\
 <span foreground="#E6000A">%S</span>%p</span></markup>')

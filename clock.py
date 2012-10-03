@@ -699,6 +699,7 @@ class ClockFace(gtk.DrawingArea):
         """
         cr = self.window.cairo_create()
         cr.set_line_width(4 * self._line_width)
+        cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
         # Simple clock background
         cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())

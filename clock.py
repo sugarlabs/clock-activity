@@ -628,9 +628,9 @@ class ClockFace(gtk.DrawingArea):
         cr = self.window.cairo_create()
         cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
         cr.rectangle(round(self._center_x - 1.1 * self._radius),
-                     round(self._center_y - 0.8 * self._radius),
+                     round(self._center_y - 0.85 * self._radius),
                      round(2.2 * self._radius),
-                     round(0.55 * self._radius))
+                     round(0.65 * self._radius))
         cr.fill()
 
         h = round(0.15 * self._radius)

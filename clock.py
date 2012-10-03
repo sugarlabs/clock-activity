@@ -711,11 +711,14 @@ class ClockFace(gtk.DrawingArea):
         # Clock ticks
         for i in xrange(60):
             if i % 15 == 0:
-                inset = 0.175 * self._radius
+                inset = 0.11 * self._radius
+                cr.set_line_width(7 * self._line_width)
             elif i % 5 == 0:
                 inset = 0.1 * self._radius
+                cr.set_line_width(5 * self._line_width)
             else:
                 inset = 0.05 * self._radius
+                cr.set_line_width(4 * self._line_width)
 
             cos = math.cos(i * math.pi / 30.0)
             sin = math.sin(i * math.pi / 30.0)

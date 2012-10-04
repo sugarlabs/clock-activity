@@ -525,9 +525,6 @@ class ClockFace(gtk.DrawingArea):
         # Black
         self._COLOR_BLACK = "#000000"
 
-        # cache backgrounds
-        self._nice_background_cache = None
-
         # gtk.Widget signals
         self.connect("expose-event", self._expose_cb)
         self.connect("size-allocate", self._size_allocate_cb)
@@ -564,6 +561,16 @@ class ClockFace(gtk.DrawingArea):
 
         # Reload the svg handle
         self._svg_handle = rsvg.Handle(file="clock.svg")
+        cr = self.window.cairo_create()
+        self._nice_background_cache = cr.get_target().create_similar(
+                cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+                self._radius * 2)
+        cache_ctx = cairo.Context(self._nice_background_cache)
+        scale_x = self._radius * 2.0 / self._svg_handle.props.width
+        scale_y = self._radius * 2.0 / self._svg_handle.props.height
+        matrix = cairo.Matrix(xx=scale_x, yy=scale_y)
+        cache_ctx.transform(matrix)
+        self._svg_handle.render_cairo(cache_ctx)
 
         self.initialized = True
 
@@ -740,18 +747,6 @@ class ClockFace(gtk.DrawingArea):
         """
         # We transform the background SVG
         cr = self.window.cairo_create()
-
-        if self._nice_background_cache == None:
-            self._nice_background_cache = cr.get_target().create_similar(
-                    cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
-                    self._radius * 2)
-            cache_ctx = cairo.Context(self._nice_background_cache)
-            scale_x = self._radius * 2.0 / self._svg_handle.props.width
-            scale_y = self._radius * 2.0 / self._svg_handle.props.height
-            matrix = cairo.Matrix(xx=scale_x, yy=scale_y)
-            cache_ctx.transform(matrix)
-            self._svg_handle.render_cairo(cache_ctx)
-
         cr.translate(self._center_x - self._radius,
                 self._center_y - self._radius)
         cr.set_source_surface(self._nice_background_cache)

@@ -31,7 +31,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-04 00:32-0400\n"
-"PO-Revision-Date: 2012-10-12 09:19+0200\n"
+"PO-Revision-Date: 2012-10-12 23:46+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en_US\n"
@@ -119,22 +119,22 @@ msgstr "Talking clock"
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:668
-#, no-python-format, fuzzy
+#, no-python-format, 
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
 "foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:815
-#, python-format, fuzzy
+#, python-format, 
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

@@ -789,9 +789,9 @@ class ClockFace(gtk.DrawingArea):
         cr.arc(self._center_x, self._center_y, 4 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
-        cr.line_to(int(self._center_x + self._radius * 0.7 *
+        cr.line_to(int(self._center_x + self._radius * 0.8 *
                 math.sin(math.pi / 30 * minutes)),
-                int(self._center_y + self._radius * 0.7 *
+                   int(self._center_y + self._radius * 0.8 *
                 - math.cos(math.pi / 30 * minutes)))
         cr.stroke()
 
@@ -802,9 +802,9 @@ class ClockFace(gtk.DrawingArea):
         cr.arc(self._center_x, self._center_y, 3 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
-        cr.line_to(int(self._center_x + self._radius * 0.8 *
+        cr.line_to(int(self._center_x + self._radius * 0.7 *
                 math.sin(math.pi / 30 * seconds)),
-                int(self._center_y + self._radius * 0.8 *
+                int(self._center_y + self._radius * 0.7 *
                 - math.cos(math.pi / 30 * seconds)))
         cr.stroke()
 

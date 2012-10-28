@@ -247,7 +247,7 @@ msgstr "El reloj parlante"
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:668
 #, no-python-format
-#, no-python-format, 
+#, no-python-format,
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
@@ -261,7 +261,7 @@ msgstr ""
 #. numbers, from 1 to 12.
 #: clock.py:815
 #, python-format
-#, python-format, 
+#, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"es\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 

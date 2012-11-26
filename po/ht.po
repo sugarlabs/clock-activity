@@ -125,6 +125,7 @@ msgstr "L'horloge parlante"
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:668
+#, no-python-format
 #, no-python-format, fuzzy
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
@@ -138,6 +139,7 @@ msgstr ""
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:815
+#, python-format
 #, python-format, fuzzy
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"fr\" font_desc=\"Sans Bold 20\">%d</span></markup>"

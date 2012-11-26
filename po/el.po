@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-04 00:32-0400\n"
-"PO-Revision-Date: 2012-07-30 10:39+0200\n"
-"Last-Translator: Yannis <kiolalis@gmail.com>\n"
+"PO-Revision-Date: 2012-10-19 02:05+0200\n"
+"Last-Translator: George <gamvrosi@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Γνωρίζετε τι ώρα είναι; Τώρα ναι! Επίσης, δείτε όλες τις διαφορετικές "
+"εμφανίσεις που μπορείτε να χρησιμοποιήσετε για το ρολόι σας!"
 
 #. TRANS: Title of the activity
 #: clock.py:123
@@ -126,7 +128,8 @@ msgstr "Το ρολόι που μιλάει"
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:668
-#, no-python-format, fuzzy
+#, no-python-format
+#, no-python-format,
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
@@ -139,7 +142,8 @@ msgstr ""
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:815
-#, python-format, fuzzy
+#, python-format
+#, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"el\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 

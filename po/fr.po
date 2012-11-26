@@ -42,8 +42,8 @@ msgstr ""
 "Project-Id-Version: Clock 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-04 00:32-0400\n"
-"PO-Revision-Date: 2012-06-12 18:54+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2012-11-24 17:35+0200\n"
+"Last-Translator: Lionel Laské <llaske@c2s.fr>\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -63,6 +63,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Connais-tu l'heure ? Maintenant tu dois ! Observes toutes les manières "
+"différentes de faire ta montre !"
 
 #. TRANS: Title of the activity
 #: clock.py:123
@@ -128,6 +130,7 @@ msgstr "L'horloge parlante"
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:668
+#, no-python-format
 #, no-python-format, fuzzy
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
@@ -141,6 +144,7 @@ msgstr ""
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:815
+#, python-format
 #, python-format, fuzzy
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"fr\" font_desc=\"Sans Bold 20\">%d</span></markup>"

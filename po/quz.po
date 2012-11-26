@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-10-04 00:32-0400\n"
-"PO-Revision-Date: 2012-06-12 23:50+0200\n"
+"PO-Revision-Date: 2012-11-20 09:21+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
@@ -23,6 +23,8 @@ msgstr ""
 msgid "Clock"
 msgstr "Pacha Watana"
 
+# ¿Sabes la hora? ¡Ahora sí! Descubre todas las maneras que tu reloj puede parecerse!
+# 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
 msgid ""
@@ -119,14 +121,14 @@ msgstr ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
 "foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
-# "<markup><span lang=\"es\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+# "<markup><span lang=\"es\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:815
 #, python-format
-#, python-format, fuzzy
+#, python-format, 
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr "<markup><span lang=\"es\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr "<markup><span lang=\"quz\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

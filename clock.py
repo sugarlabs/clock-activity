@@ -54,6 +54,8 @@ More about clocks and time in the World
   http://en.wikipedia.org/wiki/Date_and_time_notation_by_country
 
 """
+# FIXME: remove
+import logging
 
 # We initialize threading in gobject. As we will detach another thread
 # to translate the time to text, this other thread will eventually
@@ -366,8 +368,13 @@ class ClockActivity(activity.Activity):
         """
         self._clock.set_display_mode(display_mode)
 
-        # The hands can't be grabbed in the digital clock mode
         is_digital = display_mode == _MODE_DIGITAL_CLOCK
+
+        # Exit grab hands mode if the clock is digital
+        if self._clock.grab_hands_mode == True and is_digital:
+            self._grab_button.set_active(False)
+
+        # The hands can't be grabbed in the digital clock mode
         self._grab_button.props.sensitive = not is_digital
 
     def _write_time_clicked_cb(self, button):
@@ -393,8 +400,7 @@ class ClockActivity(activity.Activity):
         """The user clicked on the "grab hands" button to toggle
         grabbing the hands.
         """
-        # FIXME: implement
-        pass
+        self._clock.change_grab_hands_mode(button.get_active())
 
     def _minutes_changed_cb(self, clock):
         """Minutes have changed on the clock face: we have to update
@@ -547,7 +553,9 @@ class ClockFace(gtk.DrawingArea):
         self.connect("size-allocate", self._size_allocate_cb)
 
         # The masks to capture the events we are interested in
-        self.add_events(gdk.EXPOSURE_MASK | gdk.VISIBILITY_NOTIFY_MASK)
+        self.add_events(gdk.EXPOSURE_MASK | gdk.VISIBILITY_NOTIFY_MASK
+            | gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK
+            | gtk.gdk.BUTTON1_MOTION_MASK)
 
         # Define a new signal to notify the application when minutes
         # change.  If the user wants to display the time in full
@@ -555,6 +563,14 @@ class ClockFace(gtk.DrawingArea):
         # refresh the display.
         gobject.signal_new("time_minute", ClockFace,
           gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
+
+        # This flag is True if the clock is in grab hands mode
+        self.grab_hands_mode = False
+
+        # Event handlers for grabbing the hands.
+        self._press_id = None
+        self._motion_id = None
+        self._release_id = None
 
     def set_display_mode(self, mode):
         """Set the type of clock to display (simple, nice, digital).
@@ -904,3 +920,34 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             gobject.timeout_add(1000, self._update_cb)
 
     active = property(_get_active, _set_active)
+
+    def change_grab_hands_mode(self, toggle_grab):
+        """Connect or disconnect the callbacks for to grab the hands
+        of the clock.
+        """
+        logging.debug("CHANGE GRAB %r", toggle_grab)
+        self.grab_hands_mode = toggle_grab
+
+        if toggle_grab:
+            self._press_id = self.connect("button-press-event",
+                                          self._press_cb)
+            self._motion_id = self.connect("motion-notify-event",
+                                           self._motion_cb)
+            self._release_id = self.connect("button-release-event",
+                                        self._release_cb)
+        else:
+            self.disconnect(self._press_id)
+            self.disconnect(self._motion_id)
+            self.disconnect(self._release_id)
+
+            # Update again the clock every seconds.
+            gobject.timeout_add(1000, self._update_cb)
+
+    def _press_cb(self, widget, event):
+        logging.debug("PRESS")
+
+    def _motion_cb(self, widget, event):
+        logging.debug("MOTION")
+
+    def _release_cb(self, widget, event):
+        logging.debug("RELEASE")

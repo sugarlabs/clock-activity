@@ -310,6 +310,12 @@ class ClockActivity(activity.Activity):
         button.connect("toggled", self._speak_time_clicked_cb)
         display_toolbar.insert(button, -1)
 
+        # And another button to toggle grabbing the hands
+        self._grab_button = ToggleToolButton("grab")
+        self._grab_button.set_tooltip(_('Grab the hands'))
+        self._grab_button.connect("toggled", self._grab_clicked_cb)
+        display_toolbar.insert(self._grab_button, -1)
+
     def _make_display(self):
         """Prepare the display of the clock.
 
@@ -360,6 +366,10 @@ class ClockActivity(activity.Activity):
         """
         self._clock.set_display_mode(display_mode)
 
+        # The hands can't be grabbed in the digital clock mode
+        is_digital = display_mode == _MODE_DIGITAL_CLOCK
+        self._grab_button.props.sensitive = not is_digital
+
     def _write_time_clicked_cb(self, button):
         """The user clicked on the "write time" button to print the
         current time.
@@ -378,6 +388,13 @@ class ClockActivity(activity.Activity):
         self._speak_time = button.get_active()
         if self._speak_time:
             self._write_and_speak(True)
+
+    def _grab_clicked_cb(self, button):
+        """The user clicked on the "grab hands" button to toggle
+        grabbing the hands.
+        """
+        # FIXME: implement
+        pass
 
     def _minutes_changed_cb(self, clock):
         """Minutes have changed on the clock face: we have to update

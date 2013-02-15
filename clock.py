@@ -536,8 +536,6 @@ class ClockFace(gtk.DrawingArea):
         self._center_x = None
         self._center_y = None
         self._radius = -1
-        self._width = None
-        self._height = None
         self._line_width = 2
         self._hand_sizes = {}
 
@@ -605,13 +603,22 @@ class ClockFace(gtk.DrawingArea):
         self._center_y = int(allocation.height / 2.0)
         self._radius = max(min(int(allocation.width / 2.0), \
                 int(allocation.height / 2.0)) - 20, 0)
-        self._width = allocation.width
-        self._height = allocation.height
         self._line_width = int(self._radius / 150)
+
+        cr = self.window.cairo_create()
+
+        # Draw simple clock background
+        self._simple_background_cache = cr.get_target().create_similar(
+                cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+                self._radius * 2)
+        cache_ctx = cairo.Context(self._simple_background_cache)
+        self._draw_simple_background(cache_ctx)
+        self._draw_numbers(cache_ctx)
 
         # Reload the svg handle
         self._svg_handle = rsvg.Handle(file="clock.svg")
-        cr = self.window.cairo_create()
+
+        # Draw nice clock background
         self._nice_background_cache = cr.get_target().create_similar(
                 cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
                 self._radius * 2)
@@ -753,22 +760,27 @@ class ClockFace(gtk.DrawingArea):
     def _draw_simple_clock(self):
         """Draw the simple clock variants.
         """
-        self._draw_simple_background()
-        self._draw_numbers()
+        # Place the simple background
+        cr = self.window.cairo_create()
+        cr.translate(self._center_x - self._radius,
+                self._center_y - self._radius)
+        cr.set_source_surface(self._simple_background_cache)
+        cr.paint()
+
         self._draw_hands()
 
-    def _draw_simple_background(self):
+    def _draw_simple_background(self, cr):
         """Draw the background of the simple clock.
         The simple clock background is a white disk, with hours and minutes
         ticks, and the hour numbers.
         """
-        cr = self.window.cairo_create()
         cr.set_line_width(4 * self._line_width)
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
         # Simple clock background
         cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
-        cr.arc(self._width / 2, self._height / 2, self._radius, 0, 2 * math.pi)
+        cr.arc(self._radius, self._radius, self._radius - self._line_width * 2,
+               0, 2 * math.pi)
         cr.fill_preserve()
         cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
         cr.stroke()
@@ -787,10 +799,10 @@ class ClockFace(gtk.DrawingArea):
 
             cos = math.cos(i * math.pi / 30.0)
             sin = math.sin(i * math.pi / 30.0)
-            cr.move_to(int(self._center_x + (self._radius - inset) * cos),
-                       int(self._center_y + (self._radius - inset) * sin))
-            cr.line_to(int(self._center_x + (self._radius - 3) * cos),
-                       int(self._center_y + (self._radius - 3) * sin))
+            cr.move_to(int(self._radius + (self._radius - inset) * cos),
+                       int(self._radius + (self._radius - inset) * sin))
+            cr.line_to(int(self._radius + (self._radius - 3) * cos),
+                       int(self._radius + (self._radius - 3) * sin))
             cr.stroke()
 
     def _draw_nice_background(self):
@@ -800,7 +812,7 @@ class ClockFace(gtk.DrawingArea):
         rsvg handle, and we just transform this handle and render it
         with cairo.
         """
-        # We transform the background SVG
+        # Place the nice background
         cr = self.window.cairo_create()
         cr.translate(self._center_x - self._radius,
                 self._center_y - self._radius)
@@ -862,10 +874,9 @@ class ClockFace(gtk.DrawingArea):
             int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
 
-    def _draw_numbers(self):
+    def _draw_numbers(self, cr):
         """Draw the numbers of the hours.
         """
-        cr = self.window.cairo_create()
         cr = pangocairo.CairoContext(cr)
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         pango_layout = cr.create_layout()
@@ -878,9 +889,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             cr.save()
             pango_layout.set_markup(hour_number)
             dx, dy = pango_layout.get_pixel_size()
-            cr.translate(- dx / 2.0 + self._center_x + 0.75 *
+            cr.translate(- dx / 2.0 + self._radius + 0.75 *
                 self._radius * math.cos((i - 2) * math.pi / 6.0),
-                - dy / 2.0 + self._center_y + 0.75 * self._radius *
+                - dy / 2.0 + self._radius + 0.75 * self._radius *
                 math.sin((i - 2) * math.pi / 6.0))
             cr.update_layout(pango_layout)
             cr.show_layout(pango_layout)

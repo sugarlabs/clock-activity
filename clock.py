@@ -527,8 +527,16 @@ class ClockFace(gtk.DrawingArea):
         # SVG Background handle
         self._svg_handle = None
 
+        # This are calculated on widget resize
+        self._center_x = None
+        self._center_y = None
         self._radius = -1
+        self._width = None
+        self._height = None
         self._line_width = 2
+        self._hand_sizes = {}
+
+        self._hand_angles = {}
 
         # Color codes (approved colors for XO screen:
         # http://wiki.laptop.org/go/XO_colors)
@@ -604,6 +612,11 @@ class ClockFace(gtk.DrawingArea):
         matrix = cairo.Matrix(xx=scale_x, yy=scale_y)
         cache_ctx.transform(matrix)
         self._svg_handle.render_cairo(cache_ctx)
+
+        # The hands sizes are proportional to the radius
+        self._hand_sizes['hour'] = self._radius * 0.5
+        self._hand_sizes['minutes'] = self._radius * 0.8
+        self._hand_sizes['seconds'] = self._radius * 0.7
 
         self.initialized = True
 
@@ -794,10 +807,6 @@ class ClockFace(gtk.DrawingArea):
     def _draw_hands(self):
         """Draw the hands of the analog clocks.
         """
-        hours = self._time.hour
-        minutes = self._time.minute
-        seconds = self._time.second
-
         cr = self.window.cairo_create()
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
@@ -809,10 +818,11 @@ class ClockFace(gtk.DrawingArea):
         cr.arc(self._center_x, self._center_y, 5 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
-        cr.line_to(int(self._center_x + self._radius * 0.5 *
-            math.sin(math.pi / 6 * hours + math.pi / 360 * minutes)),
-            int(self._center_y + self._radius * 0.5 *
-            - math.cos(math.pi / 6 * hours + math.pi / 360 * minutes)))
+        sin = math.sin(self._hand_angles['hour'])
+        cos = math.cos(self._hand_angles['hour'])
+        cr.line_to(
+            int(self._center_x + self._hand_sizes['hour'] * sin),
+            int(self._center_y - self._hand_sizes['hour'] * cos))
         cr.stroke()
 
         # Minute hand:
@@ -822,10 +832,11 @@ class ClockFace(gtk.DrawingArea):
         cr.arc(self._center_x, self._center_y, 4 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
-        cr.line_to(int(self._center_x + self._radius * 0.7 *
-                math.sin(math.pi / 30 * minutes)),
-                int(self._center_y + self._radius * 0.7 *
-                - math.cos(math.pi / 30 * minutes)))
+        sin = math.sin(self._hand_angles['minutes'])
+        cos = math.cos(self._hand_angles['minutes'])
+        cr.line_to(
+            int(self._center_x + self._hand_sizes['minutes'] * sin),
+            int(self._center_y - self._hand_sizes['minutes'] * cos))
         cr.stroke()
 
         # Seconds hand:
@@ -835,10 +846,11 @@ class ClockFace(gtk.DrawingArea):
         cr.arc(self._center_x, self._center_y, 3 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
-        cr.line_to(int(self._center_x + self._radius * 0.8 *
-                math.sin(math.pi / 30 * seconds)),
-                int(self._center_y + self._radius * 0.8 *
-                - math.cos(math.pi / 30 * seconds)))
+        sin = math.sin(self._hand_angles['seconds'])
+        cos = math.cos(self._hand_angles['seconds'])
+        cr.line_to(
+            int(self._center_x + self._hand_sizes['seconds'] * sin),
+            int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
 
     def _draw_numbers(self):
@@ -878,6 +890,12 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         """
         # update the time and force a redraw of the clock
         self._time = datetime.now()
+
+        self._hand_angles['hour'] = (math.pi / 6 * self._time.hour +
+                                     math.pi / 360 * self._time.minute)
+
+        self._hand_angles['minutes'] = math.pi / 30 * self._time.minute
+        self._hand_angles['seconds'] = math.pi / 30 * self._time.second
 
         gobject.idle_add(self._redraw_canvas)
 

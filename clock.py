@@ -962,10 +962,17 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                                            self._motion_cb)
             self._release_id = self.connect("button-release-event",
                                         self._release_cb)
+
+            # Put hand cursor
+            self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND2))
+
         else:
             self.disconnect(self._press_id)
             self.disconnect(self._motion_id)
             self.disconnect(self._release_id)
+
+            # Put original cursor again
+            self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.LEFT_PTR))
 
             # Update again the clock every seconds.
             gobject.timeout_add(1000, self._update_cb)

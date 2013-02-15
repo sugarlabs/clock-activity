@@ -54,8 +54,6 @@ More about clocks and time in the World
   http://en.wikipedia.org/wiki/Date_and_time_notation_by_country
 
 """
-# FIXME: remove
-import logging
 
 # We initialize threading in gobject. As we will detach another thread
 # to translate the time to text, this other thread will eventually
@@ -111,6 +109,12 @@ _MODE_DIGITAL_CLOCK = 2
 # directory exists if powerd is running.  create a file here,
 # named after our pid, to inhibit suspend.
 POWERD_INHIBIT_DIR = '/var/run/powerd-inhibit-suspend'
+
+# Tolerance for grabbing hands, in radians.  Each hand can be grabbed
+# if the user press on a piece of the circle that is the angle of the
+# hand +- the tolerance angle.
+_ANGLE_TOLERANCE = 0.3
+
 
 class ClockActivity(activity.Activity):
     """The clock activity displays a simple clock widget.
@@ -367,6 +371,7 @@ class ClockActivity(activity.Activity):
         or digital).
         """
         self._clock.set_display_mode(display_mode)
+        self._clock.queue_draw()
 
         is_digital = display_mode == _MODE_DIGITAL_CLOCK
 
@@ -574,6 +579,10 @@ class ClockFace(gtk.DrawingArea):
 
         # This flag is True if the clock is in grab hands mode
         self.grab_hands_mode = False
+
+        # When grabbing a hand, this is the name of the hand.  If
+        # None, it means that no hand is being grabbed
+        self._hand_being_grabbed = None
 
         # Event handlers for grabbing the hands.
         self._press_id = None
@@ -908,8 +917,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self._old_minute = self._time.minute
 
         # Keep running this timer as long as the clock is active
-        # (ie. visible)
-        return self._active
+        # (ie. visible) or the mode changes to dragging the hands of
+        # the clock
+        return self._active and not self.grab_hands_mode
 
     def get_time(self):
         """Public access to the time member of the clock face.
@@ -943,7 +953,6 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         """Connect or disconnect the callbacks for to grab the hands
         of the clock.
         """
-        logging.debug("CHANGE GRAB %r", toggle_grab)
         self.grab_hands_mode = toggle_grab
 
         if toggle_grab:
@@ -962,10 +971,78 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             gobject.timeout_add(1000, self._update_cb)
 
     def _press_cb(self, widget, event):
-        logging.debug("PRESS")
+        mouse_x, mouse_y, state = event.window.get_pointer()
+
+        # Only pay attention to the button 1
+        if not (state & gtk.gdk.BUTTON1_MASK):
+            return
+
+        # Calculate the angle from the center of the clock to the
+        # mouse pointer
+        adjacent = mouse_x - self._center_x
+        opposite = -1 * (mouse_y - self._center_y)
+        pointer_angle = math.atan2(adjacent, opposite)
+
+        # Calculate the distance from the center of the clock to the
+        # mouse pointer
+        pointer_distance = math.hypot(adjacent, opposite)
+
+        # If the angle is negative, convert it to the equal angle
+        # between 0 and 2 PI
+        if pointer_angle < 0:
+            pointer_angle += math.pi * 2
+
+        def in_range(hand_angle, angle):
+            """Return True if the given angle is in a range of the
+            hand_angle +- the angle tolerance.
+            """
+            # This is the normalized angle, the equal angle that is
+            # minor than 2 PI
+            hand_normal = (hand_angle -
+                           (math.pi * 2) * int(hand_angle / (math.pi * 2)))
+
+            return (hand_normal >= angle - _ANGLE_TOLERANCE and
+                    hand_normal < angle + _ANGLE_TOLERANCE)
+
+        # Check if we can start grabbing a hand of the clock:
+        for hand in ['hour', 'minutes', 'seconds']:
+            if in_range(self._hand_angles[hand], pointer_angle):
+                if pointer_distance <= self._hand_sizes[hand]:
+                    self._hand_being_grabbed = hand
+                    break
 
     def _motion_cb(self, widget, event):
-        logging.debug("MOTION")
+        if self._hand_being_grabbed is None:
+            return
+
+        if event.is_hint:
+            mouse_x, mouse_y, state = event.window.get_pointer()
+        else:
+            mouse_x = event.x
+            mouse_y = event.y
+            state = event.state
+
+        # Only pay attention to the button 1
+        if not state & gtk.gdk.BUTTON1_MASK:
+            return
+
+        # Calculate the angle from the center of the clock to the
+        # mouse pointer
+        adjacent = mouse_x - self._center_x
+        opposite = -1 * (mouse_y - self._center_y)
+        pointer_angle = math.atan2(adjacent, opposite)
+
+        # If the angle is negative, convert it to the equal angle
+        # between 0 and 2 PI
+        if pointer_angle < 0:
+            pointer_angle += math.pi * 2
+
+        # Update the angle of the hand being grabbed
+        self._hand_angles[self._hand_being_grabbed] = pointer_angle
+
+        # Force redraw of the clock:
+        self.queue_draw()
 
     def _release_cb(self, widget, event):
-        logging.debug("RELEASE")
+        self._hand_being_grabbed = None
+        self.queue_draw()

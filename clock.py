@@ -598,6 +598,11 @@ class ClockFace(gtk.DrawingArea):
         the parameters which are important for our rendering (center
         of the clock, radius).
         """
+        # This callback can be called when the gdk window is not yet
+        # set
+        if self.window is None:
+            return
+
         # Store the measures of the clock face widget
         self._center_x = int(allocation.width / 2.0)
         self._center_y = int(allocation.height / 2.0)

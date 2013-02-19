@@ -937,10 +937,26 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         # the clock
         return self._active and not self.grab_hands_mode
 
+    def _get_time_from_hands_angles(self):
+        # FIXME, this returns the PM hours, there is no way to
+        # distinguish PM and AM in the displayed clock
+        hour = 12 + int((self._hand_angles['hour'] * 12) / (math.pi * 2))
+        minute = int((self._hand_angles['minutes'] * 60) / (math.pi * 2))
+        # Second is not used by speech or to display time in full
+        # letters, so we avoid that calculation
+        second = 0
+        return datetime(self._time.year, self._time.month, self._time.day,
+                        hour=hour, minute=minute, second=second)
+
     def get_time(self):
-        """Public access to the time member of the clock face.
+        """Public access to the time member of the clock face. In grab
+        hands mode, return the time according to the position of the
+        clock hands.
         """
-        return self._time
+        if self.grab_hands_mode:
+            return self._get_time_from_hands_angles()
+        else:
+            return self._time
 
     def _get_active(self):
         """Get the activity status of the clock. When active, the
@@ -1067,5 +1083,11 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         self.queue_draw()
 
     def _release_cb(self, widget, event):
+        if self._hand_being_grabbed is None:
+            return
+
+        if self._hand_being_grabbed in ['hour', 'minutes']:
+            self.emit("time_minute")
+
         self._hand_being_grabbed = None
         self.queue_draw()

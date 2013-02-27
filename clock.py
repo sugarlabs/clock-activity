@@ -322,6 +322,22 @@ class ClockActivity(activity.Activity):
         self._grab_button.connect("toggled", self._grab_clicked_cb)
         display_toolbar.insert(self._grab_button, -1)
 
+        # Radio buttons to switch AM PM in hands grabbing mode
+        self._am_button = RadioToolButton()
+        self._am_button.set_tooltip(_('AM'))
+        self._am_button.connect("toggled", self._am_pm_clicked_cb, 'AM')
+        display_toolbar.insert(self._am_button, -1)
+
+        self._pm_button = RadioToolButton(group=self._am_button)
+        self._pm_button.set_tooltip(_('PM'))
+        self._pm_button.connect("toggled", self._am_pm_clicked_cb, 'PM')
+        display_toolbar.insert(self._pm_button, -1)
+
+        # AM and PM buttons will be sensitive only in hands grabbing
+        # mode
+        self._am_button.props.sensitive = False
+        self._pm_button.props.sensitive = False
+
     def _make_display(self):
         """Prepare the display of the clock.
 
@@ -406,6 +422,13 @@ class ClockActivity(activity.Activity):
         grabbing the hands.
         """
         self._clock.change_grab_hands_mode(button.get_active())
+        self._am_button.props.sensitive = button.get_active()
+        self._pm_button.props.sensitive = button.get_active()
+
+    def _am_pm_clicked_cb(self, button, selection):
+        """The user selected "AM" or "PM" in grabbing hands mode.
+        """
+        self._clock.change_grab_am_pm(selection)
 
     def _minutes_changed_cb(self, clock):
         """Minutes have changed on the clock face: we have to update
@@ -586,6 +609,10 @@ class ClockFace(gtk.DrawingArea):
         self._press_id = None
         self._motion_id = None
         self._release_id = None
+
+        # This can be 'AM' or 'PM' to distinguish the user set time
+        # while grabbing the hands of the clock
+        self._am_pm = 'AM'
 
     def set_display_mode(self, mode):
         """Set the type of clock to display (simple, nice, digital).
@@ -938,13 +965,15 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         return self._active and not self.grab_hands_mode
 
     def _get_time_from_hands_angles(self):
-        # FIXME, this returns the PM hours, there is no way to
-        # distinguish PM and AM in the displayed clock
-        hour = 12 + int((self._hand_angles['hour'] * 12) / (math.pi * 2))
+        hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2))
+        if self._am_pm == 'PM':
+            hour += 12
+
         minute = int((self._hand_angles['minutes'] * 60) / (math.pi * 2))
         # Second is not used by speech or to display time in full
         # letters, so we avoid that calculation
         second = 0
+
         return datetime(self._time.year, self._time.month, self._time.day,
                         hour=hour, minute=minute, second=second)
 
@@ -1008,6 +1037,12 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
 
             # Update again the clock every seconds.
             gobject.timeout_add(1000, self._update_cb)
+
+        self.emit("time_minute")
+
+    def change_grab_am_pm(self, selection):
+        self._am_pm = selection
+        self.emit("time_minute")
 
     def _press_cb(self, widget, event):
         mouse_x, mouse_y, state = event.window.get_pointer()

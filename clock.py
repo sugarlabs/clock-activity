@@ -322,22 +322,6 @@ class ClockActivity(activity.Activity):
         self._grab_button.connect("toggled", self._grab_clicked_cb)
         display_toolbar.insert(self._grab_button, -1)
 
-        # Radio buttons to switch AM PM in hands grabbing mode
-        self._am_button = RadioToolButton()
-        self._am_button.set_tooltip(_('AM'))
-        self._am_button.connect("toggled", self._am_pm_clicked_cb, 'AM')
-        display_toolbar.insert(self._am_button, -1)
-
-        self._pm_button = RadioToolButton(group=self._am_button)
-        self._pm_button.set_tooltip(_('PM'))
-        self._pm_button.connect("toggled", self._am_pm_clicked_cb, 'PM')
-        display_toolbar.insert(self._pm_button, -1)
-
-        # AM and PM buttons will be sensitive only in hands grabbing
-        # mode
-        self._am_button.props.sensitive = False
-        self._pm_button.props.sensitive = False
-
     def _make_display(self):
         """Prepare the display of the clock.
 
@@ -422,13 +406,6 @@ class ClockActivity(activity.Activity):
         grabbing the hands.
         """
         self._clock.change_grab_hands_mode(button.get_active())
-        self._am_button.props.sensitive = button.get_active()
-        self._pm_button.props.sensitive = button.get_active()
-
-    def _am_pm_clicked_cb(self, button, selection):
-        """The user selected "AM" or "PM" in grabbing hands mode.
-        """
-        self._clock.change_grab_am_pm(selection)
 
     def _minutes_changed_cb(self, clock):
         """Minutes have changed on the clock face: we have to update
@@ -551,17 +528,19 @@ class ClockFace(gtk.DrawingArea):
 
         # The display mode of the clock
         self._mode = _MODE_SIMPLE_CLOCK
+        
+        # Cache for the simple clock face background
+        self._simple_background_cache = None
 
         # SVG Background handle
         self._svg_handle = None
 
         # This are calculated on widget resize
-        self._center_x = None
-        self._center_y = None
+        self._center_x = 0
+        self._center_y = 0
         self._radius = -1
         self._line_width = 2
         self._hand_sizes = {}
-
         self._hand_angles = {}
 
         # Color codes (approved colors for XO screen:
@@ -613,6 +592,8 @@ class ClockFace(gtk.DrawingArea):
         # This can be 'AM' or 'PM' to distinguish the user set time
         # while grabbing the hands of the clock
         self._am_pm = 'AM'
+        self.am_pm_width = 0
+        self.am_pm_height = 0
 
     def set_display_mode(self, mode):
         """Set the type of clock to display (simple, nice, digital).
@@ -792,6 +773,11 @@ class ClockFace(gtk.DrawingArea):
     def _draw_simple_clock(self):
         """Draw the simple clock variants.
         """
+        
+        # Can be called before the cache is ready
+        if self._simple_background_cache is None:
+            return
+            
         # Place the simple background
         cr = self.window.cairo_create()
         cr.translate(self._center_x - self._radius,
@@ -863,6 +849,27 @@ class ClockFace(gtk.DrawingArea):
         cr = self.window.cairo_create()
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
+        # AM/PM indicator:
+        pangocairo_context = pangocairo.CairoContext(cr)
+        pangocairo_context.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
+        pango_layout = pangocairo_context.create_layout()
+        if self._am_pm == 'AM':
+            am_pm = _('<markup><span lang="en" font_desc="Sans Bold 28">\
+<span foreground="white" background="black"> AM </span><span \
+foreground="lightgray"> PM </span></span></markup>')
+        else:
+            am_pm = _('<markup><span lang="en" font_desc="Sans Bold 28">\
+<span foreground="lightgray"> AM </span><span foreground="white" \
+background="black"> PM </span></span></markup>')
+        pangocairo_context.save()
+        pango_layout.set_markup(am_pm)
+        self.am_pm_width, self.am_pm_height = pango_layout.get_pixel_size()
+        pangocairo_context.translate(- self.am_pm_width / 2.0 + self._center_x,
+               - self.am_pm_height / 2.0 + (self._radius / 3) + self._center_y)
+        pangocairo_context.update_layout(pango_layout)
+        pangocairo_context.show_layout(pango_layout)
+        pangocairo_context.restore()
+
         # Hour hand:
         # The hour hand is rotated 30 degrees (pi/6 r) per hour +
         # 1/2 a degree (pi/360) per minute
@@ -905,7 +912,7 @@ class ClockFace(gtk.DrawingArea):
             int(self._center_x + self._hand_sizes['seconds'] * sin),
             int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
-
+        
     def _draw_numbers(self, cr):
         """Draw the numbers of the hours.
         """
@@ -949,6 +956,11 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         self._hand_angles['minutes'] = math.pi / 30 * self._time.minute
         self._hand_angles['seconds'] = math.pi / 30 * self._time.second
 
+        if self._time.hour < 12:
+            self._am_pm = 'AM'
+        else:
+            self._am_pm = 'PM'
+
         gobject.idle_add(self._redraw_canvas)
 
         # When the minutes change, we raise the 'time_minute'
@@ -968,6 +980,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2))
         if self._am_pm == 'PM':
             hour += 12
+            
+        print "hour", hour
 
         minute = int((self._hand_angles['minutes'] * 60) / (math.pi * 2))
         # Second is not used by speech or to display time in full
@@ -1040,10 +1054,6 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
 
         self.emit("time_minute")
 
-    def change_grab_am_pm(self, selection):
-        self._am_pm = selection
-        self.emit("time_minute")
-
     def _press_cb(self, widget, event):
         mouse_x, mouse_y, state = event.window.get_pointer()
 
@@ -1084,7 +1094,21 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                 if pointer_distance <= self._hand_sizes[hand]:
                     self._hand_being_grabbed = hand
                     break
+                    
+        # Toggle AM or PM if clock face AM/PM area pressed
+        if mouse_x > self._center_x - self.am_pm_width / 2 and \
+                mouse_x < self._center_x + self.am_pm_width / 2 and \
+                mouse_y > self._center_y + self._radius / 3 - self.am_pm_height and \
+                mouse_y < self._center_y + self._radius / 3 + self.am_pm_height:
+                
+            if self._am_pm == 'AM':
+                self._am_pm = 'PM'
+            else:
+                self._am_pm = 'AM'
 
+            self.emit("time_minute")
+            self.queue_draw()
+                                
     def _motion_cb(self, widget, event):
         if self._hand_being_grabbed is None:
             return

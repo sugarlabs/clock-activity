@@ -66,7 +66,6 @@ More about clocks and time in the World
 import gobject
 gobject.threads_init()
 
-import pygtk
 import gtk
 from gtk import gdk
 import pango
@@ -194,13 +193,13 @@ class ClockActivity(activity.Activity):
     def powerd_running(self):
         self.using_powerd = os.access(POWERD_INHIBIT_DIR, os.W_OK)
         return self.using_powerd
-    
+
     def _inhibit_suspend(self):
         if self.using_powerd:
             fd = open(POWERD_INHIBIT_DIR + "/%u" % os.getpid(), 'w')
             fd.close()
             return True
-        
+
         if self.ohm_keystore is not None:
             try:
                 self.ohm_keystore.SetKey('suspend.inhibit', 1)
@@ -209,12 +208,12 @@ class ClockActivity(activity.Activity):
                 return False
         else:
             return False
-    
+
     def _allow_suspend(self):
         if self.using_powerd:
             os.unlink(POWERD_INHIBIT_DIR + "/%u" % os.getpid())
             return True
-        
+
         if self.ohm_keystore is not None:
             try:
                 self.ohm_keystore.SetKey('suspend.inhibit', 0)
@@ -223,7 +222,6 @@ class ClockActivity(activity.Activity):
                 return False
         else:
             return False
-
 
     def _make_toolbars(self):
         """Prepare and set the toolbars of the activity.
@@ -376,7 +374,7 @@ class ClockActivity(activity.Activity):
         is_digital = display_mode == _MODE_DIGITAL_CLOCK
 
         # Exit grab hands mode if the clock is digital
-        if self._clock.grab_hands_mode == True and is_digital:
+        if self._clock.grab_hands_mode and is_digital:
             self._grab_button.set_active(False)
 
         # The hands can't be grabbed in the digital clock mode
@@ -473,11 +471,11 @@ class ClockActivity(activity.Activity):
 
         pipeline = 'espeak text="%(text)s" voice="%(voice)s" pitch="%(pitch)s" \
             rate="%(rate)s" gap="%(gap)s" ! autoaudiosink' % {
-            'text':self._untag(self._time_in_letters),
-            'voice':self._time_speaker.VOICE,
-            'pitch':self._time_speaker.PITCH,
-            'rate':self._time_speaker.SPEED,
-            'gap':self._time_speaker.WORD_GAP}
+            'text': self._untag(self._time_in_letters),
+            'voice': self._time_speaker.VOICE,
+            'pitch': self._time_speaker.PITCH,
+            'rate': self._time_speaker.SPEED,
+            'gap': self._time_speaker.WORD_GAP}
         try:
             pipe = gst.parse_launch(pipeline)
             bus = pipe.get_bus()
@@ -490,7 +488,7 @@ class ClockActivity(activity.Activity):
     def _untag(self, text):
         """Remove all the tags (pango markup) from a text.
         """
-        if text == False or "<" not in text:
+        if text is False or "<" not in text:
             return text
         else:
             result = ""
@@ -528,7 +526,7 @@ class ClockFace(gtk.DrawingArea):
 
         # The display mode of the clock
         self._mode = _MODE_SIMPLE_CLOCK
-        
+
         # Cache for the simple clock face background
         self._simple_background_cache = None
 
@@ -575,7 +573,7 @@ class ClockFace(gtk.DrawingArea):
         # letters, the method of the activity will be called back to
         # refresh the display.
         gobject.signal_new("time_minute", ClockFace,
-          gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
+            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
 
         # This flag is True if the clock is in grab hands mode
         self.grab_hands_mode = False
@@ -614,16 +612,16 @@ class ClockFace(gtk.DrawingArea):
         # Store the measures of the clock face widget
         self._center_x = int(allocation.width / 2.0)
         self._center_y = int(allocation.height / 2.0)
-        self._radius = max(min(int(allocation.width / 2.0), \
-                int(allocation.height / 2.0)) - 20, 0)
+        self._radius = max(min(int(allocation.width / 2.0),
+                           int(allocation.height / 2.0)) - 20, 0)
         self._line_width = int(self._radius / 150)
 
         cr = self.window.cairo_create()
 
         # Draw simple clock background
         self._simple_background_cache = cr.get_target().create_similar(
-                cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
-                self._radius * 2)
+            cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+            self._radius * 2)
         cache_ctx = cairo.Context(self._simple_background_cache)
         self._draw_simple_background(cache_ctx)
         self._draw_numbers(cache_ctx)
@@ -633,8 +631,8 @@ class ClockFace(gtk.DrawingArea):
 
         # Draw nice clock background
         self._nice_background_cache = cr.get_target().create_similar(
-                cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
-                self._radius * 2)
+            cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+            self._radius * 2)
         cache_ctx = cairo.Context(self._nice_background_cache)
         scale_x = self._radius * 2.0 / self._svg_handle.props.width
         scale_y = self._radius * 2.0 / self._svg_handle.props.height
@@ -773,15 +771,15 @@ class ClockFace(gtk.DrawingArea):
     def _draw_simple_clock(self):
         """Draw the simple clock variants.
         """
-        
+
         # Can be called before the cache is ready
         if self._simple_background_cache is None:
             return
-            
+
         # Place the simple background
         cr = self.window.cairo_create()
         cr.translate(self._center_x - self._radius,
-                self._center_y - self._radius)
+                     self._center_y - self._radius)
         cr.set_source_surface(self._simple_background_cache)
         cr.paint()
 
@@ -833,7 +831,7 @@ class ClockFace(gtk.DrawingArea):
         # Place the nice background
         cr = self.window.cairo_create()
         cr.translate(self._center_x - self._radius,
-                self._center_y - self._radius)
+                     self._center_y - self._radius)
         cr.set_source_surface(self._nice_background_cache)
         cr.paint()
 
@@ -865,7 +863,8 @@ background="black"> PM </span></span></markup>')
         pango_layout.set_markup(am_pm)
         self.am_pm_width, self.am_pm_height = pango_layout.get_pixel_size()
         pangocairo_context.translate(- self.am_pm_width / 2.0 + self._center_x,
-               - self.am_pm_height / 2.0 + (self._radius / 3) + self._center_y)
+                                     - self.am_pm_height / 2.0 +
+                                     (self._radius / 3) + self._center_y)
         pangocairo_context.update_layout(pango_layout)
         pangocairo_context.show_layout(pango_layout)
         pangocairo_context.restore()
@@ -912,7 +911,7 @@ background="black"> PM </span></span></markup>')
             int(self._center_x + self._hand_sizes['seconds'] * sin),
             int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
-        
+
     def _draw_numbers(self, cr):
         """Draw the numbers of the hours.
         """
@@ -929,9 +928,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             pango_layout.set_markup(hour_number)
             dx, dy = pango_layout.get_pixel_size()
             cr.translate(- dx / 2.0 + self._radius + 0.75 *
-                self._radius * math.cos((i - 2) * math.pi / 6.0),
-                - dy / 2.0 + self._radius + 0.75 * self._radius *
-                math.sin((i - 2) * math.pi / 6.0))
+                         self._radius * math.cos((i - 2) * math.pi / 6.0),
+                         - dy / 2.0 + self._radius + 0.75 * self._radius *
+                         math.sin((i - 2) * math.pi / 6.0))
             cr.update_layout(pango_layout)
             cr.show_layout(pango_layout)
             cr.restore()
@@ -980,7 +979,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2))
         if self._am_pm == 'PM':
             hour += 12
-            
+
         print "hour", hour
 
         minute = int((self._hand_angles['minutes'] * 60) / (math.pi * 2))
@@ -1036,7 +1035,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self._motion_id = self.connect("motion-notify-event",
                                            self._motion_cb)
             self._release_id = self.connect("button-release-event",
-                                        self._release_cb)
+                                            self._release_cb)
 
             # Put hand cursor
             self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND2))
@@ -1094,13 +1093,13 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                 if pointer_distance <= self._hand_sizes[hand]:
                     self._hand_being_grabbed = hand
                     break
-                    
+
         # Toggle AM or PM if clock face AM/PM area pressed
         if mouse_x > self._center_x - self.am_pm_width / 2 and \
                 mouse_x < self._center_x + self.am_pm_width / 2 and \
                 mouse_y > self._center_y + self._radius / 3 - self.am_pm_height and \
                 mouse_y < self._center_y + self._radius / 3 + self.am_pm_height:
-                
+
             if self._am_pm == 'AM':
                 self._am_pm = 'PM'
             else:
@@ -1108,7 +1107,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
 
             self.emit("time_minute")
             self.queue_draw()
-                                
+
     def _motion_cb(self, widget, event):
         if self._hand_being_grabbed is None:
             return

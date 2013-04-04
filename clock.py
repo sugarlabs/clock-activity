@@ -1095,7 +1095,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                     break
 
         # Toggle AM or PM if clock face AM/PM area pressed
-        if mouse_x > self._center_x - self.am_pm_width / 2 and \
+        if self._hand_being_grabbed is None and \
+                mouse_x > self._center_x - self.am_pm_width / 2 and \
                 mouse_x < self._center_x + self.am_pm_width / 2 and \
                 mouse_y > self._center_y + self._radius / 3 - self.am_pm_height and \
                 mouse_y < self._center_y + self._radius / 3 + self.am_pm_height:

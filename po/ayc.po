@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-04 00:32-0400\n"
-"PO-Revision-Date: 2013-03-12 22:59+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"POT-Creation-Date: 2013-04-02 00:32-0400\n"
+"PO-Revision-Date: 2013-04-15 18:52+0200\n"
+"Last-Translator: EdgarQuispeChambi <quispedgar@yahoo.es>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ayc\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 # "Reloj"
 #. TRANS: "name" option from activity.info file
-#: clock.py:235
+#: clock.py:239
 msgid "Clock"
 msgstr "Pacha jakuri"
 
@@ -34,7 +34,7 @@ msgstr ""
 
 # "¿Qué hora es?"
 #. TRANS: Title of the activity
-#: clock.py:123
+#: clock.py:128
 msgid "What Time Is It?"
 msgstr "Kuna Urasasa?"
 
@@ -45,7 +45,7 @@ msgstr "Kuna Urasasa?"
 #. that all times combination fit on the screen, even when the
 #. screen is rotated.  Pango markup:
 #. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:131
+#: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
@@ -57,7 +57,7 @@ msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 #. (example: Tuesday 10/21/2008) We recommend to use the same
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
-#: clock.py:139
+#: clock.py:144
 #, no-python-format
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
@@ -69,35 +69,39 @@ msgstr ""
 "d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 # "El reloj"
-#: clock.py:266
+#: clock.py:270
 msgid "Simple Clock"
 msgstr "Pacha jakhuri"
 
 # "El bonito reloj"
-#: clock.py:272
+#: clock.py:276
 msgid "Nice Clock"
 msgstr "Suma Pacha Jakhuri"
 
 # "El reloj digital"
-#: clock.py:278
+#: clock.py:282
 #, no-python-format
 msgid "Digital Clock"
 msgstr "Digital pacha jakhuri"
 
 # "Visualizar la hora"
-#: clock.py:292
+#: clock.py:296
 msgid "Display time in full letters"
 msgstr "Pacha jakhuri uñjaña"
 
 # "Visualizar el día y la fecha"
-#: clock.py:298
+#: clock.py:302
 msgid "Display weekday and date"
 msgstr "Chimpu uru uñjaña"
 
 # "El reloj parlante"
-#: clock.py:309
+#: clock.py:313
 msgid "Talking clock"
 msgstr "Parlaskiri pacha jakuri"
+
+#: clock.py:319
+msgid "Grab the hands"
+msgstr "Ampara kattapma"
 
 # "<markup><span lang=\"es\" font_desc=\"Sans,Monospace Bold 48\"><span "
 #  "foreground=\"#005FE4\">%H</span>:<span foreground=\"#00B20D\">%M</span>:<span "
@@ -109,7 +113,7 @@ msgstr "Parlaskiri pacha jakuri"
 #. strftime formats If the display of the time is moving
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
-#: clock.py:668
+#: clock.py:751
 #, no-python-format
 #, no-python-format,
 msgid ""
@@ -121,10 +125,30 @@ msgstr ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
 "foreground=\"#E6000A\">%S</span>%p</span></markup>wakichata"
 
+#: clock.py:855
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white"
+"\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
+"span></span></markup>"
+msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup> wakichata"
+
+#: clock.py:859
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground="
+"\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
+msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> AM </span><span foreground=\"white\" "
+"background=\"black\"> PM </span></span></markup> wakichata"
+
 # "<markup><span lang=\"es\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
-#: clock.py:815
+#: clock.py:925
 #, python-format
 #, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
@@ -133,20 +157,20 @@ msgstr ""
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:29
+#: speaker.py:30
 msgid "50"
 msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:37
+#: speaker.py:38
 msgid "170"
 msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:44
+#: speaker.py:45
 msgid "0"
 msgstr "0"
 
@@ -154,7 +178,7 @@ msgstr "0"
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
-#: speaker.py:52
+#: speaker.py:53
 msgid "en"
 msgstr "es"
 

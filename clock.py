@@ -303,16 +303,16 @@ class ClockActivity(activity.Activity):
         button.connect("toggled", self._write_date_clicked_cb)
         display_toolbar.insert(button, -1)
 
+        # Another button to speak aloud the time
+        button = ToggleToolButton("microphone")
+        button.set_tooltip(_('Talking clock'))
+        button.connect("toggled", self._speak_time_clicked_cb)
+        display_toolbar.insert(button, -1)
+
         # A separator between the two groups of buttons
         separator = gtk.SeparatorToolItem()
         separator.set_draw(True)
         display_toolbar.insert(separator, -1)
-
-        # Another button to speak aloud the time
-        button = ToggleToolButton("speak-time")
-        button.set_tooltip(_('Talking clock'))
-        button.connect("toggled", self._speak_time_clicked_cb)
-        display_toolbar.insert(button, -1)
 
         # And another button to toggle grabbing the hands
         self._grab_button = ToggleToolButton("grab")

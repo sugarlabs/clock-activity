@@ -949,7 +949,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         # update the time and force a redraw of the clock
         self._time = datetime.now()
 
-        self._hand_angles['hour'] = (math.pi / 6 * self._time.hour +
+        self._hand_angles['hour'] = (math.pi / 6 * (self._time.hour % 12) +
                                      math.pi / 360 * self._time.minute)
 
         self._hand_angles['minutes'] = math.pi / 30 * self._time.minute
@@ -976,13 +976,11 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         return self._active and not self.grab_hands_mode
 
     def _get_time_from_hands_angles(self):
-        hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2))
+        hour = int(round((self._hand_angles['hour'] * 12) / (math.pi * 2))) % 12
         if self._am_pm == 'PM':
             hour += 12
 
-        print "hour", hour
-
-        minute = int((self._hand_angles['minutes'] * 60) / (math.pi * 2))
+        minute = int(round((self._hand_angles['minutes'] * 60) / (math.pi * 2)))
         # Second is not used by speech or to display time in full
         # letters, so we avoid that calculation
         second = 0
@@ -1022,6 +1020,12 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             gobject.timeout_add(1000, self._update_cb)
 
     active = property(_get_active, _set_active)
+
+    def toggle_am_pm(self):
+        if self._am_pm == 'AM':
+            self._am_pm = 'PM'
+        else:
+            self._am_pm = 'AM'
 
     def change_grab_hands_mode(self, toggle_grab):
         """Connect or disconnect the callbacks for to grab the hands
@@ -1101,10 +1105,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                 mouse_y > self._center_y + self._radius / 3 - self.am_pm_height and \
                 mouse_y < self._center_y + self._radius / 3 + self.am_pm_height:
 
-            if self._am_pm == 'AM':
-                self._am_pm = 'PM'
-            else:
-                self._am_pm = 'AM'
+            self.toggle_am_pm()
 
             self.emit("time_minute")
             self.queue_draw()
@@ -1134,6 +1135,29 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         # between 0 and 2 PI
         if pointer_angle < 0:
             pointer_angle += math.pi * 2
+
+        # Auto spin hour hand and snap minute hand when minutes dragged
+        if self._hand_being_grabbed is 'minutes':
+            pointer_angle = int((pointer_angle * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
+            self._hand_angles['hour'] += (pointer_angle - self._hand_angles['minutes']) / 12.0            
+            if pointer_angle - self._hand_angles['minutes'] > math.pi:
+                self._hand_angles['hour'] -= math.pi * 2 / 12.0
+            elif pointer_angle - self._hand_angles['minutes'] < -math.pi:
+                self._hand_angles['hour'] += math.pi * 2 / 12.0
+            # Toggle AM/PM as needed
+            if self._hand_angles['hour'] >= math.pi * 2:
+                self._hand_angles['hour'] -= math.pi * 2
+                self.toggle_am_pm()
+            elif self._hand_angles['hour'] < 0:
+                self._hand_angles['hour'] += math.pi * 2
+                self.toggle_am_pm()
+
+        # Auto spin and snap minute hand when hour hand dragged
+        if self._hand_being_grabbed is 'hour':
+            tmp = self._hand_angles['hour'] * 12.0
+            while tmp >= math.pi * 2:
+                tmp -= math.pi * 2
+            self._hand_angles['minutes'] = int((tmp * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
 
         # Update the angle of the hand being grabbed
         self._hand_angles[self._hand_being_grabbed] = pointer_angle

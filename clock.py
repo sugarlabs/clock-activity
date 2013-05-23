@@ -817,8 +817,8 @@ class ClockFace(gtk.DrawingArea):
             sin = math.sin(i * math.pi / 30.0)
             cr.move_to(int(self._radius + (self._radius - inset) * cos),
                        int(self._radius + (self._radius - inset) * sin))
-            cr.line_to(int(self._radius + (self._radius - 3) * cos),
-                       int(self._radius + (self._radius - 3) * sin))
+            cr.line_to(int(self._radius + (self._radius - 6) * cos),
+                       int(self._radius + (self._radius - 6) * sin))
             cr.stroke()
 
     def _draw_nice_background(self):

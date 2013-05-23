@@ -976,7 +976,14 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         return self._active and not self.grab_hands_mode
 
     def _get_time_from_hands_angles(self):
-        hour = int(round((self._hand_angles['hour'] * 12) / (math.pi * 2))) % 12
+        """Uses the angles of the hands to generate hours and minute
+        time. Due to the small movement of the hour hand the minute hand
+        position must be used to correctly round/floor to the correct hour.
+        """
+        if self._hand_angles['minutes'] > math.pi / 30.0:
+            hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2)) % 12
+        else:
+            hour = int(round((self._hand_angles['hour'] * 12) / (math.pi * 2))) % 12
         if self._am_pm == 'PM':
             hour += 12
 

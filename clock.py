@@ -1165,6 +1165,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             while tmp >= math.pi * 2:
                 tmp -= math.pi * 2
             self._hand_angles['minutes'] = int((tmp * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
+            # Toggle AM/PM as needed
+            if abs(self._hand_angles['hour'] - pointer_angle) > math.pi:
+                self.toggle_am_pm()
 
         # Update the angle of the hand being grabbed
         self._hand_angles[self._hand_being_grabbed] = pointer_angle

@@ -39,7 +39,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2013-04-07 18:13+0200\n"
+"PO-Revision-Date: 2013-06-19 17:36+0200\n"
 "Last-Translator: lite <litekok@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -236,7 +236,7 @@ msgstr "zh"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr "time(h, m) => h小时m分钟"
+msgstr "time(h, m) => 那是什么时间？"
 
 #~ msgid "Activity"
 #~ msgstr "活动"

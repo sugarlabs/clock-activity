@@ -42,7 +42,7 @@ msgstr ""
 "Project-Id-Version: Clock 5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2013-02-15 14:08+0200\n"
+"PO-Revision-Date: 2013-08-17 20:13+0200\n"
 "Last-Translator: samy boutayeb <s.boutayeb@free.fr>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -63,7 +63,7 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
-"Connais-tu l'heure ? Maintenant tu dois ! Observes toutes les manières "
+"Connais-tu l'heure ? Maintenant tu dois ! Observe toutes les manières "
 "différentes de faire ta montre !"
 
 #. TRANS: Title of the activity
@@ -124,7 +124,7 @@ msgstr "L'horloge parlante"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Saisir les aiguilles"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -151,6 +151,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> matin </span><span foreground=\"lightgray\"> après-midi "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -158,6 +161,9 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> matin </span><span foreground=\"white\" "
+"background=\"black\"> après-midi </span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.

@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-06-13 01:32+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2013-11-26 21:06+0200\n"
+"Last-Translator: Eduardo H. <hoboprimate@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -56,6 +56,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Sabes as horas? Agora sim! Descobre também todos os diferentes aspetos que o "
+"teu relógio pode ter!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
@@ -114,7 +116,7 @@ msgstr "Rológio Falante"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Agarrar os ponteiros"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -141,6 +143,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"pt\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -148,14 +153,17 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"pt\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> AM </span><span foreground=\"white\" "
+"background=\"black\"> PM </span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
-#, python-format, fuzzy
+#, python-format, 
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr "<markup><span lang=\"pt\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr "<markup><span lang=\"pt\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

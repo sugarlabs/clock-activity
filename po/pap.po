@@ -75,6 +75,7 @@ msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
 #: clock.py:144
+#, no-python-format
 #, no-python-format, fuzzy
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"

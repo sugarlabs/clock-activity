@@ -161,7 +161,7 @@ msgstr ""
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
-#, python-format, 
+#, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"pt\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 

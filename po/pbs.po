@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-09-28 21:33+0200\n"
-"Last-Translator: usuariopame03 <proyecto.olpc@gmail.com>\n"
+"PO-Revision-Date: 2013-10-23 18:32+0200\n"
+"Last-Translator: xavier <proyecto.olpc@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pbs\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"ki'u' kulejeiñ kunju? ¡chu'manì! vukia'aut mi'ia peuk lu'ueì ne ndanù kunju "
+"mananù"
 
 #. TRANS: Title of the activity
 #: clock.py:128
@@ -86,7 +88,7 @@ msgstr "Ndanú kunju' se lumeí vateí'"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Maka'am re nda'u'u"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -97,13 +99,13 @@ msgstr ""
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:751
 #, no-python-format
-#, no-python-format, fuzzy
+#, no-python-format,
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
 "foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
@@ -113,6 +115,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"es\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -120,12 +125,15 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"es\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> AM </span><span foreground=\"white\" "
+"background=\"black\"> PM </span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
-#, python-format, fuzzy
+#, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 

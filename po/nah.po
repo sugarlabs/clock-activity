@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-04-28 06:36+0200\n"
+"PO-Revision-Date: 2014-05-20 19:05+0200\n"
 "Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: nah\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
 msgid "Clock"
-msgstr ""
+msgstr "Teposkauitl"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -28,11 +28,13 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"¿tijmatitlan kawit´? ¡amankena! xijmelawaeni, katsen miak tlamantliwelis "
+"moitas kawitl!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
 msgid "What Time Is It?"
-msgstr ""
+msgstr "¿Tlake kauitl amansin?"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -43,7 +45,7 @@ msgstr ""
 #: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -56,34 +58,37 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
+"A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008\">%"
+"d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
-msgstr ""
+msgstr "Teposkauitl"
 
 #: clock.py:276
 msgid "Nice Clock"
-msgstr ""
+msgstr "Yejyejtsin kauitl"
 
 #: clock.py:282
 msgid "Digital Clock"
-msgstr ""
+msgstr "Teposkauitl nextili"
 
 #: clock.py:296
 msgid "Display time in full letters"
-msgstr ""
+msgstr "Kitas kauitl"
 
 #: clock.py:302
 msgid "Display weekday and date"
-msgstr ""
+msgstr "Ti kitas tonal uan tonali"
 
 #: clock.py:313
 msgid "Talking clock"
-msgstr ""
+msgstr "Teposkauitl tikuintoj"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Ti kitkis tepostsitisn"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -99,6 +104,9 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"es\" font_desc=\"Sans,Monospace Bold 96\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
+"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #: clock.py:855
 msgid ""
@@ -106,6 +114,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"es\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -113,39 +124,42 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"es\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> AM </span><span foreground=\"white\" "
+"background=\"black\"> PM </span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"es\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:30
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:38
 msgid "170"
-msgstr ""
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:45
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:53
 msgid "en"
-msgstr ""
+msgstr "ne"
 
 #. TRANS: The rules to print the time in the localized language.
 #.

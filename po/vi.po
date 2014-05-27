@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-09-19 11:31+0200\n"
-"Last-Translator: vucv <chuvanvu@gmail.com>\n"
+"PO-Revision-Date: 2014-05-28 00:52+0200\n"
+"Last-Translator: Chris <cjl@laptop.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr "đồng hồ số"
 
 #: clock.py:296
 msgid "Display time in full letters"
-msgstr "Hiển thị thời gian đầy đủ "
+msgstr "Hiển thị thời gian đầy đủ"
 
 #: clock.py:302
 msgid "Display weekday and date"

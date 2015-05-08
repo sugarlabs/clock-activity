@@ -55,7 +55,7 @@ More about clocks and time in the World
 
 """
 
-# We initialize threading in gobject. As we will detach another thread
+# We initialize threading in GObject. As we will detach another thread
 # to translate the time to text, this other thread will eventually
 # update the display with idle_add() calls, because it is not running
 # in the main event thread. But idle_add() puts a callback in the
@@ -63,42 +63,36 @@ More about clocks and time in the World
 # displayed, it can spend a few seconds (20 to 30 is common) before
 # the GTK loop will process this low priority message. When we enable
 # the threads, the processing is almost instantaneous.
-import gobject
-gobject.threads_init()
 
-import gtk
-from gtk import gdk
-import pango
-import gst
-import cairo
-import pangocairo
-import rsvg
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import Gst
+from gi.repository import Rsvg
+from gi.repository import Pango
+from gi.repository import GObject
+from gi.repository import PangoCairo
 
-OLD_TOOLBAR = False
-try:
-    from sugar.graphics.toolbarbox import ToolbarBox
-    from sugar.activity.widgets import StopButton
-    from sugar.activity.widgets import ActivityToolbarButton
-except ImportError:
-    OLD_TOOLBAR = True
-
-import math
-from datetime import datetime
-import threading
+import os
 import re
+import math
+import cairo
+import threading
+from datetime import datetime
 
 from gettext import gettext as _
 
-from sugar.activity import activity
-from sugar.graphics.toggletoolbutton import ToggleToolButton
-from sugar.graphics.radiotoolbutton import RadioToolButton
-from sugar.graphics import style
+from sugar3.graphics import style
+from sugar3.activity import activity
+from sugar3.activity.widgets import StopButton
+from sugar3.graphics.toolbarbox import ToolbarBox
+from sugar3.activity.widgets import ActivityToolbarButton
+from sugar3.graphics.radiotoolbutton import RadioToolButton
+from sugar3.graphics.toggletoolbutton import ToggleToolButton
 
 from speaker import Speaker
 from timewriter import TimeWriter
 
 import dbus
-import os
 
 # The display modes of the clock
 _MODE_SIMPLE_CLOCK = 0
@@ -132,7 +126,7 @@ class ClockActivity(activity.Activity):
         # so that kids can read it easily, but also small enough so
         # that all times combination fit on the screen, even when the
         # screen is rotated.  Pango markup:
-        # http://www.pygtk.org/docs/pygtk/pango-markup-language.html
+        # http://www.pyGtk.org/docs/pyGtk/pango-markup-language.html
         self._TIME_LETTERS_FORMAT = _('<markup>\
 <span lang="en" font_desc="Sans 20">%s</span></markup>')
 
@@ -149,46 +143,56 @@ class ClockActivity(activity.Activity):
 <span foreground="#9A5200">%Y</span></span></markup>')
 
         # Should we write the time in full letters?
-        self._write_time = False
         self._time_writer = None
         self._time_in_letters = self.get_title()
-
-        # The optional labels to display the date, the day of week or time.
         self._time_letters = None
         self._date = None
-
-        # Should we talk?
-        self._speak_time = False
         self._time_speaker = None
 
-        toolbox = self._make_toolbars()
+        if 'clock-mode' not in self.metadata.keys():
+            self.metadata['clock-mode'] = _MODE_SIMPLE_CLOCK
+        else:
+            self.metadata['clock-mode'] = int(self.metadata['clock-mode'])
+
+        if 'write-time' in self.metadata.keys():
+            self._write_time = bool(self.metadata['write-time'])
+        else:
+            self._write_time = False
+
+        if 'speak-time' in self.metadata.keys():
+            self._speak_time = bool(self.metadata['speak-time'])
+        else:
+            self._speak_time = False
+
+        if 'write-date' in self.metadata.keys():
+            self._write_date = bool(self.metadata['write-date'])
+        else:
+            self._write_date = False
+
         self._make_display()
+        self._make_toolbars()
 
         # Show the activity on the screen
         self.show_all()
 
-        if OLD_TOOLBAR:
-            # Hide the tools we don't use from the activity toolbar
-            toolbox.get_activity_toolbar().share.hide()
-            toolbox.get_activity_toolbar().keep.hide()
-
         # We want to be notified when the minutes change
         self._clock.connect("time_minute", self._minutes_changed_cb)
-
-        # We want also to be notified when the activity gets the focus
-        # or loses it.  When it is not active, we don't need to update
-        # the clock.
-        self.connect("notify::active", self._notify_active_cb)
 
         if not self.powerd_running():
             try:
                 bus = dbus.SystemBus()
                 proxy = bus.get_object('org.freedesktop.ohm',
                                        '/org/freedesktop/ohm/Keystore')
-                self.ohm_keystore = dbus.Interface(proxy,
-                                                   'org.freedesktop.ohm.Keystore')
-            except dbus.DBusException, e:
+                self.ohm_keystore = dbus.Interface(
+                    proxy, 'org.freedesktop.ohm.Keystore')
+            except dbus.DBusException:
                 self.ohm_keystore = None
+
+    def write_file(self, file_path):
+        self.metadata['write-time'] = 'True' if self._write_time else ''
+        self.metadata['write-date'] = 'True' if self._write_date else ''
+        self.metadata['speak-time'] = 'True' if self._speak_time else ''
+        self.metadata['clock-mode'] = str(self._clock._mode)
 
     def powerd_running(self):
         self.using_powerd = os.access(POWERD_INHIBIT_DIR, os.W_OK)
@@ -228,56 +232,41 @@ class ClockActivity(activity.Activity):
 
         Load and show icons. Associate them to the call back methods.
         """
-        # Default toolbar
-        if OLD_TOOLBAR:
-            toolbox = activity.ActivityToolbox(self)
-            self.set_toolbox(toolbox)
-            display_toolbar = gtk.Toolbar()
+        self.max_participants = 1
+        toolbar_box = ToolbarBox()
+        activity_button = ActivityToolbarButton(self)
+        activity_button.show()
+        toolbar_box.toolbar.insert(activity_button, 0)
 
-            # Add the toolbar to the activity menu
-            self._add_clock_controls(display_toolbar)
-            toolbox.add_toolbar(_('Clock'), display_toolbar)
-            toolbox.set_current_toolbar(1)
+        self._add_clock_controls(toolbar_box.toolbar)
 
-            return toolbox
+        separator = Gtk.SeparatorToolItem()
+        separator.props.draw = False
+        separator.set_size_request(0, -1)
+        separator.set_expand(True)
+        toolbar_box.toolbar.insert(separator, -1)
 
-        else:
-            self.max_participants = 1
-            toolbar_box = ToolbarBox()
-            activity_button = ActivityToolbarButton(self)
-            activity_button.show()
-            toolbar_box.toolbar.insert(activity_button, 0)
+        toolbar_box.toolbar.insert(StopButton(self), -1)
 
-            self._add_clock_controls(toolbar_box.toolbar)
-
-            separator = gtk.SeparatorToolItem()
-            separator.props.draw = False
-            separator.set_size_request(0, -1)
-            separator.set_expand(True)
-            toolbar_box.toolbar.insert(separator, -1)
-
-            toolbar_box.toolbar.insert(StopButton(self), -1)
-
-            self.set_toolbar_box(toolbar_box)
-            toolbar_box.show_all()
-            display_toolbar = toolbar_box.toolbar
-            return toolbar_box
+        self.set_toolbar_box(toolbar_box)
+        toolbar_box.show_all()
+        return toolbar_box
 
     def _add_clock_controls(self, display_toolbar):
 
         # First group of radio button to select the type of clock to display
-        button1 = RadioToolButton(named_icon="simple-clock")
+        button1 = RadioToolButton(icon_name="simple-clock")
         button1.set_tooltip(_('Simple Clock'))
         button1.connect("toggled", self._display_mode_changed_cb,
                         _MODE_SIMPLE_CLOCK)
         display_toolbar.insert(button1, -1)
-        button2 = RadioToolButton(named_icon="nice-clock",
+        button2 = RadioToolButton(icon_name="nice-clock",
                                   group=button1)
         button2.set_tooltip(_('Nice Clock'))
         button2.connect("toggled", self._display_mode_changed_cb,
                         _MODE_NICE_CLOCK)
         display_toolbar.insert(button2, -1)
-        button3 = RadioToolButton(named_icon="digital-clock",
+        button3 = RadioToolButton(icon_name="digital-clock",
                                   group=button1)
         button3.set_tooltip(_('Digital Clock'))
         button3.connect("toggled", self._display_mode_changed_cb,
@@ -285,7 +274,7 @@ class ClockActivity(activity.Activity):
         display_toolbar.insert(button3, -1)
 
         # A separator between the two groups of buttons
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.set_draw(True)
         display_toolbar.insert(separator, -1)
 
@@ -310,7 +299,7 @@ class ClockActivity(activity.Activity):
         display_toolbar.insert(button, -1)
 
         # A separator between the two groups of buttons
-        separator = gtk.SeparatorToolItem()
+        separator = Gtk.SeparatorToolItem()
         separator.set_draw(True)
         display_toolbar.insert(separator, -1)
 
@@ -331,26 +320,26 @@ class ClockActivity(activity.Activity):
         self._clock = ClockFace()
 
         # The label to print the time in full letters
-        self._time_letters = gtk.Label()
+        self._time_letters = Gtk.Label()
         self._time_letters.set_no_show_all(True)
         # Following line in ineffective!
-        #self._time_letters.set_line_wrap(True)
-        # Resize the invisible label so that gtk will know in advance
+        # self._time_letters.set_line_wrap(True)
+        # Resize the invisible label so that Gtk will know in advance
         # the height when we show it.
         self._time_letters.set_markup(
             self._TIME_LETTERS_FORMAT % self._time_in_letters)
 
         # The label to write the date
-        self._date = gtk.Label()
+        self._date = Gtk.Label()
         self._date.set_no_show_all(True)
         self._date.set_markup(
             self._clock.get_time().strftime(self._DATE_SHORT_FORMAT))
 
         # Put all these widgets in a vertical box
-        vbox = gtk.VBox(False)
-        vbox.pack_start(self._clock, True)
-        vbox.pack_start(self._time_letters, False)
-        vbox.pack_start(self._date, False)
+        vbox = Gtk.VBox()
+        vbox.pack_start(self._clock, True, True, 0)
+        vbox.pack_start(self._time_letters, False, False, 0)
+        vbox.pack_start(self._date, False, False, 0)
 
         # Attach the display to the activity
         self.set_canvas(vbox)
@@ -414,7 +403,8 @@ class ClockActivity(activity.Activity):
         self._write_and_speak(True)
 
         # Update the weekday and date in case it was midnight
-        self._date.set_markup(clock.get_time().strftime(self._DATE_SHORT_FORMAT))
+        self._date.set_markup(
+            clock.get_time().strftime(self._DATE_SHORT_FORMAT))
 
     def _notify_active_cb(self, widget, event):
         """Sugar notify us that the activity is becoming active or
@@ -456,15 +446,16 @@ class ClockActivity(activity.Activity):
         hour = self._clock.get_time().hour
         minute = self._clock.get_time().minute
         self._time_in_letters = self._time_writer.write_time(hour, minute)
-        self._time_letters.set_markup(self._TIME_LETTERS_FORMAT % self._time_in_letters)
+        self._time_letters.set_markup(
+            self._TIME_LETTERS_FORMAT % self._time_in_letters)
 
     def _do_speak_time(self):
         """Speak aloud the current time.
         """
 
         def gstmessage_cb(bus, message, pipe):
-            if message.type in (gst.MESSAGE_EOS, gst.MESSAGE_ERROR):
-                pipe.set_state(gst.STATE_NULL)
+            if message.type in (Gst.MessageType.EOS, Gst.MessageType.ERROR):
+                pipe.set_state(Gst.State.NULL)
 
         if self._time_speaker is None:
             self._time_speaker = Speaker()
@@ -477,11 +468,11 @@ class ClockActivity(activity.Activity):
             'rate': self._time_speaker.SPEED,
             'gap': self._time_speaker.WORD_GAP}
         try:
-            pipe = gst.parse_launch(pipeline)
+            pipe = Gst.parse_launch(pipeline)
             bus = pipe.get_bus()
             bus.add_signal_watch()
             bus.connect('message', gstmessage_cb, pipe)
-            pipe.set_state(gst.STATE_PLAYING)
+            pipe.set_state(Gst.State.PLAYING)
         except:
             self._time_speaker.speak(self._untag(self._time_in_letters))
 
@@ -497,7 +488,7 @@ class ClockActivity(activity.Activity):
             return result
 
 
-class ClockFace(gtk.DrawingArea):
+class ClockFace(Gtk.DrawingArea):
     """The Pango widget of the clock.
 
     This widget draws a simple analog clock, with 3 hands (hours,
@@ -512,6 +503,8 @@ class ClockFace(gtk.DrawingArea):
         mark or date.
         """
         super(ClockFace, self).__init__()
+
+        self.window = None
 
         # Set to True when the variables to draw the clock are set:
         self.initialized = False
@@ -559,21 +552,24 @@ class ClockFace(gtk.DrawingArea):
         # Black
         self._COLOR_BLACK = "#000000"
 
-        # gtk.Widget signals
-        self.connect("expose-event", self._expose_cb)
+        # Gtk.Widget signals
+        self.connect("draw", self._draw_cb)
         self.connect("size-allocate", self._size_allocate_cb)
 
         # The masks to capture the events we are interested in
-        self.add_events(gdk.EXPOSURE_MASK | gdk.VISIBILITY_NOTIFY_MASK
-            | gtk.gdk.BUTTON_PRESS_MASK | gtk.gdk.BUTTON_RELEASE_MASK
-            | gtk.gdk.BUTTON1_MOTION_MASK)
+        self.add_events(Gdk.EventMask.EXPOSURE_MASK |
+                        Gdk.EventMask.VISIBILITY_NOTIFY_MASK |
+                        Gdk.EventMask.BUTTON_PRESS_MASK |
+                        Gdk.EventMask.BUTTON_RELEASE_MASK |
+                        Gdk.EventMask.BUTTON1_MOTION_MASK)
 
         # Define a new signal to notify the application when minutes
         # change.  If the user wants to display the time in full
         # letters, the method of the activity will be called back to
         # refresh the display.
-        gobject.signal_new("time_minute", ClockFace,
-            gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, [])
+        GObject.signal_new("time_minute", ClockFace,
+                           GObject.SIGNAL_RUN_LAST,
+                           GObject.TYPE_NONE, [])
 
         # This flag is True if the clock is in grab hands mode
         self.grab_hands_mode = False
@@ -627,7 +623,7 @@ class ClockFace(gtk.DrawingArea):
         self._draw_numbers(cache_ctx)
 
         # Reload the svg handle
-        self._svg_handle = rsvg.Handle(file="clock.svg")
+        self._svg_handle = Rsvg.Handle(file="clock.svg")
 
         # Draw nice clock background
         self._nice_background_cache = cr.get_target().create_similar(
@@ -647,7 +643,7 @@ class ClockFace(gtk.DrawingArea):
 
         self.initialized = True
 
-    def _expose_cb(self, widget, event):
+    def _draw_cb(self, widget, cr):
         """The widget is exposed and must draw itself on the graphic
         context.
 
@@ -657,6 +653,7 @@ class ClockFace(gtk.DrawingArea):
         from flickering.
         """
         if not self.initialized and self.window:
+            self.window = self.get_window()
             self.queue_resize()
 
         if self._active:
@@ -677,15 +674,15 @@ class ClockFace(gtk.DrawingArea):
         (x, y) coordinates.
 
         The markup must follow Pango markup syntax See
-        http://www.pygtk.org/pygtk2reference/pango-markup-language.html
+        http://www.pyGtk.org/pyGtk2reference/pango-markup-language.html
         It allows to specify the fonts, colors and styles and to
         display rich text fully localizable.
         """
         pango_context = self.get_pango_context()
-        layout = pango.Layout(pango_context)
+        layout = Pango.Layout(pango_context)
 
         layout.set_markup(markup)
-        layout.set_alignment(pango.ALIGN_CENTER)
+        layout.set_alignment(Pango.Alignment.CENTER)
 
         x_bearing, y_bearing, width, height = layout.get_pixel_extents()[1][:4]
         x_delta = int(x - width / 2 - x_bearing)
@@ -755,18 +752,18 @@ class ClockFace(gtk.DrawingArea):
 <span foreground="#E6000A">%S</span>%p</span></markup>')
         # BUG: The following line kills Python 2.5 but is valid in 2.4
         markup_time = self._time.strftime(markup)
-        #markup_time = time.strftime(markup)
+        # markup_time = time.strftime(markup)
 
         cr = self.window.cairo_create()
-        cr = pangocairo.CairoContext(cr)
         cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
-        pango_layout = cr.create_layout()
+        pango_layout = PangoCairo.create_layout(
+            PangoCairo.create_context(cr))
         d = int(self._center_y + 0.3 * self._radius)
         pango_layout.set_markup(markup_time)
         dx, dy = pango_layout.get_pixel_size()
-        pango_layout.set_alignment(pango.ALIGN_CENTER)
+        pango_layout.set_alignment(Pango.Alignment.CENTER)
         cr.translate(self._center_x - dx / 2.0, d - dy / 2.0)
-        cr.show_layout(pango_layout)
+        PangoCairo.show_layout(cr, pango_layout)
 
     def _draw_simple_clock(self):
         """Draw the simple clock variants.
@@ -848,8 +845,9 @@ class ClockFace(gtk.DrawingArea):
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
         # AM/PM indicator:
-        pangocairo_context = pangocairo.CairoContext(cr)
-        pangocairo_context.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
+        pangocairo_context = PangoCairo.CairoContext(cr)
+        pangocairo_context.set_source_rgba(
+            *style.Color(self._COLOR_HOURS).get_rgba())
         pango_layout = pangocairo_context.create_layout()
         if self._am_pm == 'AM':
             am_pm = _('<markup><span lang="en" font_desc="Sans Bold 28">\
@@ -874,7 +872,8 @@ background="black"> PM </span></span></markup>')
         # 1/2 a degree (pi/360) per minute
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         cr.set_line_width(9 * self._line_width)
-        cr.arc(self._center_x, self._center_y, 5 * self._line_width, 0, 2 * math.pi)
+        cr.arc(self._center_x, self._center_y,
+               5 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         sin = math.sin(self._hand_angles['hour'])
@@ -888,34 +887,34 @@ background="black"> PM </span></span></markup>')
         # The minute hand is rotated 6 degrees (pi/30 r) per minute
         cr.set_source_rgba(*style.Color(self._COLOR_MINUTES).get_rgba())
         cr.set_line_width(6 * self._line_width)
-        cr.arc(self._center_x, self._center_y, 4 * self._line_width, 0, 2 * math.pi)
+        cr.arc(self._center_x, self._center_y,
+               4 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         sin = math.sin(self._hand_angles['minutes'])
         cos = math.cos(self._hand_angles['minutes'])
-        cr.line_to(
-            int(self._center_x + self._hand_sizes['minutes'] * sin),
-            int(self._center_y - self._hand_sizes['minutes'] * cos))
+        cr.line_to(int(self._center_x + self._hand_sizes['minutes'] * sin),
+                   int(self._center_y - self._hand_sizes['minutes'] * cos))
         cr.stroke()
 
         # Seconds hand:
         # Operates identically to the minute hand
         cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
         cr.set_line_width(2 * self._line_width)
-        cr.arc(self._center_x, self._center_y, 3 * self._line_width, 0, 2 * math.pi)
+        cr.arc(self._center_x, self._center_y,
+               3 * self._line_width, 0, 2 * math.pi)
         cr.fill_preserve()
         cr.move_to(self._center_x, self._center_y)
         sin = math.sin(self._hand_angles['seconds'])
         cos = math.cos(self._hand_angles['seconds'])
-        cr.line_to(
-            int(self._center_x + self._hand_sizes['seconds'] * sin),
-            int(self._center_y - self._hand_sizes['seconds'] * cos))
+        cr.line_to(int(self._center_x + self._hand_sizes['seconds'] * sin),
+                   int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
 
     def _draw_numbers(self, cr):
         """Draw the numbers of the hours.
         """
-        cr = pangocairo.CairoContext(cr)
+        cr = PangoCairo.CairoContext(cr)
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         pango_layout = cr.create_layout()
 
@@ -960,11 +959,11 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         else:
             self._am_pm = 'PM'
 
-        gobject.idle_add(self._redraw_canvas)
+        GObject.idle_add(self._redraw_canvas)
 
         # When the minutes change, we raise the 'time_minute'
         # signal. We can't test on 'self._time.second == 0' for
-        # instance because gtk timer does not guarantee to call us
+        # instance because Gtk timer does not guarantee to call us
         # every seconds.
         if self._old_minute != self._time.minute:
             self.emit("time_minute")
@@ -981,13 +980,16 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         position must be used to correctly round/floor to the correct hour.
         """
         if self._hand_angles['minutes'] > math.pi / 30.0:
-            hour = int((self._hand_angles['hour'] * 12) / (math.pi * 2)) % 12
+            hour = int(
+                (self._hand_angles['hour'] * 12) / (math.pi * 2)) % 12
         else:
-            hour = int(round((self._hand_angles['hour'] * 12) / (math.pi * 2))) % 12
+            hour = int(
+                round((self._hand_angles['hour'] * 12) / (math.pi * 2))) % 12
         if self._am_pm == 'PM':
             hour += 12
 
-        minute = int(round((self._hand_angles['minutes'] * 60) / (math.pi * 2)))
+        minute = int(
+            round((self._hand_angles['minutes'] * 60) / (math.pi * 2)))
         # Second is not used by speech or to display time in full
         # letters, so we avoid that calculation
         second = 0
@@ -1024,7 +1026,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self._update_cb()
 
             # And update again the clock every seconds.
-            gobject.timeout_add(1000, self._update_cb)
+            GObject.timeout_add(1000, self._update_cb)
 
     active = property(_get_active, _set_active)
 
@@ -1049,7 +1051,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                                             self._release_cb)
 
             # Put hand cursor
-            self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.HAND2))
+            self.window.set_cursor(Gtk.gdk.Cursor(Gtk.gdk.HAND2))
 
         else:
             self.disconnect(self._press_id)
@@ -1057,10 +1059,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self.disconnect(self._release_id)
 
             # Put original cursor again
-            self.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.LEFT_PTR))
+            self.window.set_cursor(Gtk.gdk.Cursor(Gtk.gdk.LEFT_PTR))
 
             # Update again the clock every seconds.
-            gobject.timeout_add(1000, self._update_cb)
+            GObject.timeout_add(1000, self._update_cb)
 
         self.emit("time_minute")
 
@@ -1068,7 +1070,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         mouse_x, mouse_y, state = event.window.get_pointer()
 
         # Only pay attention to the button 1
-        if not (state & gtk.gdk.BUTTON1_MASK):
+        if not (state & Gtk.gdk.BUTTON1_MASK):
             return
 
         # Calculate the angle from the center of the clock to the
@@ -1109,8 +1111,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         if self._hand_being_grabbed is None and \
                 mouse_x > self._center_x - self.am_pm_width / 2 and \
                 mouse_x < self._center_x + self.am_pm_width / 2 and \
-                mouse_y > self._center_y + self._radius / 3 - self.am_pm_height and \
-                mouse_y < self._center_y + self._radius / 3 + self.am_pm_height:
+                mouse_y > self._center_y + self._radius / 3 - \
+                self.am_pm_height and \
+                mouse_y < self._center_y + self._radius / 3 + \
+                self.am_pm_height:
 
             self.toggle_am_pm()
 
@@ -1129,7 +1133,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             state = event.state
 
         # Only pay attention to the button 1
-        if not state & gtk.gdk.BUTTON1_MASK:
+        if not state & Gtk.gdk.BUTTON1_MASK:
             return
 
         # Calculate the angle from the center of the clock to the
@@ -1145,8 +1149,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
 
         # Auto spin hour hand and snap minute hand when minutes dragged
         if self._hand_being_grabbed is 'minutes':
-            pointer_angle = int((pointer_angle * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
-            self._hand_angles['hour'] += (pointer_angle - self._hand_angles['minutes']) / 12.0            
+            pointer_angle = int((pointer_angle * 60) / (
+                math.pi * 2)) * (math.pi * 2) / 60.0
+            self._hand_angles['hour'] += (
+                pointer_angle - self._hand_angles['minutes']) / 12.0
             if pointer_angle - self._hand_angles['minutes'] > math.pi:
                 self._hand_angles['hour'] -= math.pi * 2 / 12.0
             elif pointer_angle - self._hand_angles['minutes'] < -math.pi:
@@ -1164,7 +1170,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             tmp = self._hand_angles['hour'] * 12.0
             while tmp >= math.pi * 2:
                 tmp -= math.pi * 2
-            self._hand_angles['minutes'] = int((tmp * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
+            self._hand_angles['minutes'] = int(
+                (tmp * 60) / (math.pi * 2)) * (math.pi * 2) / 60.0
             # Toggle AM/PM as needed
             if abs(self._hand_angles['hour'] - pointer_angle) > math.pi:
                 self.toggle_am_pm()

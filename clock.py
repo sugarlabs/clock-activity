@@ -72,6 +72,7 @@ from gi.repository import Pango
 from gi.repository import GObject
 from gi.repository import PangoCairo
 
+import logging
 import os
 import re
 import math
@@ -343,6 +344,7 @@ class ClockActivity(activity.Activity):
 
         # Attach the display to the activity
         self.set_canvas(vbox)
+        self._clock.active = True
 
     def _write_date_clicked_cb(self, button):
         """The user clicked on the "write date" button to display the
@@ -504,10 +506,10 @@ class ClockFace(Gtk.DrawingArea):
         """
         super(ClockFace, self).__init__()
 
-        self.window = None
-
         # Set to True when the variables to draw the clock are set:
         self.initialized = False
+        self._simple_background_cache = None
+        self._nice_background_cache = None
 
         # The time on the clock face
         self._time = datetime.now()
@@ -602,8 +604,6 @@ class ClockFace(Gtk.DrawingArea):
         """
         # This callback can be called when the gdk window is not yet
         # set
-        if self.window is None:
-            return
 
         # Store the measures of the clock face widget
         self._center_x = int(allocation.width / 2.0)
@@ -612,29 +612,9 @@ class ClockFace(Gtk.DrawingArea):
                            int(allocation.height / 2.0)) - 20, 0)
         self._line_width = int(self._radius / 150)
 
-        cr = self.window.cairo_create()
-
-        # Draw simple clock background
-        self._simple_background_cache = cr.get_target().create_similar(
-            cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
-            self._radius * 2)
-        cache_ctx = cairo.Context(self._simple_background_cache)
-        self._draw_simple_background(cache_ctx)
-        self._draw_numbers(cache_ctx)
-
-        # Reload the svg handle
-        self._svg_handle = Rsvg.Handle(file="clock.svg")
-
-        # Draw nice clock background
-        self._nice_background_cache = cr.get_target().create_similar(
-            cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
-            self._radius * 2)
-        cache_ctx = cairo.Context(self._nice_background_cache)
-        scale_x = self._radius * 2.0 / self._svg_handle.props.width
-        scale_y = self._radius * 2.0 / self._svg_handle.props.height
-        matrix = cairo.Matrix(xx=scale_x, yy=scale_y)
-        cache_ctx.transform(matrix)
-        self._svg_handle.render_cairo(cache_ctx)
+        # lean ackground caches
+        self._simple_background_cache = None
+        self._nice_background_cache = None
 
         # The hands sizes are proportional to the radius
         self._hand_sizes['hour'] = self._radius * 0.5
@@ -652,60 +632,66 @@ class ClockFace(Gtk.DrawingArea):
         before the expose event is called and it prevents the screen
         from flickering.
         """
-        if not self.initialized and self.window:
-            self.window = self.get_window()
+        if not self.initialized:
             self.queue_resize()
 
-        if self._active:
-            if self._mode == _MODE_NICE_CLOCK:
-                self._draw_nice_clock()
-            elif self._mode == _MODE_SIMPLE_CLOCK:
-                self._draw_simple_clock()
-            elif self._mode == _MODE_DIGITAL_CLOCK:
-                self._draw_digital_clock()
-            else:
-                msg = "Unknown display mode: %d." % self._mode
-                raise ValueError(msg)
+        logging.error('DRAWING active %s', self._active)
+
+        logging.error('DRAWING CLOCK')
+        if self._mode == _MODE_NICE_CLOCK:
+            if self._nice_background_cache is None:
+                # Reload the svg handle
+                self._svg_handle = Rsvg.Handle.new_from_file("clock.svg")
+                # Draw nice clock background
+                self._nice_background_cache = \
+                    cr.get_target().create_similar(
+                        cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+                        self._radius * 2)
+                cache_ctx = cairo.Context(self._nice_background_cache)
+                scale_x = self._radius * 2.0 / self._svg_handle.props.width
+                scale_y = self._radius * 2.0 / self._svg_handle.props.height
+                matrix = cairo.Matrix(xx=scale_x, yy=scale_y)
+                cache_ctx.transform(matrix)
+                self._svg_handle.render_cairo(cache_ctx)
+
+            self._draw_nice_clock(cr)
+        elif self._mode == _MODE_SIMPLE_CLOCK:
+            if self._simple_background_cache is None:
+                # Draw simple clock background
+                logging.error('init background cache radius %s', self._radius)
+                self._simple_background_cache = cr.get_target().create_similar(
+                    cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
+                    self._radius * 2)
+                cache_ctx = cairo.Context(self._simple_background_cache)
+                self._draw_simple_background(cache_ctx)
+                self._draw_numbers(cache_ctx)
+
+            self._draw_simple_clock(cr)
+        elif self._mode == _MODE_DIGITAL_CLOCK:
+            self._draw_digital_clock(cr)
+        else:
+            msg = "Unknown display mode: %d." % self._mode
+            raise ValueError(msg)
 
         return False
 
-    def _draw_markup(self, x, y, markup):
-        """Write the markup text given as parameter, centered on
-        (x, y) coordinates.
-
-        The markup must follow Pango markup syntax See
-        http://www.pyGtk.org/pyGtk2reference/pango-markup-language.html
-        It allows to specify the fonts, colors and styles and to
-        display rich text fully localizable.
-        """
-        pango_context = self.get_pango_context()
-        layout = Pango.Layout(pango_context)
-
-        layout.set_markup(markup)
-        layout.set_alignment(Pango.Alignment.CENTER)
-
-        x_bearing, y_bearing, width, height = layout.get_pixel_extents()[1][:4]
-        x_delta = int(x - width / 2 - x_bearing)
-        y_delta = int(y - height / 2 - y_bearing)
-        self.window.draw_layout(self._gc, x_delta, y_delta, layout)
-
-    def _draw_digital_clock(self):
+    def _draw_digital_clock(self, cr):
         """Draw the digital clock.
         """
-        self._draw_time_scale()
-        self._draw_time()
+        self._draw_time_scale(cr)
+        self._draw_time(cr)
 
-    def _draw_time_scale(self):
+    def _draw_time_scale(self, cr):
         """Draw a time scale for digital clock.
         """
         # Draw scales of hours, minutes and seconds, to give the children
         # an appreciation of the time flowing...
+        cr.save()
         hours_length = 2 * self._radius / 24 * self._time.hour
         minutes_length = 2 * self._radius / 60 * self._time.minute
         seconds_length = 2 * self._radius / 60 * self._time.second
 
         # Fill background
-        cr = self.window.cairo_create()
         cr.set_source_rgba(*style.Color(self._COLOR_WHITE).get_rgba())
         cr.rectangle(round(self._center_x - 1.1 * self._radius),
                      round(self._center_y - 0.85 * self._radius),
@@ -733,8 +719,9 @@ class ClockFace(Gtk.DrawingArea):
         y = round(self._center_y - 0.45 * self._radius)
         cr.rectangle(x, y, seconds_length, h)
         cr.fill()
+        cr.restore()
 
-    def _draw_time(self):
+    def _draw_time(self, cr):
         """Draw the time in colors (digital display).
         """
         # TRANS: The format used to display the time for digital clock
@@ -745,6 +732,7 @@ class ClockFace(Gtk.DrawingArea):
         # horizontally, it means that the glyphs of the digits used in
         # the font don't have the same width. Try to use a Monospace
         # font.  xgettext:no-python-format
+        cr.save()
         markup = _('<markup>\
 <span lang="en" font_desc="Sans,Monospace Bold 96">\
 <span foreground="#005FE4">%I</span>:\
@@ -754,7 +742,6 @@ class ClockFace(Gtk.DrawingArea):
         markup_time = self._time.strftime(markup)
         # markup_time = time.strftime(markup)
 
-        cr = self.window.cairo_create()
         cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
         pango_layout = PangoCairo.create_layout(
             PangoCairo.create_context(cr))
@@ -764,29 +751,30 @@ class ClockFace(Gtk.DrawingArea):
         pango_layout.set_alignment(Pango.Alignment.CENTER)
         cr.translate(self._center_x - dx / 2.0, d - dy / 2.0)
         PangoCairo.show_layout(cr, pango_layout)
+        cr.restore()
 
-    def _draw_simple_clock(self):
+    def _draw_simple_clock(self, cr):
         """Draw the simple clock variants.
         """
 
         # Can be called before the cache is ready
         if self._simple_background_cache is None:
             return
-
+        cr.save()
         # Place the simple background
-        cr = self.window.cairo_create()
         cr.translate(self._center_x - self._radius,
                      self._center_y - self._radius)
         cr.set_source_surface(self._simple_background_cache)
         cr.paint()
-
-        self._draw_hands()
+        cr.restore()
+        self._draw_hands(cr)
 
     def _draw_simple_background(self, cr):
         """Draw the background of the simple clock.
         The simple clock background is a white disk, with hours and minutes
         ticks, and the hour numbers.
         """
+        cr.save()
         cr.set_line_width(4 * self._line_width)
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
@@ -817,38 +805,42 @@ class ClockFace(Gtk.DrawingArea):
             cr.line_to(int(self._radius + (self._radius - 6) * cos),
                        int(self._radius + (self._radius - 6) * sin))
             cr.stroke()
+        cr.restore()
 
-    def _draw_nice_background(self):
+    def _draw_nice_background(self, cr):
         """Draw the nice clock background.
 
         The background has been loaded from the clock.svg file to a
         rsvg handle, and we just transform this handle and render it
         with cairo.
         """
-        # Place the nice background
-        cr = self.window.cairo_create()
+        cr.save()
         cr.translate(self._center_x - self._radius,
                      self._center_y - self._radius)
         cr.set_source_surface(self._nice_background_cache)
         cr.paint()
+        cr.restore()
 
-    def _draw_nice_clock(self):
+    def _draw_nice_clock(self, cr):
         """Draw the nice clock.
         """
-        self._draw_nice_background()
-        self._draw_hands()
+        cr.save()
+        self._draw_nice_background(cr)
+        self._draw_hands(cr)
+        cr.restore()
 
-    def _draw_hands(self):
+    def _draw_hands(self, cr):
         """Draw the hands of the analog clocks.
         """
-        cr = self.window.cairo_create()
+        cr.save()
+        cr.translate(0, 0)
+
         cr.set_line_cap(cairo.LINE_CAP_ROUND)
 
         # AM/PM indicator:
-        pangocairo_context = PangoCairo.CairoContext(cr)
-        pangocairo_context.set_source_rgba(
+        cr.set_source_rgba(
             *style.Color(self._COLOR_HOURS).get_rgba())
-        pango_layout = pangocairo_context.create_layout()
+        pango_layout = PangoCairo.create_layout(cr)
         if self._am_pm == 'AM':
             am_pm = _('<markup><span lang="en" font_desc="Sans Bold 28">\
 <span foreground="white" background="black"> AM </span><span \
@@ -857,15 +849,15 @@ foreground="lightgray"> PM </span></span></markup>')
             am_pm = _('<markup><span lang="en" font_desc="Sans Bold 28">\
 <span foreground="lightgray"> AM </span><span foreground="white" \
 background="black"> PM </span></span></markup>')
-        pangocairo_context.save()
+        cr.save()
         pango_layout.set_markup(am_pm)
         self.am_pm_width, self.am_pm_height = pango_layout.get_pixel_size()
-        pangocairo_context.translate(- self.am_pm_width / 2.0 + self._center_x,
-                                     - self.am_pm_height / 2.0 +
-                                     (self._radius / 3) + self._center_y)
-        pangocairo_context.update_layout(pango_layout)
-        pangocairo_context.show_layout(pango_layout)
-        pangocairo_context.restore()
+        cr.translate(- self.am_pm_width / 2.0 + self._center_x,
+                     - self.am_pm_height / 2.0 +
+                     (self._radius / 3) + self._center_y)
+        PangoCairo.update_layout(cr, pango_layout)
+        PangoCairo.show_layout(cr, pango_layout)
+        cr.restore()
 
         # Hour hand:
         # The hour hand is rotated 30 degrees (pi/6 r) per hour +
@@ -910,13 +902,14 @@ background="black"> PM </span></span></markup>')
         cr.line_to(int(self._center_x + self._hand_sizes['seconds'] * sin),
                    int(self._center_y - self._hand_sizes['seconds'] * cos))
         cr.stroke()
+        cr.restore()
 
     def _draw_numbers(self, cr):
         """Draw the numbers of the hours.
         """
-        cr = PangoCairo.CairoContext(cr)
+        cr.save()
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
-        pango_layout = cr.create_layout()
+        pango_layout = PangoCairo.create_layout(cr)
 
         for i in xrange(12):
             # TRANS: The format of the font used to print hour
@@ -930,22 +923,16 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                          self._radius * math.cos((i - 2) * math.pi / 6.0),
                          - dy / 2.0 + self._radius + 0.75 * self._radius *
                          math.sin((i - 2) * math.pi / 6.0))
-            cr.update_layout(pango_layout)
-            cr.show_layout(pango_layout)
+            PangoCairo.update_layout(cr, pango_layout)
+            PangoCairo.show_layout(cr, pango_layout)
             cr.restore()
-
-    def _redraw_canvas(self):
-        """Force a redraw of the clock on the screen.
-        """
-        # If we are attached to a window, redraw ourself.
-        if self.window:
-            self.queue_draw()
-            self.window.process_updates(True)
+        cr.restore()
 
     def _update_cb(self):
         """Called every seconds to update the time value.
         """
         # update the time and force a redraw of the clock
+        logging.error('UPDATE CALLBACK')
         self._time = datetime.now()
 
         self._hand_angles['hour'] = (math.pi / 6 * (self._time.hour % 12) +
@@ -959,7 +946,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         else:
             self._am_pm = 'PM'
 
-        GObject.idle_add(self._redraw_canvas)
+        GObject.idle_add(self.queue_draw)
 
         # When the minutes change, we raise the 'time_minute'
         # signal. We can't test on 'self._time.second == 0' for
@@ -1051,7 +1038,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                                             self._release_cb)
 
             # Put hand cursor
-            self.window.set_cursor(Gtk.gdk.Cursor(Gtk.gdk.HAND2))
+            self.get_window().set_cursor(
+                Gdk.Cursor.new(Gdk.CursorType.HAND2))
 
         else:
             self.disconnect(self._press_id)
@@ -1059,7 +1047,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self.disconnect(self._release_id)
 
             # Put original cursor again
-            self.window.set_cursor(Gtk.gdk.Cursor(Gtk.gdk.LEFT_PTR))
+            self.get_window().set_cursor(
+                Gdk.Cursor.new(Gdk.CursorType.LEFT_PTR))
 
             # Update again the clock every seconds.
             GObject.timeout_add(1000, self._update_cb)
@@ -1067,10 +1056,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         self.emit("time_minute")
 
     def _press_cb(self, widget, event):
-        mouse_x, mouse_y, state = event.window.get_pointer()
+        _pointer, mouse_x, mouse_y, state = event.window.get_pointer()
 
         # Only pay attention to the button 1
-        if not (state & Gtk.gdk.BUTTON1_MASK):
+        if not (state & Gdk.ModifierType.BUTTON1_MASK):
             return
 
         # Calculate the angle from the center of the clock to the
@@ -1126,14 +1115,14 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             return
 
         if event.is_hint:
-            mouse_x, mouse_y, state = event.window.get_pointer()
+            _pointer, mouse_x, mouse_y, state = event.window.get_pointer()
         else:
             mouse_x = event.x
             mouse_y = event.y
             state = event.state
 
         # Only pay attention to the button 1
-        if not state & Gtk.gdk.BUTTON1_MASK:
+        if not state & Gdk.ModifierType.BUTTON1_MASK:
             return
 
         # Calculate the angle from the center of the clock to the

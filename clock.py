@@ -150,25 +150,10 @@ class ClockActivity(activity.Activity):
         self._date = None
         self._time_speaker = None
 
-        if 'clock-mode' not in self.metadata.keys():
-            self.metadata['clock-mode'] = _MODE_SIMPLE_CLOCK
-        else:
-            self.metadata['clock-mode'] = int(self.metadata['clock-mode'])
-
-        if 'write-time' in self.metadata.keys():
-            self._write_time = bool(self.metadata['write-time'])
-        else:
-            self._write_time = False
-
-        if 'speak-time' in self.metadata.keys():
-            self._speak_time = bool(self.metadata['speak-time'])
-        else:
-            self._speak_time = False
-
-        if 'write-date' in self.metadata.keys():
-            self._write_date = bool(self.metadata['write-date'])
-        else:
-            self._write_date = False
+        self._write_time = False
+        self._speak_time = False
+        self._write_date = False
+        self._display_mode_buttons = []
 
         self._make_display()
         self._make_toolbars()
@@ -190,10 +175,44 @@ class ClockActivity(activity.Activity):
                 self.ohm_keystore = None
 
     def write_file(self, file_path):
-        self.metadata['write-time'] = 'True' if self._write_time else ''
-        self.metadata['write-date'] = 'True' if self._write_date else ''
-        self.metadata['speak-time'] = 'True' if self._speak_time else ''
+        self.metadata['write-time'] = str(self._write_time)
+        self.metadata['write-date'] = str(self._write_date)
+        self.metadata['speak-time'] = str(self._speak_time)
         self.metadata['clock-mode'] = str(self._clock._mode)
+        logging.error('Saving metadata %s', (self.metadata['write-time'],
+                      self.metadata['write-date'], self.metadata['speak-time'],
+                      self.metadata['clock-mode']))
+        # Need write a empty file or the read_file is not called
+        with open(file_path, 'w') as data:
+            data.write('')
+
+    def read_file(self, file_path):
+        logging.error('Reading metadata %s', (self.metadata['write-time'],
+                      self.metadata['write-date'], self.metadata['speak-time'],
+                      self.metadata['clock-mode']))
+        if 'clock-mode' not in self.metadata.keys():
+            display_mode = _MODE_SIMPLE_CLOCK
+        else:
+            display_mode = int(self.metadata['clock-mode'])
+
+        if 'write-time' in self.metadata.keys():
+            self._write_time = str(self.metadata['write-time']) == 'True'
+
+        if 'speak-time' in self.metadata.keys():
+            self._speak_time = str(self.metadata['speak-time']) == 'True'
+
+        if 'write-date' in self.metadata.keys():
+            self._write_date = str(self.metadata['write-date']) == 'True'
+
+        logging.error('Read values %s', (self._write_time,
+                      self._speak_time, self._write_date,
+                      display_mode))
+
+        # apply the changes in the UI
+        self._display_mode_buttons[display_mode].set_active(True)
+        self._write_time_btn.set_active(self._write_time)
+        self._write_date_btn.set_active(self._write_date)
+        self._speak_time_btn.set_active(self._speak_time)
 
     def powerd_running(self):
         self.using_powerd = os.access(POWERD_INHIBIT_DIR, os.W_OK)
@@ -261,18 +280,21 @@ class ClockActivity(activity.Activity):
         button1.connect("toggled", self._display_mode_changed_cb,
                         _MODE_SIMPLE_CLOCK)
         display_toolbar.insert(button1, -1)
+        self._display_mode_buttons.append(button1)
         button2 = RadioToolButton(icon_name="nice-clock",
                                   group=button1)
         button2.set_tooltip(_('Nice Clock'))
         button2.connect("toggled", self._display_mode_changed_cb,
                         _MODE_NICE_CLOCK)
         display_toolbar.insert(button2, -1)
+        self._display_mode_buttons.append(button2)
         button3 = RadioToolButton(icon_name="digital-clock",
                                   group=button1)
         button3.set_tooltip(_('Digital Clock'))
         button3.connect("toggled", self._display_mode_changed_cb,
                         _MODE_DIGITAL_CLOCK)
         display_toolbar.insert(button3, -1)
+        self._display_mode_buttons.append(button3)
 
         # A separator between the two groups of buttons
         separator = Gtk.SeparatorToolItem()
@@ -282,22 +304,22 @@ class ClockActivity(activity.Activity):
         # Now the options buttons to display other elements: date, day
         # of week...  A button in the toolbar to write the time in
         # full letters
-        button = ToggleToolButton("write-time")
-        button.set_tooltip(_('Display time in full letters'))
-        button.connect("toggled", self._write_time_clicked_cb)
-        display_toolbar.insert(button, -1)
+        self._write_time_btn = ToggleToolButton("write-time")
+        self._write_time_btn.set_tooltip(_('Display time in full letters'))
+        self._write_time_btn.connect("toggled", self._write_time_clicked_cb)
+        display_toolbar.insert(self._write_time_btn, -1)
 
         # The button to display the weekday and date
-        button = ToggleToolButton("write-date")
-        button.set_tooltip(_('Display weekday and date'))
-        button.connect("toggled", self._write_date_clicked_cb)
-        display_toolbar.insert(button, -1)
+        self._write_date_btn = ToggleToolButton("write-date")
+        self._write_date_btn.set_tooltip(_('Display weekday and date'))
+        self._write_date_btn.connect("toggled", self._write_date_clicked_cb)
+        display_toolbar.insert(self._write_date_btn, -1)
 
         # Another button to speak aloud the time
-        button = ToggleToolButton("microphone")
-        button.set_tooltip(_('Talking clock'))
-        button.connect("toggled", self._speak_time_clicked_cb)
-        display_toolbar.insert(button, -1)
+        self._speak_time_btn = ToggleToolButton("microphone")
+        self._speak_time_btn.set_tooltip(_('Talking clock'))
+        self._speak_time_btn.connect("toggled", self._speak_time_clicked_cb)
+        display_toolbar.insert(self._speak_time_btn, -1)
 
         # A separator between the two groups of buttons
         separator = Gtk.SeparatorToolItem()
@@ -350,6 +372,7 @@ class ClockActivity(activity.Activity):
         """The user clicked on the "write date" button to display the
         current weekday and date.
         """
+        self._write_date = button.get_active()
         if button.get_active():
             self._date.show()
         else:
@@ -387,8 +410,7 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
-        if self._speak_time:
-            self._write_and_speak(True)
+        self._write_and_speak(self._speak_time)
 
     def _grab_clicked_cb(self, button):
         """The user clicked on the "grab hands" button to toggle

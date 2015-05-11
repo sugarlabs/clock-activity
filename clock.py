@@ -635,9 +635,6 @@ class ClockFace(Gtk.DrawingArea):
         if not self.initialized:
             self.queue_resize()
 
-        logging.error('DRAWING active %s', self._active)
-
-        logging.error('DRAWING CLOCK')
         if self._mode == _MODE_NICE_CLOCK:
             if self._nice_background_cache is None:
                 # Reload the svg handle
@@ -930,7 +927,6 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         """Called every seconds to update the time value.
         """
         # update the time and force a redraw of the clock
-        logging.error('UPDATE CALLBACK')
         self._time = datetime.now()
 
         self._hand_angles['hour'] = (math.pi / 6 * (self._time.hour % 12) +

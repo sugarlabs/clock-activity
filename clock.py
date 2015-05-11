@@ -738,18 +738,16 @@ class ClockFace(Gtk.DrawingArea):
 <span foreground="#005FE4">%I</span>:\
 <span foreground="#00B20D">%M</span>:\
 <span foreground="#E6000A">%S</span>%p</span></markup>')
-        # BUG: The following line kills Python 2.5 but is valid in 2.4
         markup_time = self._time.strftime(markup)
-        # markup_time = time.strftime(markup)
 
         cr.set_source_rgba(*style.Color(self._COLOR_BLACK).get_rgba())
-        pango_layout = PangoCairo.create_layout(
-            PangoCairo.create_context(cr))
+        pango_layout = PangoCairo.create_layout(cr)
         d = int(self._center_y + 0.3 * self._radius)
         pango_layout.set_markup(markup_time)
         dx, dy = pango_layout.get_pixel_size()
         pango_layout.set_alignment(Pango.Alignment.CENTER)
         cr.translate(self._center_x - dx / 2.0, d - dy / 2.0)
+        PangoCairo.update_layout(cr, pango_layout)
         PangoCairo.show_layout(cr, pango_layout)
         cr.restore()
 

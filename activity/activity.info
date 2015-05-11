@@ -8,3 +8,5 @@ activity_version = 15
 host_version = 1
 show_launcher = yes
 license=Public Domain
+repository = https://github.com/godiard/clock-activity.git
+max_participants = 1

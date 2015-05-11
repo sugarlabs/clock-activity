@@ -179,7 +179,7 @@ class ClockActivity(activity.Activity):
         self.metadata['write-date'] = str(self._write_date)
         self.metadata['speak-time'] = str(self._speak_time)
         self.metadata['clock-mode'] = str(self._clock._mode)
-        logging.error('Saving metadata %s', (self.metadata['write-time'],
+        logging.debug('Saving metadata %s', (self.metadata['write-time'],
                       self.metadata['write-date'], self.metadata['speak-time'],
                       self.metadata['clock-mode']))
         # Need write a empty file or the read_file is not called
@@ -187,7 +187,7 @@ class ClockActivity(activity.Activity):
             data.write('')
 
     def read_file(self, file_path):
-        logging.error('Reading metadata %s', (self.metadata['write-time'],
+        logging.debug('Reading metadata %s', (self.metadata['write-time'],
                       self.metadata['write-date'], self.metadata['speak-time'],
                       self.metadata['clock-mode']))
         if 'clock-mode' not in self.metadata.keys():
@@ -204,7 +204,7 @@ class ClockActivity(activity.Activity):
         if 'write-date' in self.metadata.keys():
             self._write_date = str(self.metadata['write-date']) == 'True'
 
-        logging.error('Read values %s', (self._write_time,
+        logging.debug('Read values %s', (self._write_time,
                       self._speak_time, self._write_date,
                       display_mode))
 
@@ -677,7 +677,7 @@ class ClockFace(Gtk.DrawingArea):
         elif self._mode == _MODE_SIMPLE_CLOCK:
             if self._simple_background_cache is None:
                 # Draw simple clock background
-                logging.error('init background cache radius %s', self._radius)
+                logging.debug('init background cache radius %s', self._radius)
                 self._simple_background_cache = cr.get_target().create_similar(
                     cairo.CONTENT_COLOR_ALPHA, self._radius * 2,
                     self._radius * 2)

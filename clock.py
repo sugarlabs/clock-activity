@@ -127,7 +127,7 @@ class ClockActivity(activity.Activity):
         # so that kids can read it easily, but also small enough so
         # that all times combination fit on the screen, even when the
         # screen is rotated.  Pango markup:
-        # http://www.pyGtk.org/docs/pyGtk/pango-markup-language.html
+        # http://www.pygtk.org/docs/pygtk/pango-markup-language.html
         self._TIME_LETTERS_FORMAT = _('<markup>\
 <span lang="en" font_desc="Sans 20">%s</span></markup>')
 

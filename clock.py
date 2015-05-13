@@ -66,7 +66,6 @@ More about clocks and time in the World
 
 from gi.repository import Gtk
 from gi.repository import Gdk
-from gi.repository import Gst
 from gi.repository import Rsvg
 from gi.repository import Pango
 from gi.repository import GObject
@@ -77,7 +76,6 @@ import os
 import re
 import math
 import cairo
-import threading
 from datetime import datetime
 
 from gettext import gettext as _
@@ -401,7 +399,7 @@ class ClockActivity(activity.Activity):
         self._write_time = button.get_active()
         if self._write_time:
             self._time_letters.show()
-            self._write_and_speak(False)
+            GObject.idle_add(self._write_and_speak, False)
         else:
             self._time_letters.hide()
 
@@ -410,7 +408,7 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
-        self._write_and_speak(self._speak_time)
+        GObject.idle_add(self._write_and_speak, self._speak_time)
 
     def _grab_clicked_cb(self, button):
         """The user clicked on the "grab hands" button to toggle
@@ -424,7 +422,7 @@ class ClockActivity(activity.Activity):
         to have it and eventually croak the time.
         """
         # Change time display and talk, if necessary
-        self._write_and_speak(True)
+        GObject.idle_add(self._write_and_speak, True)
 
         # Update the weekday and date in case it was midnight
         self._date.set_markup(
@@ -444,23 +442,13 @@ class ClockActivity(activity.Activity):
             self._allow_suspend()
 
     def _write_and_speak(self, speak):
-        """
-        Write and speak the time (called in another thread not to
-        block the clock).
-        """
-        # A helper function for the running thread
-        def thread_write_and_speak():
-            # Only update the time in full letters when necessary
-            if self._write_time or self._speak_time:
-                self._do_write_time()
+        # Only update the time in full letters when necessary
+        if self._write_time or self._speak_time:
+            self._do_write_time()
 
-            # And if requested, say it aloud
-            if self._speak_time and speak:
-                self._do_speak_time()
-
-        # Now detach a thread to do the big job
-        thread = threading.Thread(target=thread_write_and_speak)
-        thread.start()
+        # And if requested, say it aloud
+        if self._speak_time and speak:
+            self._do_speak_time()
 
     def _do_write_time(self):
         """Translate the time to full letters.
@@ -476,29 +464,9 @@ class ClockActivity(activity.Activity):
     def _do_speak_time(self):
         """Speak aloud the current time.
         """
-
-        def gstmessage_cb(bus, message, pipe):
-            if message.type in (Gst.MessageType.EOS, Gst.MessageType.ERROR):
-                pipe.set_state(Gst.State.NULL)
-
         if self._time_speaker is None:
             self._time_speaker = Speaker()
-
-        pipeline = 'espeak text="%(text)s" voice="%(voice)s" pitch="%(pitch)s" \
-            rate="%(rate)s" gap="%(gap)s" ! autoaudiosink' % {
-            'text': self._untag(self._time_in_letters),
-            'voice': self._time_speaker.VOICE,
-            'pitch': self._time_speaker.PITCH,
-            'rate': self._time_speaker.SPEED,
-            'gap': self._time_speaker.WORD_GAP}
-        try:
-            pipe = Gst.parse_launch(pipeline)
-            bus = pipe.get_bus()
-            bus.add_signal_watch()
-            bus.connect('message', gstmessage_cb, pipe)
-            pipe.set_state(Gst.State.PLAYING)
-        except:
-            self._time_speaker.speak(self._untag(self._time_in_letters))
+        self._time_speaker.speak(self._untag(self._time_in_letters))
 
     def _untag(self, text):
         """Remove all the tags (pango markup) from a text.

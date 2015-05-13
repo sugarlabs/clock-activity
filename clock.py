@@ -399,7 +399,7 @@ class ClockActivity(activity.Activity):
         self._write_time = button.get_active()
         if self._write_time:
             self._time_letters.show()
-            GObject.idle_add(self._write_and_speak, False)
+            self._write_and_speak(False)
         else:
             self._time_letters.hide()
 
@@ -408,7 +408,7 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
-        GObject.idle_add(self._write_and_speak, self._speak_time)
+        self._write_and_speak(self._speak_time)
 
     def _grab_clicked_cb(self, button):
         """The user clicked on the "grab hands" button to toggle
@@ -422,7 +422,7 @@ class ClockActivity(activity.Activity):
         to have it and eventually croak the time.
         """
         # Change time display and talk, if necessary
-        GObject.idle_add(self._write_and_speak, True)
+        self._write_and_speak(True)
 
         # Update the weekday and date in case it was midnight
         self._date.set_markup(
@@ -448,7 +448,7 @@ class ClockActivity(activity.Activity):
 
         # And if requested, say it aloud
         if self._speak_time and speak:
-            self._do_speak_time()
+            GObject.idle_add(self._do_speak_time)
 
     def _do_write_time(self):
         """Translate the time to full letters.

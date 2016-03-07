@@ -295,9 +295,7 @@ class ClockActivity(activity.Activity):
         self._display_mode_buttons.append(button3)
 
         # A separator between the two groups of buttons
-        separator = Gtk.SeparatorToolItem()
-        separator.set_draw(True)
-        display_toolbar.insert(separator, -1)
+        self._add_separator(display_toolbar)
 
         # Now the options buttons to display other elements: date, day
         # of week...  A button in the toolbar to write the time in
@@ -320,15 +318,18 @@ class ClockActivity(activity.Activity):
         display_toolbar.insert(self._speak_time_btn, -1)
 
         # A separator between the two groups of buttons
-        separator = Gtk.SeparatorToolItem()
-        separator.set_draw(True)
-        display_toolbar.insert(separator, -1)
+        self._add_separator(display_toolbar)
 
         # And another button to toggle grabbing the hands
         self._grab_button = ToggleToolButton("grab")
         self._grab_button.set_tooltip(_('Grab the hands'))
         self._grab_button.connect("toggled", self._grab_clicked_cb)
         display_toolbar.insert(self._grab_button, -1)
+
+    def _add_separator(self, display_toolbar):
+        separator = Gtk.SeparatorToolItem()
+        separator.set_draw(True)
+        display_toolbar.insert(separator, -1)
 
     def _make_display(self):
         """Prepare the display of the clock.

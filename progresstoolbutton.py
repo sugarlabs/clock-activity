@@ -240,3 +240,4 @@ class ProgressToolButton(Gtk.ToolButton):
 
     def update(self, progress):
         self._progress = progress
+        self.queue_draw()

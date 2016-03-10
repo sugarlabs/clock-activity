@@ -520,7 +520,6 @@ class ClockActivity(activity.Activity):
         if self._ntp_process.poll() is None:
             self._ntp_counter += 1
             self._ntp_button.update(0.1 + (self._ntp_counter / 90.0))
-            self._ntp_button.set_tooltip(_('Download time in progress'))
             return True
 
         if self._ntp_process.returncode:

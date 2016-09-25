@@ -2,33 +2,27 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2011-12-02 08:47+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2016-09-23 23:24+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: yo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1474673075.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
 msgid "Clock"
-msgstr ""
+msgstr "Aago"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -36,11 +30,13 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Ǹjẹ o mọ awọn akoko? Bayi o ṣe! Ṣayẹwo jade gbogbo awọn ti o yatọ ona ti o "
+"le ṣe rẹ aago wo ju!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
 msgid "What Time Is It?"
-msgstr ""
+msgstr "Ogogo melo ni o lu?"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -51,7 +47,7 @@ msgstr ""
 #: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -64,34 +60,37 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20 \"><span foreground=\"#B20008\""
+">%A</span>,<span foreground =\"#5E008C\">%m</span>/<span foreground=\"#"
+"B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
-msgstr ""
+msgstr "O rọrun Aago"
 
 #: clock.py:276
 msgid "Nice Clock"
-msgstr ""
+msgstr "Dara Aago"
 
 #: clock.py:282
 msgid "Digital Clock"
-msgstr ""
+msgstr "Ilọsiwaju Aago"
 
 #: clock.py:296
 msgid "Display time in full letters"
-msgstr ""
+msgstr "Àpapọ akoko ni kikun awọn lẹta"
 
 #: clock.py:302
 msgid "Display weekday and date"
-msgstr ""
+msgstr "Àpapọ weekday ati ọjọ"
 
 #: clock.py:313
 msgid "Talking clock"
-msgstr ""
+msgstr "Sọrọ Aago"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Ja gba awọn ọwọ"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -107,6 +106,9 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<"
+"span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #: clock.py:855
 msgid ""
@@ -114,6 +116,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"white\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -121,39 +126,42 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span Lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:30
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:38
 msgid "170"
-msgstr ""
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:45
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:53
 msgid "en"
-msgstr ""
+msgstr "en"
 
 #. TRANS: The rules to print the time in the localized language.
 #.
@@ -198,12 +206,56 @@ msgstr ""
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
-
-#~ msgid "espeak-pitch"
-#~ msgstr "50"
-
-#~ msgid "espeak-speed"
-#~ msgstr "170"
-
-#~ msgid "espeak-wgap"
-#~ msgstr "1"
+"        time(12, 0) => <span foreground=\"\\#005FE4\">wakati(12)</span> |"
+"        time(0, 0) => <span foreground=\"\\#005FE4\">wakati(0)</span> |"
+"        time(h, 0) => <span foreground=\"\\#005FE4\">wakati(h)</span> wakati "
+"kẹsan am_pm(h) |        time(h, m) [m < 31] => <span foreground=\"\\#00B20D\""
+">iseju(m)</span> past <span foreground=\"\\#005FE4\">wakati(h)</span> "
+"owurọ_mọjumọ(h) |        time(h, m) [30 < m] => <span foreground=\"\\#"
+"00B20D\">min(m)</span> to <span foreground=\"\\#005FE4\">wakati1(h)</span> "
+"owurọ_mọjumọ(h) |        min(1) => ọkan iseju |        min(2) => meji iṣẹju |"
+"        min(3) => meta iṣẹju |        min(4) => mẹrin iṣẹju |        min(5) "
+"=> iṣẹju marun |        min(6) => mefa iṣẹju |        min(7) => meje iṣẹju |"
+"        min(8) => mẹjọ iseju |        min(9) => mẹsan iṣẹju |        min(10) "
+"=> iṣẹju mẹwa |        min(11) => mọkanla iṣẹju |        min(12) => mejila "
+"iṣẹju |        min(13) => mẹtala iṣẹju |        min(14) => mẹrinla iṣẹju |"
+"        min(15) => a mẹẹdogun |        min(16) => mẹrindilogun iṣẹju |"
+"        min(17) => mẹtadilogun iseju |        min(18) => mejidilogun iṣẹju |"
+"        min(19) => mọkandilogun iṣẹju |        min(20) => ogun iseju |"
+"        min(21) => ogun-kan iṣẹju |        min(22) => ogun-meji iṣẹju |"
+"        min(23) => mẹtalelogun iṣẹju |        min(24) => mẹrinlelogun iṣẹju|"
+"        min(25) => ogun-iṣẹju marun |        min(26) => ogun-mefa iṣẹju |"
+"        min(27) => ogun-meje iṣẹju |        min(28) => mejidinlọgbọn iṣẹju |"
+"        min(29) => ogun-mẹsan iṣẹju |        min(30) => idaji |        "
+"min(31) => ogun-mẹsan iṣẹju |        min(32) => mejidinlọgbọn iṣẹju |        "
+"min(33) => ogun-meje iṣẹju |        min(34) => ogun-mefa iṣẹju |        "
+"min(35) => ogun-iṣẹju marun |        min(36) => mẹrinlelogun iṣẹju |        "
+"min(37) => mẹtalelogun iṣẹju |        min(38) => ogun-meji iṣẹju |        "
+"min(39) => ogun-kan iṣẹju |        min(40) => ogun iseju |        min(41) => "
+"mọkandilogun iṣẹju |        min(42) => mejidilogun iṣẹju |        min(43) => "
+"mẹtadilogun iseju |        min(44) => mẹtadilogun iseju |        min(45) => "
+"mẹẹdogun |        min(46) => mẹrinla iṣẹju |        min(47) => mẹtala iṣẹju |"
+"        min(48) => mejila iṣẹju |        min(49) => mọkanla iṣẹju |        "
+"min(50) => iṣẹju mẹwa |        min(51) => mẹsan iṣẹju |        min(52) => "
+"mẹjọ iṣẹju |        min(53) => meje iṣẹju |        min(54) => mefa iṣẹju |"
+"        min(55) => iṣẹju marun |        min(56) => mẹrin iṣẹju |        "
+"min(57) => meta iṣẹju |        min(58) => meji iṣẹju |        min(59) => "
+"ọkan iṣẹju |        min(60) => ọgọta iṣẹju |        hour(0) => ọganjọ|"
+"        hour(1) => ọkan|        hour(2) => meji |        hour(3) => mẹta |"
+"        hour(4) => mẹrin |        hour(5) => marun |        hour(6) => mefa|"
+"        hour(7) => meje |        hour(8) => mẹjọ |        hour(9) => mẹsan |"
+"        hour(10) => mẹwa |        hour(11) => mọkanla |        hour(12) => "
+"ọjọkanri |        hour(13) => ọkan |        hour(14) => meji |        "
+"hour(15) => mẹta |        hour(16) => mẹrin |        hour(17) => marun |"
+"        hour(18) => mefa |        hour(19) => meje |        hour(20) => mẹjọ "
+"|        hour(21) => mẹsan |        hour(22) => mẹwa |        hour(23) => "
+"mọkanla |        hour1(0) => ọkan |        hour1(1) => meji |        hour1(2)"
+" => mẹta |        hour1(3) => mẹrin |        hour1(4) => marun|        "
+"hour1(5) => mefa |        hour1(6) => meje |        hour1(7) => mẹjọ |"
+"        hour1(8) => mẹsan|        hour1(9) => mẹwa |        hour1(10) => "
+"mọkanla |        hour1(11) => kẹfa |        hour1(12) => ọkan |        "
+"hour1(13) => meji|        hour1(14) => mẹta |        hour1(15) => mẹrin |"
+"        hour1(16) => marun |        hour1(17) => mefa |        hour1(18) => "
+"meje |        hour1(19) => mẹjọ |        hour1(20) => mẹsan|        hour1(21)"
+" => mẹwa |        hour1(22) => mọkanla |        hour1(23) => ọganjọ |        "
+"am_pm(h) [ h < 12] => owurọ |        am_pm(_) => mọjumọ"

@@ -17,10 +17,6 @@ Controls the espeak program available on the OLPC XO laptop.
 import os
 
 try:
-    # workaround to bug in the toolkit
-    from gi.repository import Gst
-    Gst.init(None)
-    #
     from sugar3.speech import SpeechManager
     _HAS_SPEECH_MANAGER = True
 except:

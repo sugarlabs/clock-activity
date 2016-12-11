@@ -16,16 +16,7 @@ Controls the espeak program available on the OLPC XO laptop.
 
 import os
 
-try:
-    # workaround to bug in the toolkit
-    from gi.repository import Gst
-    Gst.init(None)
-    #
-    from sugar3.speech import SpeechManager
-    _HAS_SPEECH_MANAGER = True
-except:
-    _HAS_SPEECH_MANAGER = False
-
+from sugar3.speech import SpeechManager
 
 from gettext import gettext as _
 
@@ -64,15 +55,13 @@ class Speaker:
     ESPEAK_COMMAND = "espeak -p%s -s%s -g%s -v%s \"%s\""
 
     def __init__(self):
-        self._speech_manager = None
-        if _HAS_SPEECH_MANAGER:
-            self._speech_manager = SpeechManager()
+        self._speech_manager = SpeechManager()
 
     def speak(self, text):
         """Speaks aloud the given text.
         """
         text = text.replace("\"", "\\\"")
-        if self._speech_manager and self._speech_manager.enabled():
+        if self._speech_manager.enabled():
             self._speech_manager.say_text(text)
         else:
             child = os.popen(Speaker.ESPEAK_COMMAND %

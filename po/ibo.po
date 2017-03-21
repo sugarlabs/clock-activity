@@ -2,58 +2,27 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2016-10-16 17:54+0000\n"
+"PO-Revision-Date: 2016-10-16 18:27+0000\n"
 "Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: el\n"
+"Language: ibo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1476640443.000000\n"
+"X-POOTLE-MTIME: 1476642468.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
 msgid "Clock"
-msgstr "Ρολόι"
+msgstr ""
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -61,13 +30,11 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
-"Γνωρίζετε τι ώρα είναι; Τώρα ναι! Επίσης, δείτε όλες τις διαφορετικές "
-"εμφανίσεις που μπορείτε να χρησιμοποιήσετε για το ρολόι σας!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
 msgid "What Time Is It?"
-msgstr "Τι ώρα είναι;"
+msgstr "Gini na ku"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -78,9 +45,8 @@ msgstr "Τι ώρα είναι;"
 #: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr "<markup><span lang=\"el\" font_desc=\"Sans 20\">%s</span></markup>"
+msgstr ""
 
-# ignore the printf error
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
 #. font size as for the time display.  See
@@ -92,38 +58,34 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
-"<markup><span lang=\"el\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
-"A</span>, <span foreground=\"#B20008\">%d</span>/<span foreground=\"#5E008C\">%"
-"m</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
-msgstr "Απλό ρολόι"
+msgstr ""
 
 #: clock.py:276
 msgid "Nice Clock"
-msgstr "Εκλεπτυσμένο ρολόι"
+msgstr ""
 
 #: clock.py:282
-#, no-python-format
 msgid "Digital Clock"
-msgstr "Ψηφιακό ρολόι"
+msgstr ""
 
 #: clock.py:296
 msgid "Display time in full letters"
-msgstr "Εμφάνιση της ώρας ολογράφως"
+msgstr ""
 
 #: clock.py:302
 msgid "Display weekday and date"
-msgstr "Εμφάνιση ημέρας και ημερομηνίας"
+msgstr ""
 
 #: clock.py:313
 msgid "Talking clock"
-msgstr "Το ρολόι που μιλάει"
+msgstr ""
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr "Πιάσιμο"
+msgstr "Gide aka ya"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -134,15 +96,11 @@ msgstr "Πιάσιμο"
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:751
 #, no-python-format
-#, no-python-format,
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
-"<markup><span lang=\"el\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
-"foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #: clock.py:855
 msgid ""
@@ -150,9 +108,6 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
-"background=\"black\"> ΠΜ </span><span foreground=\"lightgray\"> ΜΜ "
-"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -160,46 +115,40 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span "
-"foreground=\"lightgray\"> ΠΜ</span><span foreground=\"white\" "
-"background=\"black\"> ΜΜ</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
-#, python-format,
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr "<markup><span lang=\"el\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr ""
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:30
 msgid "50"
-msgstr "50"
+msgstr ""
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:38
 msgid "170"
-msgstr "170"
+msgstr ""
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:45
 msgid "0"
-msgstr "0"
+msgstr ""
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:53
 msgid "en"
-msgstr "el"
+msgstr ""
 
-# This string should look something like this English template, but with the words "o'clock" and the words after the arrows translated.  Do not translate min(1), hour(1), etc., those are internal names.  See Spanish string for another example.
-# http://translate.sugarlabs.org/es/honey/clock.po?item=12&view_mode=translate
 #. TRANS: The rules to print the time in the localized language.
 #.
 #. Example syntax:
@@ -362,31 +311,3 @@ msgstr ""
 "        hour1(23) => midnight |\n"
 "        am_pm(h) [ h < 12] => AM |\n"
 "        am_pm(_) => PM"
-
-#~ msgid "Activity"
-#~ msgstr "Δραστηριότητα"
-
-#~ msgid "Write Time"
-#~ msgstr "Μορφή ώρας"
-
-#, no-python-format
-#~ msgid "Write Date"
-#~ msgstr "Μορφή ημερομηνίας"
-
-#~ msgid "Toolbar"
-#~ msgstr "Γραμμή εργαλείων"
-
-#~ msgid "Hour Number"
-#~ msgstr "Αριθμός ώρας"
-
-#~ msgid "espeak-pitch"
-#~ msgstr "50"
-
-#~ msgid "espeak-speed"
-#~ msgstr "170"
-
-#~ msgid "espeak-wgap"
-#~ msgstr "1"
-
-#~ msgid "espeak-voice"
-#~ msgstr "el"

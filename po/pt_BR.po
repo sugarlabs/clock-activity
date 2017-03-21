@@ -35,15 +35,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-06-13 01:33+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2016-08-11 18:42+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Pootle 2.0.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1470940959.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
@@ -56,6 +57,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Você sabe que horas são? Agora você sabe! Verifique todas as formas "
+"diferentes que você pode mudar seu relógio!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
@@ -84,9 +87,9 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">%"
-"A</span>, <span foreground=\"#B20008\">%d</span>/<span foreground=\"#5E008C\">%"
-"m</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+"<markup><span lang=\"pt_BR\" font_desc=\"Sans 20\"><span foreground=\"#"
+"B20008\">%A</span>, <span foreground=\"#B20008\">%d</span>/<span foreground="
+"\"#5E008C\">%m</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
@@ -115,7 +118,7 @@ msgstr "Rológio Falante"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Pegar os ponteiros"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -142,6 +145,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"white\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -149,6 +155,9 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.

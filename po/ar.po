@@ -2,30 +2,28 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-06-12 19:05+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2017-02-17 07:55+0000\n"
+"Last-Translator: khaled <khaledhosny@eglug.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
-"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Pootle 2.0.5\n"
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1487318114.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
 msgid "Clock"
-msgstr ""
+msgstr "ساعة"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -33,11 +31,12 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"أتعرف ما هو الوقت؟ الآن تعرف!تفقد كل الطرق الممكنة لتجعل ساعتك تبدو كذلك"
 
 #. TRANS: Title of the activity
 #: clock.py:128
 msgid "What Time Is It?"
-msgstr ""
+msgstr "ما الوقت الآن؟"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -48,7 +47,7 @@ msgstr ""
 #: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -61,18 +60,21 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\""
+">%A</span>، <span foreground=\"#5E008C\">%d</span>/<span foreground=\"#"
+"B20008\">%m</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
-msgstr ""
+msgstr "ساعة بسيطة"
 
 #: clock.py:276
 msgid "Nice Clock"
-msgstr ""
+msgstr "ساعة جميلة"
 
 #: clock.py:282
 msgid "Digital Clock"
-msgstr ""
+msgstr "ساعة رقمية"
 
 #: clock.py:296
 msgid "Display time in full letters"
@@ -84,7 +86,7 @@ msgstr ""
 
 #: clock.py:313
 msgid "Talking clock"
-msgstr ""
+msgstr "ساعة ناطقة"
 
 #: clock.py:319
 msgid "Grab the hands"
@@ -195,12 +197,3 @@ msgstr ""
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
-
-#~ msgid "espeak-pitch"
-#~ msgstr "50"
-
-#~ msgid "espeak-speed"
-#~ msgstr "170"
-
-#~ msgid "espeak-wgap"
-#~ msgstr "1"

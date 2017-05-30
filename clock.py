@@ -64,6 +64,11 @@ More about clocks and time in the World
 # the GTK loop will process this low priority message. When we enable
 # the threads, the processing is almost instantaneous.
 
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('Rsvg', '2.0')
+gi.require_version('PangoCairo', '1.0')
+
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Rsvg

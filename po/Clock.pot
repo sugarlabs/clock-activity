@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-21 12:15+1100\n"
+"POT-Creation-Date: 2017-05-30 14:01+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 
 #. TRANS: Title of the activity
-#: clock.py:121
+#: clock.py:127
 msgid "What Time Is It?"
 msgstr ""
 
@@ -38,7 +38,7 @@ msgstr ""
 #. that all times combination fit on the screen, even when the
 #. screen is rotated.  Pango markup:
 #. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:129
+#: clock.py:135
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 msgstr ""
@@ -47,7 +47,7 @@ msgstr ""
 #. (example: Tuesday 10/21/2008) We recommend to use the same
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
-#: clock.py:137
+#: clock.py:143
 #, no-python-format
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
@@ -55,49 +55,70 @@ msgid ""
 "\"#B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
 
-#: clock.py:277
+#: clock.py:285
 msgid "Simple Clock"
 msgstr ""
 
-#: clock.py:284
+#: clock.py:292
 msgid "Nice Clock"
 msgstr ""
 
-#: clock.py:291
+#: clock.py:299
 msgid "Digital Clock"
 msgstr ""
 
-#: clock.py:306
+#: clock.py:312
 msgid "Display time in full letters"
 msgstr ""
 
-#: clock.py:312
+#: clock.py:318
 msgid "Display weekday and date"
 msgstr ""
 
-#: clock.py:318
+#: clock.py:324
 msgid "Talking clock"
 msgstr ""
 
-#: clock.py:329
+#: clock.py:333
 msgid "Grab the hands"
 msgstr ""
 
-#: clock.py:723
+#: clock.py:345
+msgid "Download time"
+msgstr ""
+
+#: clock.py:517
+msgid "Download time began"
+msgstr ""
+
+#: clock.py:532
+#, python-format
+msgid "Download time failed (%d)"
+msgstr ""
+
+#: clock.py:549
+msgid "Setting time in progress"
+msgstr ""
+
+#: clock.py:559
+msgid "Download time done"
+msgstr ""
+
+#: clock.py:809
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
 
-#: clock.py:830
+#: clock.py:916
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white"
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
 
-#: clock.py:834
+#: clock.py:920
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground="
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
@@ -106,7 +127,7 @@ msgstr ""
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
-#: clock.py:902
+#: clock.py:988
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr ""

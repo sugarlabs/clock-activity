@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-11-20 09:21+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2016-10-16 17:57+0000\n"
+"Last-Translator: Chris <cjl@sugarlabs.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: quz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1476640637.000000\n"
 
 # "Reloj"
 #. TRANS: "name" option from activity.info file
@@ -29,6 +30,8 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Yachankichu pachata hurata ima qhawayta? Kunanqa yachallawaqmi qhawariy imay "
+"pacha watana qhawakusqanta!"
 
 # "¿Qué hora es?"
 #. TRANS: Title of the activity
@@ -99,7 +102,7 @@ msgstr "Pacha watana rimaq"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Makichankunata hap'iy"
 
 # "<markup><span lang=\"es\" font_desc=\"Sans,Monospace Bold 48\"><span "
 #  "foreground=\"#005FE4\">%H</span>:<span foreground=\"#00B20D\">%M</span>:<span "
@@ -113,7 +116,7 @@ msgstr ""
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:751
 #, no-python-format
-#, no-python-format, fuzzy
+#, no-python-format,
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
@@ -129,6 +132,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white\" "
+"background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -136,6 +142,9 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span "
+"foreground=\"lightgray\"> AM </span><span foreground=\"white\" "
+"background=\"black\"> PM </span></span></markup>"
 
 # "<markup><span lang=\"es\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 #. TRANS: The format of the font used to print hour
@@ -171,7 +180,7 @@ msgstr "0"
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:53
 msgid "en"
-msgstr "es"
+msgstr "quz"
 
 #. TRANS: The rules to print the time in the localized language.
 #.
@@ -214,6 +223,7 @@ msgstr "es"
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
+#, fuzzy
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
 "        time(h, 55) => <span foreground=\"\\#005FE4\">hour1(h)</span> menos "

@@ -64,6 +64,11 @@ More about clocks and time in the World
 # the GTK loop will process this low priority message. When we enable
 # the threads, the processing is almost instantaneous.
 
+import gi
+gi.require_version('Gtk', '3.0')
+gi.require_version('Rsvg', '2.0')
+gi.require_version('PangoCairo', '1.0')
+
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Rsvg
@@ -76,6 +81,7 @@ import os
 import re
 import math
 import cairo
+import subprocess
 from datetime import datetime
 
 from gettext import gettext as _
@@ -87,6 +93,11 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.radiotoolbutton import RadioToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
+
+try:
+    from sugar3.graphics.progresstoolbutton import ProgressToolButton
+except:
+    from progresstoolbutton import ProgressToolButton
 
 from speaker import Speaker
 from timewriter import TimeWriter
@@ -152,6 +163,8 @@ class ClockActivity(activity.Activity):
         self._speak_time = False
         self._write_date = False
         self._display_mode_buttons = []
+
+        self._ntp_process = None
 
         self._make_display()
         self._make_toolbars()
@@ -295,9 +308,7 @@ class ClockActivity(activity.Activity):
         self._display_mode_buttons.append(button3)
 
         # A separator between the two groups of buttons
-        separator = Gtk.SeparatorToolItem()
-        separator.set_draw(True)
-        display_toolbar.insert(separator, -1)
+        self._add_separator(display_toolbar)
 
         # Now the options buttons to display other elements: date, day
         # of week...  A button in the toolbar to write the time in
@@ -320,15 +331,31 @@ class ClockActivity(activity.Activity):
         display_toolbar.insert(self._speak_time_btn, -1)
 
         # A separator between the two groups of buttons
-        separator = Gtk.SeparatorToolItem()
-        separator.set_draw(True)
-        display_toolbar.insert(separator, -1)
+        self._add_separator(display_toolbar)
 
         # And another button to toggle grabbing the hands
         self._grab_button = ToggleToolButton("grab")
         self._grab_button.set_tooltip(_('Grab the hands'))
         self._grab_button.connect("toggled", self._grab_clicked_cb)
         display_toolbar.insert(self._grab_button, -1)
+
+        if os.access('/boot/olpc_build', os.R_OK) and \
+           os.access('/usr/sbin/ntpdate', os.R_OK):
+
+            self._add_separator(display_toolbar)
+
+            self._ntp_button = ProgressToolButton("emblem-downloads",
+                                                  style.STANDARD_ICON_SIZE,
+                                                  'vertical')
+            self._ntp_button.set_tooltip(_('Download time'))
+            self._ntp_button.connect("clicked", self._ntp_clicked_cb)
+            self._ntp_button.update(0.05)
+            display_toolbar.insert(self._ntp_button, -1)
+
+    def _add_separator(self, display_toolbar):
+        separator = Gtk.SeparatorToolItem()
+        separator.set_draw(True)
+        display_toolbar.insert(separator, -1)
 
     def _make_display(self):
         """Prepare the display of the clock.
@@ -479,6 +506,70 @@ class ClockActivity(activity.Activity):
                 result += s[1]
             return result
 
+    def _ntp_clicked_cb(self, button):
+        if self._ntp_process:
+            return
+
+        args = ["su", "-c", "/usr/sbin/ntpdate -u pool.ntp.org"]
+        self._ntp_process = subprocess.Popen(args, bufsize=-1,
+                                             stdout=subprocess.PIPE,
+                                             stderr=subprocess.PIPE)
+        self._ntp_counter = 0
+
+        GObject.timeout_add(100, self._ntpdate_poll_cb)
+
+        button.update(0.1)
+        button.set_tooltip(_('Download time began'))
+
+    def _ntpdate_poll_cb(self):
+        if self._ntp_process.poll() is None:
+            self._ntp_counter += 1
+            self._ntp_button.update(0.1 + (self._ntp_counter / 90.0))
+            return True
+
+        if self._ntp_process.returncode:
+            data = self._ntp_process.communicate()
+            logging.error('Download time failed (%d), %r',
+                          self._ntp_process.returncode,
+                          repr(data))
+
+            self._ntp_button.update(0.05)
+            self._ntp_button.set_tooltip(_('Download time failed (%d)') %
+                                         self._ntp_process.returncode)
+            return False
+
+        args = ["su", "-c", "/usr/sbin/hwclock --systohc"]
+        self._ntp_process = subprocess.Popen(args, bufsize=-1,
+                                             stdout=subprocess.PIPE,
+                                             stderr=subprocess.PIPE)
+
+        self._ntp_counter = 0
+        GObject.timeout_add(100, self._hwclock_poll_cb)
+        return False
+
+    def _hwclock_poll_cb(self):
+        if self._ntp_process.poll() is None:
+            self._ntp_counter += 1
+            self._ntp_button.update(0.1 + (self._ntp_counter / 20.0))
+            self._ntp_button.set_tooltip(_('Setting time in progress'))
+            return True
+
+        if self._ntp_process.returncode:
+            data = self._ntp_process.communicate()
+            logging.error('Setting time failed (%d), %r',
+                          self._ntp_process.returncode,
+                          repr(data))
+
+        self._ntp_button.update(1.0)
+        self._ntp_button.set_tooltip(_('Download time done'))
+
+        GObject.timeout_add(1000, self._ntp_disable_cb)
+        return False
+
+    def _ntp_disable_cb(self):
+        self._ntp_button.update(0.0)
+        self._ntp_button.set_sensitive(False)
+        return False
 
 class ClockFace(Gtk.DrawingArea):
     """The Pango widget of the clock.

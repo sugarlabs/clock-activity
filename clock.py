@@ -100,7 +100,6 @@ except:
     from progresstoolbutton import ProgressToolButton
 
 from speaker import Speaker
-from timewriter import TimeWriter
 
 import dbus
 
@@ -153,7 +152,6 @@ class ClockActivity(activity.Activity):
 <span foreground="#9A5200">%Y</span></span></markup>')
 
         # Should we write the time in full letters?
-        self._time_writer = None
         self._time_in_letters = self.get_title()
         self._time_letters = None
         self._date = None
@@ -477,14 +475,42 @@ class ClockActivity(activity.Activity):
         if self._speak_time and speak:
             GObject.idle_add(self._do_speak_time)
 
+
     def _do_write_time(self):
         """Translate the time to full letters.
         """
-        if self._time_writer is None:
-            self._time_writer = TimeWriter()
         hour = self._clock.get_time().hour
         minute = self._clock.get_time().minute
-        self._time_in_letters = self._time_writer.write_time(hour, minute)
+
+        #TRANS: Hour, referring to the unit of time. This list iterates through each unit of the 12-hour clock twice in word form, so one AM would have the same translation as one PM.
+        hours = [_('twelve'), _('one'), _('two'), _('three'), _('four'), _('five'), _('six'), _('seven'), _('eight'), _('nine'), _('ten'), _('eleven'), _('twelve'), _('one'), _('two'), _('three'), _('four'), _('five'), _('six'), _('seven'), _('eight'), _('nine'), _('ten'), _('eleven')]
+
+        #TRANS: Minute, referring to the unit of time. This list iterates through 60 minutes in word form.
+        minutes = [_('o clock'), _('one'), _('two'), _('three'), _('four'), _('five'), _('six'), _('seven'), _('eight'), _('nine'), _('ten'), _('eleven'), _('twelve'), _('thirteen'), _('fourteen'), _('fifteen'), _('sixteen'), _('seventeen'), _('eighteen'), _('nineteen'), _('twenty'), _('twenty-one'), _('twenty-two'), _('twenty-three'), _('twenty-four'), _('twenty-five'), _('twenty-six'),  _('twenty-seven'), _('twenty-eight'), _('twenty-nine'), _('thirty'), _('thirty-one'), _('thirty-two'), _('thirty-three'), _('thirty-four'), _('thirty-five'), _('thirty-six'), _('thirty-seven'),_('thirty-eight'), _('thirty-nine'), _('fourty'), _('fourty-one'), _('fourty-two'), _('fourty-three'), _('fourty-four'), _('fourty-five'), _('fourty-six'), _('fourty-seven'), _('fourty-eight'), _('fourty-nine'), _('fifty'), _('fifty-one'), _('fifty-two'), _('fifty-three'), _('fifty-four'), _('fifty-five'), _('fifty-six'), _('fifty-seven'), _('fifty-eight'), _('fifty-nine'), _('sixty')]
+
+        #TRANS: AM or PM, referring to morning (before 12PM) or afternoon (12PM and after).
+        period = [_('AM'), _('PM')]
+
+        if hour < 12:
+            periodHour = 0
+        else:
+            periodHour = 1
+
+        if hour == 12 and minute == 0:
+
+            #TRANS: "Noon", as in afternoon 12PM
+            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%s') + '</span></span></markup>') % ("noon")
+        
+        elif hour == 0 and minute == 0:
+
+            #TRANS: "Midnight", as in morning 12AM
+            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%s') + '</span></span></markup>') % ("midnight")
+        
+        else:
+
+            #TRANS: This takes on the format of <hour minute period>, eg. <one forty AM>
+            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20">' + _('<span foreground="#005FE4">%(hour)s</span><span foreground="#00B20D"> %(minute)s</span><span foreground="#B20008"> %(period)s</span>') + '</span></markup>') % {'hour': hours[hour], 'minute': minutes[minute], 'period': period[periodHour]}
+
         self._time_letters.set_markup(
             self._TIME_LETTERS_FORMAT % self._time_in_letters)
 

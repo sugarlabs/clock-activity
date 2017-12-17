@@ -515,30 +515,24 @@ class ClockActivity(activity.Activity):
             periodHour = 1
 
         if hour == 12 and minute == 0:
-
             #TRANS: "Noon", as in afternoon 12PM
             self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + 
                                      _('noon') + '</span></span></markup>')
-        
         elif hour == 0 and minute == 0:
-
             #TRANS: "Midnight", as in morning 12AM
             self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + 
                                      _('midnight') + '</span></span></markup>')
-        
         elif minute == 0:
-          
             #TRANS: Use <hour o clock period> when minute == 0, eg. one o clock PM
             self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20">' + 
                                      _('<span foreground="#005FE4">%(hour)s</span><span foreground="#00B20D"> %(minute)s</span><span foreground="#B20008"> %(period)s</span>') + 
                                      '</span></markup>') % {'hour': hours[hour], 'minute': oClock, 'period': period[periodHour]}
         else:
-
             #TRANS: This takes on the format of <hour minute period>, eg. <one forty AM>
             self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20">' + 
                                      _('<span foreground="#005FE4">%(hour)s</span><span foreground="#00B20D"> %(minute)s</span><span foreground="#B20008"> %(period)s</span>') + 
                                      '</span></markup>') % {'hour': hours[hour], 'minute': minutes[minute-1], 'period': period[periodHour]}
-
+            
         self._time_letters.set_markup(
             self._TIME_LETTERS_FORMAT % self._time_in_letters)
 

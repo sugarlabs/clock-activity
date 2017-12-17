@@ -499,12 +499,12 @@ class ClockActivity(activity.Activity):
         if hour == 12 and minute == 0:
 
             #TRANS: "Noon", as in afternoon 12PM
-            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%s') + '</span></span></markup>') % ("noon")
+            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%(hour)s') + '</span></span></markup>') % {'hour': "noon"}
         
         elif hour == 0 and minute == 0:
 
             #TRANS: "Midnight", as in morning 12AM
-            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%s') + '</span></span></markup>') % ("midnight")
+            self._time_in_letters = ('<markup><span lang="en" font_desc="Sans 20"><span foreground="#005FE4">' + _('%(hour)s') + '</span></span></markup>') % {'hour': "midnight"}
         
         else:
 

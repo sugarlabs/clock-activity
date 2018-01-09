@@ -7,6 +7,6 @@ icon = activity-clock
 activity_version = 19
 host_version = 1
 show_launcher = yes
-license = Public Domain
+license = Public Domain and GPLv3+
 repository = https://github.com/sugarlabs/clock-activity.git
 max_participants = 1

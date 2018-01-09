@@ -344,9 +344,7 @@ class ClockActivity(activity.Activity):
 
             self._add_separator(display_toolbar)
 
-            self._ntp_button = ProgressToolButton("emblem-downloads",
-                                                  style.STANDARD_ICON_SIZE,
-                                                  'vertical')
+            self._ntp_button = ProgressToolButton(icon_name="emblem-downloads")
             self._ntp_button.set_tooltip(_('Download time'))
             self._ntp_button.connect("clicked", self._ntp_clicked_cb)
             self._ntp_button.update(0.05)

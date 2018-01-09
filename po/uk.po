@@ -7,19 +7,22 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2017-05-04 17:45+0000\n"
+"Last-Translator: yurchor <yurchor@ukr.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 1.11.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1493919924.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
 msgid "Clock"
-msgstr ""
+msgstr "Годинник"
 
 #. TRANS: "summary" option from activity.info file
 #. TRANS: "description" option from activity.info file
@@ -27,11 +30,13 @@ msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"Знаєте котра година? Тепер знаєте! Скористайтеся усіма можливими варіантами "
+"дізнатися час!"
 
 #. TRANS: Title of the activity
 #: clock.py:128
 msgid "What Time Is It?"
-msgstr ""
+msgstr "Котра година?"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -42,7 +47,7 @@ msgstr ""
 #: clock.py:136
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"uk\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -55,34 +60,37 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#B20008"
 "\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"uk\" font_desc=\"Sans 20\"><span foreground=\"#B20008\""
+">%A</span>, <span foreground=\"#5E008C\">%d</span>.<span foreground=\"#"
+"B20008\">%m</span>.<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:270
 msgid "Simple Clock"
-msgstr ""
+msgstr "Простий годинник"
 
 #: clock.py:276
 msgid "Nice Clock"
-msgstr ""
+msgstr "Красивий годинник"
 
 #: clock.py:282
 msgid "Digital Clock"
-msgstr ""
+msgstr "Цифровий годинник"
 
 #: clock.py:296
 msgid "Display time in full letters"
-msgstr ""
+msgstr "Показувати час повністю літерами"
 
 #: clock.py:302
 msgid "Display weekday and date"
-msgstr ""
+msgstr "Показувати день тижня і дату"
 
 #: clock.py:313
 msgid "Talking clock"
-msgstr ""
+msgstr "Голосовий годинник"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "Захоплення стрілок"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -98,6 +106,9 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"uk\" font_desc=\"Sans,Monospace Bold 96\"><span "
+"foreground=\"#005FE4\">%H</span>:<span foreground=\"#00B20D\">%M</span>:<"
+"span foreground=\"#E6000A\">%S</span></span></markup>"
 
 #: clock.py:855
 msgid ""
@@ -105,6 +116,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"uk\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"white\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -112,39 +126,42 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"uk\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"uk\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:30
 msgid "50"
-msgstr ""
+msgstr "50"
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:38
 msgid "170"
-msgstr ""
+msgstr "170"
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
 #: speaker.py:45
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #. TRANS: The language and voice variant
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language is supported.
 #: speaker.py:53
 msgid "en"
-msgstr ""
+msgstr "en"
 
 #. TRANS: The rules to print the time in the localized language.
 #.
@@ -189,3 +206,141 @@ msgstr ""
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
 msgstr ""
+"time(0, 0) => <span foreground=\"\\#005FE4\">hour(0)</span> |\n"
+"time(h, 0) => <span foreground=\"\\#005FE4\">hour(h)</span> година |\n"
+"time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> на <span "
+"foreground=\"\\#005FE4\">hour1(h)</span> |\n"
+"time(h, m) [31 < m] => за <span foreground=\"\\#00B20D\">min(m)</span> <span "
+"foreground=\"\\#005FE4\">hour2(h)</span> |\n"
+"min(1) => одна хвилина |\n"
+"min(2) => дві хвилини |\n"
+"min(3) => три хвилини |\n"
+"min(4) => чотири хвилини |\n"
+"min(5) => п’ять хвилин |\n"
+"min(6) => шість хвилин |\n"
+"min(7) => сім хвилин |\n"
+"min(8) => вісім хвилин |\n"
+"min(9) => дев’ять хвилин |\n"
+"min(10) => десять хвилин |\n"
+"min(11) => одинадцять хвилин |\n"
+"min(12) => дванадцять хвилин |\n"
+"min(13) => тринадцять хвилин |\n"
+"min(14) => чотирнадцять хвилин |\n"
+"min(15) => чверть |\n"
+"min(16) => шістнадцять хвилин |\n"
+"min(17) => сімнадцять хвилин |\n"
+"min(18) => вісімнадцять хвилин |\n"
+"min(19) => дев’ятнадцять хвилин |\n"
+"min(20) => двадцять хвилин |\n"
+"min(21) => двадцять одна хвилина |\n"
+"min(22) => двадцять дві хвилини |\n"
+"min(23) => двадцять три хвилини |\n"
+"min(24) => двадцять чотири хвилини |\n"
+"min(25) => двадцять п’ять хвилин |\n"
+"min(26) => двадцять шість хвилин |\n"
+"min(27) => двадцять сім хвилин |\n"
+"min(28) => двадцять вісім хвилин |\n"
+"min(29) => двадцять дев’ять хвилин |\n"
+"min(30) => опів |\n"
+"min(31) => двадцять дев’ять хвилин |\n"
+"min(32) => двадцять вісім хвилин |\n"
+"min(33) => двадцять сім хвилини |\n"
+"min(34) => двадцять шість хвилин |\n"
+"min(35) => двадцять п’ять хвилин |\n"
+"min(36) => двадцять чотири хвилини |\n"
+"min(37) => двадцять три хвилини |\n"
+"min(38) => двадцять дві хвилини |\n"
+"min(39) => двадцять одну хвилину |\n"
+"min(40) => двадцять хвилин |\n"
+"min(41) => дев’ятнадцять хвилин |\n"
+"min(42) => вісімнадцять хвилин |\n"
+"min(43) => сімнадцять хвилин |\n"
+"min(44) => шістнадцять хвилин |\n"
+"min(45) => чверть |\n"
+"min(46) => чотирнадцять хвилин |\n"
+"min(47) => тринадцять хвилин |\n"
+"min(48) => дванадцять хвилин |\n"
+"min(49) => одинадцять хвилин |\n"
+"min(50) => десять хвилин |\n"
+"min(51) => дев’ять хвилин |\n"
+"min(52) => вісім хвилин |\n"
+"min(53) => сім хвилин |\n"
+"min(54) => шість хвилин |\n"
+"min(55) => п’ять хвилин |\n"
+"min(56) => чотири хвилини |\n"
+"min(57) => три хвилини |\n"
+"min(58) => дві хвилини |\n"
+"min(59) => хвилину |\n"
+"min(60) => менш ніж хвилину |\n"
+"hour(0) => північ |\n"
+"hour(1) => перша |\n"
+"hour(2) => друга |\n"
+"hour(3) => третя |\n"
+"hour(4) => четверта |\n"
+"hour(5) => п’ята |\n"
+"hour(6) => шоста |\n"
+"hour(7) => сьома |\n"
+"hour(8) => восьма |\n"
+"hour(9) => дев’ята |\n"
+"hour(10) => десята |\n"
+"hour(11) => одинадцята |\n"
+"hour(12) => дванадцята |\n"
+"hour(13) => тринадцята |\n"
+"hour(14) => чотирнадцята |\n"
+"hour(15) => п’ятнадцята |\n"
+"hour(16) => шістнадцята |\n"
+"hour(17) => сімнадцята |\n"
+"hour(18) => вісімнадцята |\n"
+"hour(19) => дев’ятнадцята |\n"
+"hour(20) => двадцята |\n"
+"hour(21) => двадцять перша |\n"
+"hour(22) => двадцять друга |\n"
+"hour(23) => двадцять третя |\n"
+"hour1(0) => першу |\n"
+"hour1(1) => другу |\n"
+"hour1(2) => третю |\n"
+"hour1(3) => четверту |\n"
+"hour1(4) => п’яту |\n"
+"hour1(5) => шосту |\n"
+"hour1(6) => сьому |\n"
+"hour1(7) => восьму |\n"
+"hour1(8) => дев’яту |\n"
+"hour1(9) => десяту |\n"
+"hour1(10) => одинадцяту |\n"
+"hour1(11) => дванадцяту |\n"
+"hour1(12) => тринадцяту |\n"
+"hour1(13) => чотирнадцяту |\n"
+"hour1(14) => п’ятнадцяту |\n"
+"hour1(15) => шістнадцяту |\n"
+"hour1(16) => сімнадцяту |\n"
+"hour1(17) => вісімнадцяту |\n"
+"hour1(18) => дев’ятнадцяту |\n"
+"hour1(19) => двадцяту |\n"
+"hour1(20) => двадцять першу |\n"
+"hour1(21) => двадцять другу |\n"
+"hour1(22) => двадцять третю |\n"
+"hour1(23) => опівніч |\n"
+"hour2(0) => перша |\n"
+"hour2(1) => друга |\n"
+"hour2(2) => третя |\n"
+"hour2(3) => четверта |\n"
+"hour2(4) => п’ята |\n"
+"hour2(5) => шоста |\n"
+"hour2(6) => сьома |\n"
+"hour2(7) => восьма |\n"
+"hour2(8) => дев’ята |\n"
+"hour2(9) => десята |\n"
+"hour2(10) => одинадцята |\n"
+"hour2(11) => дванадцята |\n"
+"hour2(12) => тринадцята |\n"
+"hour2(13) => чотирнадцята |\n"
+"hour2(14) => п’ятнадцята |\n"
+"hour2(15) => шістнадцята |\n"
+"hour2(16) => сімнадцята |\n"
+"hour2(17) => вісімнадцята |\n"
+"hour2(18) => дев’ятнадцята |\n"
+"hour2(19) => двадцята |\n"
+"hour2(20) => двадцять перша |\n"
+"hour2(21) => двадцять друга |\n"
+"hour2(22) => двадцять третя |\n"
+"hour2(23) => опівніч"

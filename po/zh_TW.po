@@ -35,15 +35,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2012-06-13 09:48+0200\n"
-"Last-Translator: Chris <cjl@laptop.org>\n"
+"PO-Revision-Date: 2017-03-25 12:40+0000\n"
+"Last-Translator: Yuan <yuanchao@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Pootle 2.0.5\n"
+"X-Generator: Pootle 2.5.1.1\n"
+"X-POOTLE-MTIME: 1490445657.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
@@ -55,7 +56,7 @@ msgstr "小時鐘"
 msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
-msgstr ""
+msgstr "你懂得時間嗎？現在就來試試！這裡有各種不同的時鐘外觀可以選用！"
 
 #. TRANS: Title of the activity
 #: clock.py:128
@@ -115,7 +116,7 @@ msgstr "語音時鐘"
 
 #: clock.py:319
 msgid "Grab the hands"
-msgstr ""
+msgstr "選取指針"
 
 #. TRANS: The format used to display the time for digital clock
 #. You can add AM/PM indicator or use 12/24 format, for example
@@ -125,16 +126,15 @@ msgstr ""
 #. horizontally, it means that the glyphs of the digits used in
 #. the font don't have the same width. Try to use a Monospace
 #: clock.py:751
-#, no-python-format
-#, no-python-format, fuzzy
+#, no-python-format, no-python-format
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
-"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 48\"><span "
-"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<span "
-"foreground=\"#E6000A\">%S</span>%p</span></markup>"
+"<markup><span lang=\"zh-TW\" font_desc=\"Sans,Monospace Bold 48\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:<"
+"span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #: clock.py:855
 msgid ""
@@ -142,6 +142,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"zh-TW\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"white\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:859
 msgid ""
@@ -149,14 +152,17 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"zh-TW\" font_desc=\"Sans Bold 28\"><span foreground=\""
+"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:925
-#, python-format
-#, python-format, fuzzy
+#, python-format, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
-msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 20\">%d</span></markup>"
+msgstr ""
+"<markup><span lang=\"zh-TW\" font_desc=\"Sans Bold 20\">%d</span></markup>"
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details

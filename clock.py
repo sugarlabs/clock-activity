@@ -10,9 +10,9 @@
 
 """Learning time.
 ==============
-The XO is missing a simple clock for kids to learn how to
+Sugar was missing a simple clock for kids to learn how to
 read time, but more importantly to know what time is is. When you
-don't own a clock, the XO can be used to display the time to
+don't own a clock, Sugar can be used to display the time to
 arrive in time at school...
 A clock can also be used to learn how to count and read numbers.
 
@@ -692,16 +692,15 @@ class ClockFace(Gtk.DrawingArea):
         self._hand_sizes = {}
         self._hand_angles = {}
 
-        # Color codes (approved colors for XO screen:
-        # http://wiki.laptop.org/go/XO_colors)
+        # Color codes (approved colors for Sugar)
 
-        # XO Medium Blue
+        # Medium Blue
         self._COLOR_HOURS = "#005FE4"
 
-        # XO Medium Green
+        # Medium Green
         self._COLOR_MINUTES = "#00B20D"
 
-        # XO Medium Red
+        # Medium Red
         self._COLOR_SECONDS = "#E6000A"
 
         # White

@@ -9,9 +9,9 @@
 
 
 """
-Speak aloud the text given in the XO configured language.
+Speak aloud the text given in the configured language.
 
-Controls the espeak program available on the OLPC XO laptop.
+Depends on the espeak program.
 """
 
 import os

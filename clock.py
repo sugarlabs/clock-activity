@@ -68,13 +68,16 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Rsvg', '2.0')
 gi.require_version('PangoCairo', '1.0')
+gi.require_version('Gst', '1.0')
 
+from gi.repository import GLib
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import Rsvg
 from gi.repository import Pango
 from gi.repository import GObject
 from gi.repository import PangoCairo
+from gi.repository import Gst
 
 import logging
 import os
@@ -116,6 +119,9 @@ POWERD_INHIBIT_DIR = '/var/run/powerd-inhibit-suspend'
 # if the user press on a piece of the circle that is the angle of the
 # hand +- the tolerance angle.
 _ANGLE_TOLERANCE = 0.3
+
+
+Gst.init(None)
 
 
 class ClockActivity(activity.Activity):
@@ -183,15 +189,31 @@ class ClockActivity(activity.Activity):
             except dbus.DBusException:
                 self.ohm_keystore = None
 
+        self.connect('notify::active', self._notify_active_cb)
+
+        # Some hardware cannot keep two GStreamer playback pipelines active
+        try:
+            model = file('/proc/device-tree/openprom/model', 'r').readline()
+        except:
+            model = 'unknown'
+
+        self._pathetic = False
+        if 'CL1   Q2' in model:  # OLPC XO-1
+            self._pathetic = True
+        if 'CL2   Q4' in model:  # OLPC XO-1.75
+            self._pathetic = True
+
     def write_file(self, file_path):
         self.metadata['write-time'] = str(self._write_time)
         self.metadata['write-date'] = str(self._write_date)
         self.metadata['speak-time'] = str(self._speak_time)
         self.metadata['clock-mode'] = str(self._clock._mode)
+        self.metadata['ticking'] = str(self._clock.ticking)
         logging.debug('Saving metadata %s', (self.metadata['write-time'],
                                              self.metadata['write-date'],
                                              self.metadata['speak-time'],
-                                             self.metadata['clock-mode']))
+                                             self.metadata['clock-mode'],
+                                             self.metadata['ticking']))
         # Need write a empty file or the read_file is not called
         with open(file_path, 'w') as data:
             data.write('')
@@ -200,7 +222,8 @@ class ClockActivity(activity.Activity):
         logging.debug('Reading metadata %s', (self.metadata['write-time'],
                                               self.metadata['write-date'],
                                               self.metadata['speak-time'],
-                                              self.metadata['clock-mode']))
+                                              self.metadata['clock-mode'],
+                                              self.metadata['ticking']))
         if 'clock-mode' not in self.metadata.keys():
             display_mode = _MODE_SIMPLE_CLOCK
         else:
@@ -215,15 +238,19 @@ class ClockActivity(activity.Activity):
         if 'write-date' in self.metadata.keys():
             self._write_date = str(self.metadata['write-date']) == 'True'
 
+        if 'ticking' in self.metadata.keys():
+            self._clock.ticking = str(self.metadata['ticking']) == 'True'
+
         logging.debug('Read values %s', (self._write_time,
                                          self._speak_time, self._write_date,
-                                         display_mode))
+                                         display_mode, self._clock.ticking))
 
         # apply the changes in the UI
         self._display_mode_buttons[display_mode].set_active(True)
         self._write_time_btn.set_active(self._write_time)
         self._write_date_btn.set_active(self._write_date)
         self._speak_time_btn.set_active(self._speak_time)
+        self._ticking_btn.set_active(self._clock.ticking)
 
     def powerd_running(self):
         self.using_powerd = os.access(POWERD_INHIBIT_DIR, os.W_OK)
@@ -277,7 +304,9 @@ class ClockActivity(activity.Activity):
         separator.set_expand(True)
         toolbar_box.toolbar.insert(separator, -1)
 
-        toolbar_box.toolbar.insert(StopButton(self), -1)
+        stop_button = StopButton(self)
+        toolbar_box.toolbar.insert(stop_button, -1)
+        stop_button.connect('clicked', self._stop_clicked_cb)
 
         self.set_toolbar_box(toolbar_box)
         toolbar_box.show_all()
@@ -329,6 +358,12 @@ class ClockActivity(activity.Activity):
         self._speak_time_btn.set_tooltip(_('Talking clock'))
         self._speak_time_btn.connect("toggled", self._speak_time_clicked_cb)
         display_toolbar.insert(self._speak_time_btn, -1)
+
+        # Another button to toggle tick
+        self._ticking_btn = ToggleToolButton("ticking")
+        self._ticking_btn.set_tooltip(_('Ticking clock'))
+        self._ticking_btn.connect("toggled", self._ticking_toggled_cb)
+        display_toolbar.insert(self._ticking_btn, -1)
 
         # A separator between the two groups of buttons
         self._add_separator(display_toolbar)
@@ -433,7 +468,16 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
+        if self._pathetic:
+            self._ticking_btn.set_sensitive(not self._speak_time)
         self._write_and_speak(self._speak_time)
+
+    def _ticking_toggled_cb(self, button):
+        """The user clicked on the "ticking clock" button to hear or
+        not hear the clock ticking.  """
+        self._clock.ticking = button.get_active()
+        if self._pathetic:
+            self._speak_time_btn.set_sensitive(not self._clock.ticking)
 
     def _grab_clicked_cb(self, button):
         """The user clicked on the "grab hands" button to toggle
@@ -453,7 +497,7 @@ class ClockActivity(activity.Activity):
         self._date.set_markup(
             clock.get_time().strftime(self._DATE_SHORT_FORMAT))
 
-    def _notify_active_cb(self, widget, event):
+    def _notify_active_cb(self, widget, pspec):
         """Sugar notify us that the activity is becoming active or
         inactive.
 
@@ -646,6 +690,10 @@ class ClockActivity(activity.Activity):
         self._ntp_button.set_sensitive(False)
         return False
 
+    def _stop_clicked_cb(self, button):
+        self._clock.active = False
+
+
 class ClockFace(Gtk.DrawingArea):
     """The Pango widget of the clock.
 
@@ -674,6 +722,8 @@ class ClockFace(Gtk.DrawingArea):
         # Update the clock only when the widget is active to save
         # resource
         self._active = False
+        self._ticking = False
+        self._update_id = None
 
         # The display mode of the clock
         self._mode = _MODE_SIMPLE_CLOCK
@@ -1039,6 +1089,11 @@ background="black"> PM </span></span></markup>')
                    int(self._center_y - self._hand_sizes['minutes'] * cos))
         cr.stroke()
 
+        # When not well-synchronised, do not draw seconds hand
+        if self._time.microsecond > 100000 and self._time.microsecond < 900000:
+            cr.restore()
+            return
+
         # Seconds hand:
         # Operates identically to the minute hand
         cr.set_source_rgba(*style.Color(self._COLOR_SECONDS).get_rgba())
@@ -1078,11 +1133,34 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             cr.restore()
         cr.restore()
 
+    def _dequeue_update(self):
+        """Cancel the next exact second update.
+        """
+        if self._update_id is not None:
+            GLib.source_remove(self._update_id)
+            self._update_id = None
+
+    def _requeue_update(self):
+        """Queue an update for as close as possible to the next exact
+        second, plus two milliseconds.
+        """
+        self._dequeue_update()
+
+        interval = (1000000 - (GLib.get_real_time() % 1000000)) / 1000 + 2
+        self._update_id = GLib.timeout_add(interval, self._update_cb)
+
     def _update_cb(self):
-        """Called every seconds to update the time value.
+        """Called as close as possible to exact second; to update the
+        time, tick, calculate hand angles, queue a redraw, emit
+        changed minute signal, and requeue the update for next exact
+        second.
         """
         # update the time and force a redraw of the clock
         self._time = datetime.now()
+
+        # When well-synchronised, then tick
+        if self._time.microsecond < 100000 or self._time.microsecond > 900000:
+            self._tick()
 
         self._hand_angles['hour'] = (math.pi / 6 * (self._time.hour % 12) +
                                      math.pi / 360 * self._time.minute)
@@ -1095,7 +1173,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         else:
             self._am_pm = 'PM'
 
-        GObject.idle_add(self.queue_draw)
+        self.queue_draw()
 
         # When the minutes change, we raise the 'time_minute'
         # signal. We can't test on 'self._time.second == 0' for
@@ -1105,10 +1183,13 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self.emit("time_minute")
             self._old_minute = self._time.minute
 
-        # Keep running this timer as long as the clock is active
+        # Keep running this update as long as the clock is active
         # (ie. visible) or the mode changes to dragging the hands of
         # the clock
-        return self._active and not self.grab_hands_mode
+        if self._active and not self.grab_hands_mode:
+            self._requeue_update()
+
+        return False
 
     def _get_time_from_hands_angles(self):
         """Uses the angles of the hands to generate hours and minute
@@ -1153,7 +1234,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
     def _set_active(self, active):
         """Set the activity state of the clock face. When Sugar
         reactivates the clock, we start a timer to be called every
-        seconds and update the clock.
+        second and update the clock.
         """
         self._active = active
 
@@ -1161,8 +1242,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             # We must redraw the clock...
             self._update_cb()
 
-            # And update again the clock every seconds.
-            GObject.timeout_add(1000, self._update_cb)
+            # And update again the clock on every second tick.
+            self._requeue_update()
+        else:
+            self._dequeue_update()
 
     active = property(_get_active, _set_active)
 
@@ -1199,8 +1282,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             self.get_window().set_cursor(
                 Gdk.Cursor.new(Gdk.CursorType.LEFT_PTR))
 
-            # Update again the clock every seconds.
-            GObject.timeout_add(1000, self._update_cb)
+            # Update again the clock on every second tick
+            self._requeue_update()
 
         self.emit("time_minute")
 
@@ -1329,3 +1412,46 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
 
         self._hand_being_grabbed = None
         self.queue_draw()
+
+    def _tick_message_cb(self, bus, message):
+        """On tick end of stream, stop, seek to start of file, and
+        prepare for playing using PAUSED.  Minimises latency between
+        clock second hand redraw and sound."""
+        if message.type == Gst.MessageType.EOS:
+            self._player.set_state(Gst.State.NULL)
+            self._player.seek_simple(Gst.Format.TIME,
+                                     Gst.SeekFlags.FLUSH,
+                                     0 * Gst.SECOND)
+            self._player.set_state(Gst.State.PAUSED)
+        return True
+
+    def _get_ticking(self):
+        return self._ticking
+
+    def _set_ticking(self, ticking):
+
+        # Start ticking sound player
+        if not self._ticking and ticking:
+            self._player = Gst.ElementFactory.make('playbin', 'Player')
+            self._player.set_property('uri', 'file://%s' %
+                os.path.join(activity.get_bundle_path(), 'sounds', 'tick.wav'))
+            self._player.set_state(Gst.State.PAUSED)
+
+            bus = self._player.get_bus()
+            bus.add_signal_watch()
+            bus.connect('message', self._tick_message_cb)
+
+        # Stop ticking sound player
+        if self._ticking and not ticking:
+            self._player.set_state(Gst.State.NULL)
+            self._player = None
+
+        self._ticking = ticking
+
+    ticking = property(_get_ticking, _set_ticking)
+
+    def _tick(self):
+        """Make a tick sound.
+        Player is in PAUSED state, so ready to go."""
+        if self._ticking:
+            self._player.set_state(Gst.State.PLAYING)

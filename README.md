@@ -1,5 +1,17 @@
 ﻿# Clock activity
 
+## What is this?
+
+The Clock activity is for you to learn how to read time, even if you do not own a watch.
+
+## How to use?
+
+Clock is part of the Sugar desktop.  Please refer to;
+
+* [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
+* [How to use Sugar](https://help.sugarlabs.org/),
+* [How to use Clock](https://help.sugarlabs.org/clock.html)
+
 ## License
 This activity and its code is put under public domain. Do whatever you want with it!
 If you want to contact me: Pierre Métras <pierre@alterna.tv>

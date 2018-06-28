@@ -1,6 +1,6 @@
 [Activity]
 name = Clock
-license = GPLv3+
+license = Public Domain;GPLv3+
 bundle_id = tv.alterna.Clock
 exec = sugar-activity clock.ClockActivity
 icon = activity-clock

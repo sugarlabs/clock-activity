@@ -9,5 +9,5 @@ show_launcher = yes
 summary = Do you know the time? Now you do! Check out all the different ways you can make your clock look too!
 url = https://help.sugarlabs.org/clock.html
 repository = https://github.com/sugarlabs/clock-activity.git
-tags = Science
+tags = time
 max_participants = 1

@@ -27,6 +27,7 @@ from gettext import gettext as _
 
 
 class Speaker:
+
     """Speak aloud the given text.
     """
 

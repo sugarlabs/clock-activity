@@ -45,6 +45,7 @@ from sugar3.graphics.xocolor import XoColor
 
 
 class ProgressToolButton(ToolButton):
+
     '''
     This button is just like a normal tool button, except that the
     icon can dynamically fill based on a progress number.

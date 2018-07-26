@@ -125,6 +125,7 @@ Gst.init(None)
 
 
 class ClockActivity(activity.Activity):
+
     """The clock activity displays a simple clock widget.
     """
 
@@ -519,7 +520,6 @@ class ClockActivity(activity.Activity):
         if self._speak_time and speak:
             GObject.idle_add(self._do_speak_time)
 
-
     def _do_write_time(self):
         """Translate the time to full letters.
         """
@@ -601,7 +601,7 @@ class ClockActivity(activity.Activity):
                   '<span foreground="#00B20D"> %(minute)s</span>' +
                   '<span foreground="#B20008"> %(period)s</span>') +
                 '</span></markup>') % {'hour': hours[hour],
-                                       'minute': minutes[minute-1],
+                                       'minute': minutes[minute - 1],
                                        'period': period[periodHour]}
 
         self._time_letters.set_markup(
@@ -695,6 +695,7 @@ class ClockActivity(activity.Activity):
 
 
 class ClockFace(Gtk.DrawingArea):
+
     """The Pango widget of the clock.
 
     This widget draws a simple analog clock, with 3 hands (hours,
@@ -1434,7 +1435,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         if not self._ticking and ticking:
             self._player = Gst.ElementFactory.make('playbin', 'Player')
             self._player.set_property('uri', 'file://%s' %
-                os.path.join(activity.get_bundle_path(), 'sounds', 'tick.wav'))
+                                      os.path.join(activity.get_bundle_path(), 'sounds', 'tick.wav'))
             self._player.set_state(Gst.State.PAUSED)
 
             bus = self._player.get_bus()

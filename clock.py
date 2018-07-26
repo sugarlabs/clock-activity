@@ -1435,7 +1435,8 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         if not self._ticking and ticking:
             self._player = Gst.ElementFactory.make('playbin', 'Player')
             self._player.set_property('uri', 'file://%s' %
-                                      os.path.join(activity.get_bundle_path(), 'sounds', 'tick.wav'))
+                                      os.path.join(activity.get_bundle_path(),
+                                                   'sounds', 'tick.wav'))
             self._player.set_state(Gst.State.PAUSED)
 
             bus = self._player.get_bus()

@@ -224,21 +224,21 @@ class ClockActivity(activity.Activity):
                                               self.metadata['speak-time'],
                                               self.metadata['clock-mode'],
                                               self.metadata['ticking']))
-        if 'clock-mode' not in self.metadata.keys():
+        if 'clock-mode' not in list(self.metadata.keys()):
             display_mode = _MODE_SIMPLE_CLOCK
         else:
             display_mode = int(self.metadata['clock-mode'])
 
-        if 'write-time' in self.metadata.keys():
+        if 'write-time' in list(self.metadata.keys()):
             self._write_time = str(self.metadata['write-time']) == 'True'
 
-        if 'speak-time' in self.metadata.keys():
+        if 'speak-time' in list(self.metadata.keys()):
             self._speak_time = str(self.metadata['speak-time']) == 'True'
 
-        if 'write-date' in self.metadata.keys():
+        if 'write-date' in list(self.metadata.keys()):
             self._write_date = str(self.metadata['write-date']) == 'True'
 
-        if 'ticking' in self.metadata.keys():
+        if 'ticking' in list(self.metadata.keys()):
             self._clock.ticking = str(self.metadata['ticking']) == 'True'
 
         logging.debug('Read values %s', (self._write_time,
@@ -987,7 +987,7 @@ class ClockFace(Gtk.DrawingArea):
         cr.stroke()
 
         # Clock ticks
-        for i in xrange(60):
+        for i in range(60):
             if i % 15 == 0:
                 inset = 0.11 * self._radius
                 cr.set_line_width(7 * self._line_width)
@@ -1116,7 +1116,7 @@ background="black"> PM </span></span></markup>')
         cr.set_source_rgba(*style.Color(self._COLOR_HOURS).get_rgba())
         pango_layout = PangoCairo.create_layout(cr)
 
-        for i in xrange(12):
+        for i in range(12):
             # TRANS: The format of the font used to print hour
             # numbers, from 1 to 12.
             hour_number = _('<markup><span lang="en" \

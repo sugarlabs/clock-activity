@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2017-12-22 08:36+0000\n"
-"Last-Translator: chanchumgpa <chanchumgpa@gmail.com>\n"
+"PO-Revision-Date: 2018-04-03 05:49+0000\n"
+"Last-Translator: Olot <agwanta2004@yahoo.co.uk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: ach\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1513931776.000000\n"
+"X-POOTLE-MTIME: 1522734566.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
@@ -203,4 +203,4 @@ msgstr "en"
 #. rules.
 #: timewriter.py:204
 msgid "time(h, m) => What Time Is It?"
-msgstr ""
+msgstr "Cawa(h, m) => Cawa dong adi?"

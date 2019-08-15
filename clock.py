@@ -55,15 +55,6 @@ More about clocks and time in the World
 
 """
 
-# We initialize threading in GObject. As we will detach another thread
-# to translate the time to text, this other thread will eventually
-# update the display with idle_add() calls, because it is not running
-# in the main event thread. But idle_add() puts a callback in the
-# message queue with the lowest priority. When the nice clock is
-# displayed, it can spend a few seconds (20 to 30 is common) before
-# the GTK loop will process this low priority message. When we enable
-# the threads, the processing is almost instantaneous.
-
 import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('Rsvg', '2.0')

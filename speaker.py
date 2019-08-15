@@ -19,7 +19,7 @@ import os
 try:
     from sugar3.speech import SpeechManager
     _HAS_SPEECH_MANAGER = True
-except:
+except BaseException:
     _HAS_SPEECH_MANAGER = False
 
 

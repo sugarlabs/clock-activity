@@ -90,7 +90,7 @@ from sugar3.graphics.toggletoolbutton import ToggleToolButton
 
 try:
     from sugar3.graphics.progresstoolbutton import ProgressToolButton
-except:
+except BaseException:
     from progresstoolbutton import ProgressToolButton
 
 from speaker import Speaker
@@ -186,7 +186,7 @@ class ClockActivity(activity.Activity):
         # Some hardware cannot keep two GStreamer playback pipelines active
         try:
             model = file('/proc/device-tree/openprom/model', 'r').readline()
-        except:
+        except BaseException:
             model = 'unknown'
 
         self._pathetic = False

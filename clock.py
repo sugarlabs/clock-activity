@@ -1181,6 +1181,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         if self._active and not self.grab_hands_mode:
             self._requeue_update()
 
+        self._update_id = None
         return False
 
     def _get_time_from_hands_angles(self):

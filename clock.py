@@ -87,11 +87,7 @@ from sugar3.graphics.toolbarbox import ToolbarBox
 from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.radiotoolbutton import RadioToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
-
-try:
-    from sugar3.graphics.progresstoolbutton import ProgressToolButton
-except:
-    from progresstoolbutton import ProgressToolButton
+from sugar3.graphics.progresstoolbutton import ProgressToolButton
 
 from speaker import Speaker
 
@@ -182,18 +178,6 @@ class ClockActivity(activity.Activity):
                 self.ohm_keystore = None
 
         self.connect('notify::active', self._notify_active_cb)
-
-        # Some hardware cannot keep two GStreamer playback pipelines active
-        try:
-            model = file('/proc/device-tree/openprom/model', 'r').readline()
-        except:
-            model = 'unknown'
-
-        self._pathetic = False
-        if 'CL1   Q2' in model:  # OLPC XO-1
-            self._pathetic = True
-        if 'CL2   Q4' in model:  # OLPC XO-1.75
-            self._pathetic = True
 
     def write_file(self, file_path):
         self.metadata['write-time'] = str(self._write_time)
@@ -460,16 +444,12 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
-        if self._pathetic:
-            self._ticking_btn.set_sensitive(not self._speak_time)
         self._write_and_speak(self._speak_time)
 
     def _ticking_toggled_cb(self, button):
         """The user clicked on the "ticking clock" button to hear or
         not hear the clock ticking.  """
         self._clock.ticking = button.get_active()
-        if self._pathetic:
-            self._speak_time_btn.set_sensitive(not self._clock.ticking)
 
     def _grab_clicked_cb(self, button):
         """The user clicked on the "grab hands" button to toggle

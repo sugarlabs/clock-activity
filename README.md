@@ -6,7 +6,7 @@ The Clock activity is for you to learn how to read time, even if you do not own 
 
 ## How to use?
 
-Clock is part of the Sugar desktop.  Please refer to;
+Clock is not part of the Sugar desktop but is often included.  Please refer to;
 
 * [How to Get Sugar on sugarlabs.org](https://sugarlabs.org/),
 * [How to use Sugar](https://help.sugarlabs.org/),

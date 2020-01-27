@@ -1,3 +1,10 @@
+v22
+* New Translations (Chris Leonard et al)
+* Port to Python 3 (Rahul Bothra)
+* Remove empty locale files (James Cameron)
+* Translate.sugarlabs.org synchronisation (Paulo Francisco, James Cameron)
+
+
 A simple Clock face to know the time of the day, and eventually learn how to read it.
 
 20080129 1.0	- Initial creation of the Basic Clock.

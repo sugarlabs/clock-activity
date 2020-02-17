@@ -1,3 +1,6 @@
+v22.1
+* Fix fail to start (James Cameron)
+
 v22
 * New Translations (Chris Leonard et al)
 * Port to Python 3 (Rahul Bothra)

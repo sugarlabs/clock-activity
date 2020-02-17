@@ -12,11 +12,7 @@
 Speak aloud the text given in the configured language.
 """
 
-import os
-
 from sugar3.speech import SpeechManager
-
-from gettext import gettext as _
 
 
 class Speaker:

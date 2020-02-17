@@ -1358,7 +1358,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
             pointer_angle += math.pi * 2
 
         # Auto spin hour hand and snap minute hand when minutes dragged
-        if self._hand_being_grabbed is 'minutes':
+        if self._hand_being_grabbed == 'minutes':
             pointer_angle = int((pointer_angle * 60) / (
                 math.pi * 2)) * (math.pi * 2) / 60.0
             self._hand_angles['hour'] += (
@@ -1376,7 +1376,7 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                 self.toggle_am_pm()
 
         # Auto spin and snap minute hand when hour hand dragged
-        if self._hand_being_grabbed is 'hour':
+        if self._hand_being_grabbed == 'hour':
             tmp = self._hand_angles['hour'] * 12.0
             while tmp >= math.pi * 2:
                 tmp -= math.pi * 2

@@ -158,6 +158,18 @@ class ClockActivity(activity.Activity):
 
         self._ntp_process = None
 
+        # Some hardware cannot keep two GStreamer playback pipelines active
+        try:
+            model = file('/proc/device-tree/openprom/model', 'r').readline()
+        except:
+            model = 'unknown'
+
+        self._pathetic = False
+        if 'CL1   Q2' in model:  # OLPC XO-1
+            self._pathetic = True
+        if 'CL2   Q4' in model:  # OLPC XO-1.75
+            self._pathetic = True
+
         self._make_display()
         self._make_toolbars()
 
@@ -178,18 +190,6 @@ class ClockActivity(activity.Activity):
                 self.ohm_keystore = None
 
         self.connect('notify::active', self._notify_active_cb)
-
-        # Some hardware cannot keep two GStreamer playback pipelines active
-        try:
-            model = file('/proc/device-tree/openprom/model', 'r').readline()
-        except:
-            model = 'unknown'
-
-        self._pathetic = False
-        if 'CL1   Q2' in model:  # OLPC XO-1
-            self._pathetic = True
-        if 'CL2   Q4' in model:  # OLPC XO-1.75
-            self._pathetic = True
 
     def write_file(self, file_path):
         self.metadata['write-time'] = str(self._write_time)

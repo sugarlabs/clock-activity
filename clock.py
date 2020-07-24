@@ -1209,6 +1209,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         reactivates the clock, we start a timer to be called every
         second and update the clock.
         """
+        if self._active == active:
+            return
+
         self._active = active
 
         if active:

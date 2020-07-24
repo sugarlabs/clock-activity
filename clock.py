@@ -107,6 +107,9 @@ POWERD_INHIBIT_DIR = '/var/run/powerd-inhibit-suspend'
 # hand +- the tolerance angle.
 _ANGLE_TOLERANCE = 0.3
 
+_LIMIT_STREAMS = False  # GStreamer pipelines limited to one active
+_NEEDS_RESTART = False  # GStreamer pipelines need restart after pause
+
 
 Gst.init(None)
 
@@ -157,18 +160,7 @@ class ClockActivity(activity.Activity):
         self._display_mode_buttons = []
 
         self._ntp_process = None
-
-        # Some hardware cannot keep two GStreamer playback pipelines active
-        try:
-            model = file('/proc/device-tree/openprom/model', 'r').readline()
-        except:
-            model = 'unknown'
-
-        self._pathetic = False
-        if 'CL1   Q2' in model:  # OLPC XO-1
-            self._pathetic = True
-        if 'CL2   Q4' in model:  # OLPC XO-1.75
-            self._pathetic = True
+        self._probe_hardware()
 
         self._make_display()
         self._make_toolbars()
@@ -190,6 +182,21 @@ class ClockActivity(activity.Activity):
                 self.ohm_keystore = None
 
         self.connect('notify::active', self._notify_active_cb)
+
+    def _probe_hardware(self):
+        global _LIMIT_STREAMS, _NEEDS_RESTART
+
+        # Some hardware cannot keep two GStreamer playback pipelines active
+        try:
+            model = file('/proc/device-tree/openprom/model', 'r').readline()
+        except:
+            model = 'unknown'
+
+        if 'CL1   Q2' in model:  # OLPC XO-1
+            _LIMIT_STREAMS = True
+            _NEEDS_RESTART = True
+        if 'CL2   Q4' in model:  # OLPC XO-1.75
+            _LIMIT_STREAMS = True
 
     def write_file(self, file_path):
         self.metadata['write-time'] = str(self._write_time)
@@ -456,7 +463,7 @@ class ClockActivity(activity.Activity):
         talking clock.
         """
         self._speak_time = button.get_active()
-        if self._pathetic:
+        if _LIMIT_STREAMS:
             self._ticking_btn.set_sensitive(not self._speak_time)
         self._write_and_speak(self._speak_time)
 
@@ -464,7 +471,7 @@ class ClockActivity(activity.Activity):
         """The user clicked on the "ticking clock" button to hear or
         not hear the clock ticking.  """
         self._clock.ticking = button.get_active()
-        if self._pathetic:
+        if _LIMIT_STREAMS:
             self._speak_time_btn.set_sensitive(not self._clock.ticking)
 
     def _grab_clicked_cb(self, button):
@@ -1433,8 +1440,13 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         if self._ticking:
             def pause():
                 if self._player:
+                    if _NEEDS_RESTART:
+                        self._player.set_state(Gst.State.NULL)
                     self._player.set_state(Gst.State.PAUSED)
 
             self._player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, 0)
             self._player.set_state(Gst.State.PLAYING)
-            GObject.timeout_add(450, pause)
+            if _NEEDS_RESTART:
+                GObject.timeout_add(250, pause)
+            else:
+                GObject.timeout_add(450, pause)

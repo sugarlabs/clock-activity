@@ -88,11 +88,7 @@ from sugar3.activity.widgets import ActivityToolbarButton
 from sugar3.graphics.radiotoolbutton import RadioToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 
-try:
-    from sugar3.graphics.progresstoolbutton import ProgressToolButton
-except:
-    from progresstoolbutton import ProgressToolButton
-
+from progresstoolbutton import ProgressToolButton
 from speaker import Speaker
 
 import dbus

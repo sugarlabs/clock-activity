@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-12 12:38+1100\n"
+"POT-Creation-Date: 2020-07-24 11:14+1000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 
 #. TRANS: Title of the activity
-#: clock.py:137
+#: clock.py:125
 msgid "What Time Is It?"
 msgstr ""
 
@@ -38,7 +38,7 @@ msgstr ""
 #. that all times combination fit on the screen, even when the
 #. screen is rotated.  Pango markup:
 #. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
-#: clock.py:145
+#: clock.py:133
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 msgstr ""
@@ -47,7 +47,7 @@ msgstr ""
 #. (example: Tuesday 10/21/2008) We recommend to use the same
 #. font size as for the time display.  See
 #. http://docs.python.org/lib/module-time.html for available
-#: clock.py:153
+#: clock.py:141
 #, no-python-format
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
@@ -55,350 +55,350 @@ msgid ""
 "\"#B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
 
-#: clock.py:319
+#: clock.py:307
 msgid "Simple Clock"
 msgstr ""
 
-#: clock.py:326
+#: clock.py:314
 msgid "Nice Clock"
 msgstr ""
 
-#: clock.py:333
+#: clock.py:321
 msgid "Digital Clock"
 msgstr ""
 
-#: clock.py:346
+#: clock.py:334
 msgid "Display time in full letters"
 msgstr ""
 
-#: clock.py:352
+#: clock.py:340
 msgid "Display weekday and date"
 msgstr ""
 
-#: clock.py:358
+#: clock.py:346
 msgid "Talking clock"
 msgstr ""
 
-#: clock.py:364
+#: clock.py:352
 msgid "Ticking clock"
 msgstr ""
 
-#: clock.py:373
+#: clock.py:361
 msgid "Grab the hands"
 msgstr ""
 
-#: clock.py:383
+#: clock.py:371
 msgid "Download time"
 msgstr ""
 
 #. TRANS: Hour, referring to the unit of time. This list
 #. iterates through each unit of the 12-hour clock twice in
 #. word form so one AM would have the same translation as one PM.
-#: clock.py:532 clock.py:534 clock.py:542
+#: clock.py:519 clock.py:521 clock.py:529
 msgid "twelve"
 msgstr ""
 
 #. TRANS: Minute, referring to the unit of time. This list
 #. iterates through 60 minutes in word form.
-#: clock.py:532 clock.py:534 clock.py:540
+#: clock.py:519 clock.py:521 clock.py:527
 msgid "one"
 msgstr ""
 
-#: clock.py:532 clock.py:534 clock.py:540
+#: clock.py:519 clock.py:521 clock.py:527
 msgid "two"
 msgstr ""
 
-#: clock.py:532 clock.py:535 clock.py:540
+#: clock.py:519 clock.py:522 clock.py:527
 msgid "three"
 msgstr ""
 
-#: clock.py:532 clock.py:535 clock.py:540
+#: clock.py:519 clock.py:522 clock.py:527
 msgid "four"
 msgstr ""
 
-#: clock.py:533 clock.py:535 clock.py:540
+#: clock.py:520 clock.py:522 clock.py:527
 msgid "five"
 msgstr ""
 
-#: clock.py:533 clock.py:535 clock.py:541
+#: clock.py:520 clock.py:522 clock.py:528
 msgid "six"
 msgstr ""
 
-#: clock.py:533 clock.py:535 clock.py:541
+#: clock.py:520 clock.py:522 clock.py:528
 msgid "seven"
 msgstr ""
 
-#: clock.py:533 clock.py:536 clock.py:541
+#: clock.py:520 clock.py:523 clock.py:528
 msgid "eight"
 msgstr ""
 
-#: clock.py:533 clock.py:536 clock.py:541
+#: clock.py:520 clock.py:523 clock.py:528
 msgid "nine"
 msgstr ""
 
-#: clock.py:534 clock.py:536 clock.py:541
+#: clock.py:521 clock.py:523 clock.py:528
 msgid "ten"
 msgstr ""
 
-#: clock.py:534 clock.py:536 clock.py:542
+#: clock.py:521 clock.py:523 clock.py:529
 msgid "eleven"
 msgstr ""
 
-#: clock.py:542
+#: clock.py:529
 msgid "thirteen"
 msgstr ""
 
-#: clock.py:542
+#: clock.py:529
 msgid "fourteen"
 msgstr ""
 
-#: clock.py:543
+#: clock.py:530
 msgid "fifteen"
 msgstr ""
 
-#: clock.py:543
+#: clock.py:530
 msgid "sixteen"
 msgstr ""
 
-#: clock.py:543
+#: clock.py:530
 msgid "seventeen"
 msgstr ""
 
-#: clock.py:543
+#: clock.py:530
 msgid "eighteen"
 msgstr ""
 
-#: clock.py:544
+#: clock.py:531
 msgid "nineteen"
 msgstr ""
 
-#: clock.py:544
+#: clock.py:531
 msgid "twenty"
 msgstr ""
 
-#: clock.py:544
+#: clock.py:531
 msgid "twenty-one"
 msgstr ""
 
-#: clock.py:545
+#: clock.py:532
 msgid "twenty-two"
 msgstr ""
 
-#: clock.py:545
+#: clock.py:532
 msgid "twenty-three"
 msgstr ""
 
-#: clock.py:545
+#: clock.py:532
 msgid "twenty-four"
 msgstr ""
 
-#: clock.py:546
+#: clock.py:533
 msgid "twenty-five"
 msgstr ""
 
-#: clock.py:546
+#: clock.py:533
 msgid "twenty-six"
 msgstr ""
 
-#: clock.py:546
+#: clock.py:533
 msgid "twenty-seven"
 msgstr ""
 
-#: clock.py:547
+#: clock.py:534
 msgid "twenty-eight"
 msgstr ""
 
-#: clock.py:547
+#: clock.py:534
 msgid "twenty-nine"
 msgstr ""
 
-#: clock.py:547
+#: clock.py:534
 msgid "thirty"
 msgstr ""
 
-#: clock.py:548
+#: clock.py:535
 msgid "thirty-one"
 msgstr ""
 
-#: clock.py:548
+#: clock.py:535
 msgid "thirty-two"
 msgstr ""
 
-#: clock.py:548
+#: clock.py:535
 msgid "thirty-three"
 msgstr ""
 
-#: clock.py:549
+#: clock.py:536
 msgid "thirty-four"
 msgstr ""
 
-#: clock.py:549
+#: clock.py:536
 msgid "thirty-five"
 msgstr ""
 
-#: clock.py:549
+#: clock.py:536
 msgid "thirty-six"
 msgstr ""
 
-#: clock.py:550
+#: clock.py:537
 msgid "thirty-seven"
 msgstr ""
 
-#: clock.py:550
+#: clock.py:537
 msgid "thirty-eight"
 msgstr ""
 
-#: clock.py:550
+#: clock.py:537
 msgid "thirty-nine"
 msgstr ""
 
-#: clock.py:551
-msgid "fourty"
+#: clock.py:538
+msgid "forty"
 msgstr ""
 
-#: clock.py:551
-msgid "fourty-one"
+#: clock.py:538
+msgid "forty-one"
 msgstr ""
 
-#: clock.py:551
-msgid "fourty-two"
+#: clock.py:538
+msgid "forty-two"
 msgstr ""
 
-#: clock.py:552
-msgid "fourty-three"
+#: clock.py:539
+msgid "forty-three"
 msgstr ""
 
-#: clock.py:552
-msgid "fourty-four"
+#: clock.py:539
+msgid "forty-four"
 msgstr ""
 
-#: clock.py:552
-msgid "fourty-five"
+#: clock.py:539
+msgid "forty-five"
 msgstr ""
 
-#: clock.py:553
-msgid "fourty-six"
+#: clock.py:540
+msgid "forty-six"
 msgstr ""
 
-#: clock.py:553
-msgid "fourty-seven"
+#: clock.py:540
+msgid "forty-seven"
 msgstr ""
 
-#: clock.py:553
-msgid "fourty-eight"
+#: clock.py:540
+msgid "forty-eight"
 msgstr ""
 
-#: clock.py:554
-msgid "fourty-nine"
+#: clock.py:541
+msgid "forty-nine"
 msgstr ""
 
-#: clock.py:554
+#: clock.py:541
 msgid "fifty"
 msgstr ""
 
-#: clock.py:554
+#: clock.py:541
 msgid "fifty-one"
 msgstr ""
 
-#: clock.py:555
+#: clock.py:542
 msgid "fifty-two"
 msgstr ""
 
-#: clock.py:555
+#: clock.py:542
 msgid "fifty-three"
 msgstr ""
 
-#: clock.py:555
+#: clock.py:542
 msgid "fifty-four"
 msgstr ""
 
-#: clock.py:556
+#: clock.py:543
 msgid "fifty-five"
 msgstr ""
 
-#: clock.py:556
+#: clock.py:543
 msgid "fifty-six"
 msgstr ""
 
-#: clock.py:556
+#: clock.py:543
 msgid "fifty-seven"
 msgstr ""
 
-#: clock.py:557
+#: clock.py:544
 msgid "fifty-eight"
 msgstr ""
 
-#: clock.py:557
+#: clock.py:544
 msgid "fifty-nine"
 msgstr ""
 
-#: clock.py:557
+#: clock.py:544
 msgid "sixty"
 msgstr ""
 
 #. TRANS: "o clock", used after a number from one to twelve to
 #. indicate the hour of the day or night, eg. "one o clock PM"
-#: clock.py:561
+#: clock.py:548
 msgid "o clock"
 msgstr ""
 
 #. TRANS: AM or PM, referring to morning (before 12PM) or
 #. afternoon (12PM and after).
-#: clock.py:565
+#: clock.py:552
 msgid "AM"
 msgstr ""
 
-#: clock.py:565
+#: clock.py:552
 msgid "PM"
 msgstr ""
 
-#: clock.py:576
+#: clock.py:563
 msgid "noon"
 msgstr ""
 
-#: clock.py:583
+#: clock.py:570
 msgid "midnight"
 msgstr ""
 
-#: clock.py:589 clock.py:600
+#: clock.py:576 clock.py:587
 #, python-format
 msgid ""
 "<span foreground=\"#005FE4\">%(hour)s</span><span foreground=\"#00B20D\"> "
 "%(minute)s</span><span foreground=\"#B20008\"> %(period)s</span>"
 msgstr ""
 
-#: clock.py:641
+#: clock.py:628
 msgid "Download time began"
 msgstr ""
 
-#: clock.py:656
+#: clock.py:643
 #, python-format
 msgid "Download time failed (%d)"
 msgstr ""
 
-#: clock.py:673
+#: clock.py:660
 msgid "Setting time in progress"
 msgstr ""
 
-#: clock.py:683
+#: clock.py:670
 msgid "Download time done"
 msgstr ""
 
-#: clock.py:938
+#: clock.py:926
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
 
-#: clock.py:1045
+#: clock.py:1033
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white"
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
 
-#: clock.py:1049
+#: clock.py:1037
 msgid ""
 "<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground="
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
@@ -407,27 +407,27 @@ msgstr ""
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
-#: clock.py:1122
+#: clock.py:1110
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
 msgstr ""
 
 #. TRANS: The language pitch (range [0 - 99], default 50 for English)
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:37
+#: speaker.py:38
 msgid "50"
 msgstr ""
 
 #. TRANS: The diction speed, in average words per minute (range [80 - 390],
 #. default 170 for English).
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:44
+#: speaker.py:45
 msgid "170"
 msgstr ""
 
 #. TRANS: The pause duration between words, in units of 10 ms.
 #. Look at http://espeak.sourceforge.net/commands.html for details
-#: speaker.py:50
+#: speaker.py:51
 msgid "0"
 msgstr ""
 
@@ -435,6 +435,6 @@ msgstr ""
 #. Look at http://espeak.sourceforge.net/commands.html for details, and
 #. http://espeak.sourceforge.net/languages.html to see if your language
 #. is supported.
-#: speaker.py:58
+#: speaker.py:59
 msgid "en"
 msgstr ""

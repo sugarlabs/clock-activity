@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-02 00:32-0400\n"
-"PO-Revision-Date: 2018-02-11 14:54+0000\n"
-"Last-Translator: Yaron <sh.yaron@gmail.com>\n"
+"PO-Revision-Date: 2021-02-17 23:06+0000\n"
+"Last-Translator: omeritzics <omeritzicschwartz@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Pootle 2.5.1.1\n"
-"X-POOTLE-MTIME: 1518360840.000000\n"
+"X-POOTLE-MTIME: 1613603202.000000\n"
 
 #. TRANS: "name" option from activity.info file
 #: clock.py:239
@@ -203,6 +203,5 @@ msgstr "he"
 #. Look at the README file from the activity for explanations on how to create
 #. rules.
 #: timewriter.py:204
-#, fuzzy
 msgid "time(h, m) => What Time Is It?"
 msgstr "time(h, m) => מה השעה?"

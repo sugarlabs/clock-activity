@@ -8,28 +8,32 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-27 19:24+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-11-01 00:26+0000\n"
+"Last-Translator: NF <rkavt@smartprojects.ge>\n"
+"Language-Team: Georgian <http://weblate.sugarlabs.org/projects/"
+"sugar-activities/clock/ka/>\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: activity/activity.info:2
 msgid "Clock"
-msgstr ""
+msgstr "საათი"
 
 #: activity/activity.info:3
 msgid ""
 "Do you know the time? Now you do! Check out all the different ways you can "
 "make your clock look too!"
 msgstr ""
+"იცით, რა დროა? ახლა კი! ნახეთ, რამდენნაირად შეიძლება, საათი გამოიყურებოდეს!"
 
 #. TRANS: Title of the activity
 #: clock.py:125
 msgid "What Time Is It?"
-msgstr ""
+msgstr "რომელი საათია?"
 
 #. TRANS: The format used when writing the time in full
 #. letters.  You must take care to use a font size large enough
@@ -40,7 +44,7 @@ msgstr ""
 #: clock.py:133
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
-msgstr ""
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
 
 #. TRANS: The format used to display the weekday and date
 #. (example: Tuesday 10/21/2008) We recommend to use the same
@@ -53,30 +57,33 @@ msgid ""
 "%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground="
 "\"#B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\""
+">%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground=\"#"
+"B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
 
 #: clock.py:295
 msgid "Simple Clock"
-msgstr ""
+msgstr "მარტივი საათი"
 
 #: clock.py:302
 msgid "Nice Clock"
-msgstr ""
+msgstr "კარგი საათი"
 
 #: clock.py:309
 msgid "Digital Clock"
-msgstr ""
+msgstr "ციფრული საათი"
 
 #: clock.py:322
 msgid "Display time in full letters"
-msgstr ""
+msgstr "დროის ჩვენება სრული ასოებით"
 
 #: clock.py:328
 msgid "Display weekday and date"
-msgstr ""
+msgstr "კვირის დღისა და თარიღის ჩვენება"
 
 #: clock.py:334
 msgid "Talking clock"
-msgstr ""
+msgstr "მოლაპარაკე საათი"
 
 #: clock.py:340
 msgid "Ticking clock"
@@ -84,7 +91,7 @@ msgstr ""
 
 #: clock.py:349
 msgid "Grab the hands"
-msgstr ""
+msgstr "მოჰკიდეთ ხელი"
 
 #: clock.py:359
 msgid "Download time"
@@ -389,6 +396,9 @@ msgid ""
 "foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
 "<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
+"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
 
 #: clock.py:1017
 msgid ""
@@ -396,6 +406,9 @@ msgid ""
 "\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
 "span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white"
+"\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM "
+"</span></span></markup>"
 
 #: clock.py:1021
 msgid ""
@@ -403,10 +416,201 @@ msgid ""
 "\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
 "</span></span></markup>"
 msgstr ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground="
+"\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
 
 #. TRANS: The format of the font used to print hour
 #. numbers, from 1 to 12.
 #: clock.py:1094
 #, python-format
 msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
+msgstr "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
+
+#. TRANS: The language pitch (range [0 - 99], default 50 for English)
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:30
+msgid "50"
+msgstr "50"
+
+#. TRANS: The diction speed, in average words per minute (range [80 - 390],
+#. default 170 for English).
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:38
+msgid "170"
+msgstr "170"
+
+#. TRANS: The pause duration between words, in units of 10 ms.
+#. Look at http://espeak.sourceforge.net/commands.html for details
+#: speaker.py:45
+msgid "0"
+msgstr "0"
+
+#. TRANS: The language and voice variant
+#. Look at http://espeak.sourceforge.net/commands.html for details, and
+#. http://espeak.sourceforge.net/languages.html to see if your language is supported.
+#: speaker.py:53
+msgid "en"
+msgstr "ka"
+
+#. TRANS: The rules to print the time in the localized language.
+#.
+#. Example syntax:
+#. time(h, 15) => a quarter to hour(h) am_pm(h) |
+#. The left hand side of the rule defines a pattern with a variable 'h' and a
+#. value '15'.
+#. The right hand side, when applied, will use the text "a quarter to " and call
+#. the first rule matching hour(h) after substituting the variable 'h' by its value,
+#. and call the rule matching am_pm(h).
+#. Internal spaces are significant on the right side of a rule. In calls, all
+#. arguments which are not numbers are considered to be variables. The rule parser
+#. is very simple and will let many syntax errors go ignored.
+#.
+#. A rule ends with the character '|'.
+#. The character '_' is a anonymous variable.
+#. The character '#' can be used to concatenate two text fragments. For instance:
+#. plural(1) => |
+#. plural(_) => s |
+#. hour(h) => number(h) hour#plural(h) |
+#. Use '\#' to use a # character, for instance in a pango color
+#. tag like <span foreground="\#FF0055">
+#.
+#. You can put range conditions on firing a rule, with the syntax [var1 < var2] or
+#. [var1 < var2 < var3]. For instance:
+#. hours(h) [h < 12] => in the morning |
+#. hours(h) [12 < h < 18] => in the afternoon |
+#. hours(_) => in the night |
+#.
+#. These rules will be called with the root pattern "time(hour, minute)", with the
+#. variable 'hour' bound to the current hour and the variable 'minute' to the
+#. current minute.
+#. Order of rules is important. Rules are tried from first to last. So most precise
+#. rule must be placed first in the list.
+#.
+#. You can validate your set of rules by running the command line:
+#. python timewriter.py LANG
+#.
+#. You should use pango markup to respect the same colors as for the clock hands.
+#. Look at the README file from the activity for explanations on how to create
+#. rules.
+#: timewriter.py:204
+msgid "time(h, m) => What Time Is It?"
 msgstr ""
+"        time(12, 0) => <span foreground=\"\\#005FE4\">hour(12)</span> |\n"
+"        time(0, 0) => <span foreground=\"\\#005FE4\">hour(0)</span> |\n"
+"        time(h, 0) => <span foreground=\"\\#005FE4\">hour(h)</span> o'clock "
+"am_pm(h) |\n"
+"        time(h, m) [m < 31] => <span foreground=\"\\#00B20D\">min(m)</span> "
+"past <span foreground=\"\\#005FE4\">hour(h)</span> am_pm(h) |\n"
+"        time(h, m) [30 < m] => <span foreground=\"\\#00B20D\">min(m)</span> "
+"to <span foreground=\"\\#005FE4\">hour1(h)</span> am_pm(h) |\n"
+"        min(1) => ერთი წუთი |\n"
+"        min(2) => ორი წუთი |\n"
+"        min(3) => სამი წუთი |\n"
+"        min(4) => ოთხი წუთი |\n"
+"        min(5) => ხუთი წუთი |\n"
+"        min(6) => ექვსი წუთი |\n"
+"        min(7) => შვიდი წუთი |\n"
+"        min(8) => რვა წუთი |\n"
+"        min(9) => ცხრა წუთი |\n"
+"        min(10) => ათი წუთი |\n"
+"        min(11) => თერთმეტი წუთი |\n"
+"        min(12) => თორმეთი წუთი |\n"
+"        min(13) => ცამეტი წუთი |\n"
+"        min(14) => თოთხმეტი წუთი |\n"
+"        min(15) => თხუთმეტი წუთი |\n"
+"        min(16) => თექვსმეტი წუთი |\n"
+"        min(17) => ჩვიდმეტი წუთი |\n"
+"        min(18) => თვრამეტი წუთი |\n"
+"        min(19) => ცხრამეტი წუთი |\n"
+"        min(20) => ოცი წუთი |\n"
+"        min(21) => ოცდაერთი წუთი |\n"
+"        min(22) => ოცდაორი წუთი |\n"
+"        min(23) => ოცდასამი წუთი |\n"
+"        min(24) => ოცდაოთხი წუთი |\n"
+"        min(25) => ოცდახუთი წუთი |\n"
+"        min(26) => ოცდაექვსი წუთი |\n"
+"        min(27) => ოცდაშვიდი წუთი |\n"
+"        min(28) => ოცდარვა წუთი |\n"
+"        min(29) => ოცდაცხრა წუთი |\n"
+"        min(30) => ნახევარი |\n"
+"        min(31) => ოცდაცხრა წუთი |\n"
+"        min(32) => ოცდარვა წუთი |\n"
+"        min(33) => ოცდაშვიდი წუთი |\n"
+"        min(34) => ოცდაექვსი წუთი |\n"
+"        min(35) => ოცდახუთი წუთი |\n"
+"        min(36) => ოცდაოთხი წუთი |\n"
+"        min(37) => ოცდასამი წუთი |\n"
+"        min(38) => ოცდაორი წუთი |\n"
+"        min(39) => ოცდაერთი წუთი |\n"
+"        min(40) => ოცი წუთი |\n"
+"        min(41) => ცხრამეტი წუთი |\n"
+"        min(42) => თვრამეტი წუთი |\n"
+"        min(43) => ჩვიდმეტი წუთი |\n"
+"        min(44) => თექვსმეტი წუთი |\n"
+"        min(45) => თხუთმეტი წუთი |\n"
+"        min(46) => თოთხმეტი წუთი |\n"
+"        min(47) => ცამეტი წუთი |\n"
+"        min(48) => თორმეტი წუთი |\n"
+"        min(49) => თერთმეტი წუთი |\n"
+"        min(50) => ათი წუთი |\n"
+"        min(51) => ცხრა წუთი |\n"
+"        min(52) => რვა წუთი |\n"
+"        min(53) => შვიდი წუთი |\n"
+"        min(54) => ექვსი წუთი |\n"
+"        min(55) => ხუთი |\n"
+"        min(56) => ოთხი წუთი |\n"
+"        min(57) => სამი წუთი |\n"
+"        min(58) => ორი წუთი |\n"
+"        min(59) => ერთი წუთი |\n"
+"        min(60) => სამოცი წუთი |\n"
+"        hour(0) => შუაღამე |\n"
+"        hour(1) => პირველი |\n"
+"        hour(2) => ორი |\n"
+"        hour(3) => სამი |\n"
+"        hour(4) => ოთხი |\n"
+"        hour(5) => ხუთი |\n"
+"        hour(6) => ექვსი |\n"
+"        hour(7) => შვიდი |\n"
+"        hour(8) => რვა |\n"
+"        hour(9) => ცხრა |\n"
+"        hour(10) => ათი |\n"
+"        hour(11) => თერთმეტი |\n"
+"        hour(12) => საღამო |\n"
+"        hour(13) => პირველი |\n"
+"        hour(14) => ორი |\n"
+"        hour(15) => სამი |\n"
+"        hour(16) => ოთხი |\n"
+"        hour(17) => ხუთი |\n"
+"        hour(18) => ექვსი |\n"
+"        hour(19) => შვიდი |\n"
+"        hour(20) => რვა |\n"
+"        hour(21) => ცხრა |\n"
+"        hour(22) => ათი |\n"
+"        hour(23) => თერთმეტი |\n"
+"        hour1(0) => პირველი |\n"
+"        hour1(1) => ორი |\n"
+"        hour1(2) => სამი |\n"
+"        hour1(3) => ოთხი |\n"
+"        hour1(4) => ხუთი |\n"
+"        hour1(5) => ექვსი |\n"
+"        hour1(6) => შვიდი |\n"
+"        hour1(7) => რვა |\n"
+"        hour1(8) => ცხრა |\n"
+"        hour1(9) => ათი |\n"
+"        hour1(10) => თერთმეტი |\n"
+"        hour1(11) => საღამოს |\n"
+"        hour1(12) => პირველი |\n"
+"        hour1(13) => ორი |\n"
+"        hour1(14) => სამი |\n"
+"        hour1(15) => ოთხი |\n"
+"        hour1(16) => ხუთი |\n"
+"        hour1(17) => ექვსი |\n"
+"        hour1(18) => შვიდი |\n"
+"        hour1(19) => რვა |\n"
+"        hour1(20) => ცხრა |\n"
+"        hour1(21) => ათი |\n"
+"        hour1(22) => თერთმეტი |\n"
+"        hour1(23) => შუაღამე |\n"
+"        am_pm(h) [ h < 12] => AM |\n"
+"        am_pm(_) => PM"

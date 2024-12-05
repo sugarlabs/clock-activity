@@ -1209,6 +1209,9 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         reactivates the clock, we start a timer to be called every
         second and update the clock.
         """
+        if self._active == active:
+            return
+
         self._active = active
 
         if active:
@@ -1386,18 +1389,6 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         self._hand_being_grabbed = None
         self.queue_draw()
 
-    def _tick_message_cb(self, bus, message):
-        """On tick end of stream, stop, seek to start of file, and
-        prepare for playing using PAUSED.  Minimises latency between
-        clock second hand redraw and sound."""
-        if message.type == Gst.MessageType.EOS:
-            self._player.set_state(Gst.State.NULL)
-            self._player.seek_simple(Gst.Format.TIME,
-                                     Gst.SeekFlags.FLUSH,
-                                     0 * Gst.SECOND)
-            self._player.set_state(Gst.State.PAUSED)
-        return True
-
     def _get_ticking(self):
         return self._ticking
 
@@ -1410,10 +1401,6 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
                                       os.path.join(activity.get_bundle_path(),
                                                    'sounds', 'tick.wav'))
             self._player.set_state(Gst.State.PAUSED)
-
-            bus = self._player.get_bus()
-            bus.add_signal_watch()
-            bus.connect('message', self._tick_message_cb)
 
         # Stop ticking sound player
         if self._ticking and not ticking:
@@ -1428,4 +1415,10 @@ font_desc="Sans Bold 40">%d</span></markup>') % (i + 1)
         """Make a tick sound.
         Player is in PAUSED state, so ready to go."""
         if self._ticking:
+            def pause():
+                if self._player:
+                    self._player.set_state(Gst.State.PAUSED)
+
+            self._player.seek_simple(Gst.Format.TIME, Gst.SeekFlags.FLUSH, 0)
             self._player.set_state(Gst.State.PLAYING)
+            GObject.timeout_add(450, pause)

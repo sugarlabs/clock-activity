@@ -1,0 +1,412 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-27 19:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: activity/activity.info:2
+msgid "Clock"
+msgstr ""
+
+#: activity/activity.info:3
+msgid ""
+"Do you know the time? Now you do! Check out all the different ways you can "
+"make your clock look too!"
+msgstr ""
+
+#. TRANS: Title of the activity
+#: clock.py:125
+msgid "What Time Is It?"
+msgstr ""
+
+#. TRANS: The format used when writing the time in full
+#. letters.  You must take care to use a font size large enough
+#. so that kids can read it easily, but also small enough so
+#. that all times combination fit on the screen, even when the
+#. screen is rotated.  Pango markup:
+#. http://www.pygtk.org/docs/pygtk/pango-markup-language.html
+#: clock.py:133
+#, python-format
+msgid "<markup><span lang=\"en\" font_desc=\"Sans 20\">%s</span></markup>"
+msgstr ""
+
+#. TRANS: The format used to display the weekday and date
+#. (example: Tuesday 10/21/2008) We recommend to use the same
+#. font size as for the time display.  See
+#. http://docs.python.org/lib/module-time.html for available
+#: clock.py:141
+#, no-python-format
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans 20\"><span foreground=\"#B20008\">"
+"%A</span>, <span foreground=\"#5E008C\">%m</span>/<span foreground="
+"\"#B20008\">%d</span>/<span foreground=\"#9A5200\">%Y</span></span></markup>"
+msgstr ""
+
+#: clock.py:295
+msgid "Simple Clock"
+msgstr ""
+
+#: clock.py:302
+msgid "Nice Clock"
+msgstr ""
+
+#: clock.py:309
+msgid "Digital Clock"
+msgstr ""
+
+#: clock.py:322
+msgid "Display time in full letters"
+msgstr ""
+
+#: clock.py:328
+msgid "Display weekday and date"
+msgstr ""
+
+#: clock.py:334
+msgid "Talking clock"
+msgstr ""
+
+#: clock.py:340
+msgid "Ticking clock"
+msgstr ""
+
+#: clock.py:349
+msgid "Grab the hands"
+msgstr ""
+
+#: clock.py:359
+msgid "Download time"
+msgstr ""
+
+#. TRANS: Hour, referring to the unit of time. This list
+#. iterates through each unit of the 12-hour clock twice in
+#. word form so one AM would have the same translation as one PM.
+#: clock.py:503 clock.py:505 clock.py:513
+msgid "twelve"
+msgstr ""
+
+#. TRANS: Minute, referring to the unit of time. This list
+#. iterates through 60 minutes in word form.
+#: clock.py:503 clock.py:505 clock.py:511
+msgid "one"
+msgstr ""
+
+#: clock.py:503 clock.py:505 clock.py:511
+msgid "two"
+msgstr ""
+
+#: clock.py:503 clock.py:506 clock.py:511
+msgid "three"
+msgstr ""
+
+#: clock.py:503 clock.py:506 clock.py:511
+msgid "four"
+msgstr ""
+
+#: clock.py:504 clock.py:506 clock.py:511
+msgid "five"
+msgstr ""
+
+#: clock.py:504 clock.py:506 clock.py:512
+msgid "six"
+msgstr ""
+
+#: clock.py:504 clock.py:506 clock.py:512
+msgid "seven"
+msgstr ""
+
+#: clock.py:504 clock.py:507 clock.py:512
+msgid "eight"
+msgstr ""
+
+#: clock.py:504 clock.py:507 clock.py:512
+msgid "nine"
+msgstr ""
+
+#: clock.py:505 clock.py:507 clock.py:512
+msgid "ten"
+msgstr ""
+
+#: clock.py:505 clock.py:507 clock.py:513
+msgid "eleven"
+msgstr ""
+
+#: clock.py:513
+msgid "thirteen"
+msgstr ""
+
+#: clock.py:513
+msgid "fourteen"
+msgstr ""
+
+#: clock.py:514
+msgid "fifteen"
+msgstr ""
+
+#: clock.py:514
+msgid "sixteen"
+msgstr ""
+
+#: clock.py:514
+msgid "seventeen"
+msgstr ""
+
+#: clock.py:514
+msgid "eighteen"
+msgstr ""
+
+#: clock.py:515
+msgid "nineteen"
+msgstr ""
+
+#: clock.py:515
+msgid "twenty"
+msgstr ""
+
+#: clock.py:515
+msgid "twenty-one"
+msgstr ""
+
+#: clock.py:516
+msgid "twenty-two"
+msgstr ""
+
+#: clock.py:516
+msgid "twenty-three"
+msgstr ""
+
+#: clock.py:516
+msgid "twenty-four"
+msgstr ""
+
+#: clock.py:517
+msgid "twenty-five"
+msgstr ""
+
+#: clock.py:517
+msgid "twenty-six"
+msgstr ""
+
+#: clock.py:517
+msgid "twenty-seven"
+msgstr ""
+
+#: clock.py:518
+msgid "twenty-eight"
+msgstr ""
+
+#: clock.py:518
+msgid "twenty-nine"
+msgstr ""
+
+#: clock.py:518
+msgid "thirty"
+msgstr ""
+
+#: clock.py:519
+msgid "thirty-one"
+msgstr ""
+
+#: clock.py:519
+msgid "thirty-two"
+msgstr ""
+
+#: clock.py:519
+msgid "thirty-three"
+msgstr ""
+
+#: clock.py:520
+msgid "thirty-four"
+msgstr ""
+
+#: clock.py:520
+msgid "thirty-five"
+msgstr ""
+
+#: clock.py:520
+msgid "thirty-six"
+msgstr ""
+
+#: clock.py:521
+msgid "thirty-seven"
+msgstr ""
+
+#: clock.py:521
+msgid "thirty-eight"
+msgstr ""
+
+#: clock.py:521
+msgid "thirty-nine"
+msgstr ""
+
+#: clock.py:522
+msgid "forty"
+msgstr ""
+
+#: clock.py:522
+msgid "forty-one"
+msgstr ""
+
+#: clock.py:522
+msgid "forty-two"
+msgstr ""
+
+#: clock.py:523
+msgid "forty-three"
+msgstr ""
+
+#: clock.py:523
+msgid "forty-four"
+msgstr ""
+
+#: clock.py:523
+msgid "forty-five"
+msgstr ""
+
+#: clock.py:524
+msgid "forty-six"
+msgstr ""
+
+#: clock.py:524
+msgid "forty-seven"
+msgstr ""
+
+#: clock.py:524
+msgid "forty-eight"
+msgstr ""
+
+#: clock.py:525
+msgid "forty-nine"
+msgstr ""
+
+#: clock.py:525
+msgid "fifty"
+msgstr ""
+
+#: clock.py:525
+msgid "fifty-one"
+msgstr ""
+
+#: clock.py:526
+msgid "fifty-two"
+msgstr ""
+
+#: clock.py:526
+msgid "fifty-three"
+msgstr ""
+
+#: clock.py:526
+msgid "fifty-four"
+msgstr ""
+
+#: clock.py:527
+msgid "fifty-five"
+msgstr ""
+
+#: clock.py:527
+msgid "fifty-six"
+msgstr ""
+
+#: clock.py:527
+msgid "fifty-seven"
+msgstr ""
+
+#: clock.py:528
+msgid "fifty-eight"
+msgstr ""
+
+#: clock.py:528
+msgid "fifty-nine"
+msgstr ""
+
+#: clock.py:528
+msgid "sixty"
+msgstr ""
+
+#. TRANS: "o clock", used after a number from one to twelve to
+#. indicate the hour of the day or night, eg. "one o clock PM"
+#: clock.py:532
+msgid "o clock"
+msgstr ""
+
+#. TRANS: AM or PM, referring to morning (before 12PM) or
+#. afternoon (12PM and after).
+#: clock.py:536
+msgid "AM"
+msgstr ""
+
+#: clock.py:536
+msgid "PM"
+msgstr ""
+
+#: clock.py:547
+msgid "noon"
+msgstr ""
+
+#: clock.py:554
+msgid "midnight"
+msgstr ""
+
+#: clock.py:560 clock.py:571
+#, python-format
+msgid ""
+"<span foreground=\"#005FE4\">%(hour)s</span><span foreground=\"#00B20D\"> "
+"%(minute)s</span><span foreground=\"#B20008\"> %(period)s</span>"
+msgstr ""
+
+#: clock.py:612
+msgid "Download time began"
+msgstr ""
+
+#: clock.py:627
+#, python-format
+msgid "Download time failed (%d)"
+msgstr ""
+
+#: clock.py:644
+msgid "Setting time in progress"
+msgstr ""
+
+#: clock.py:654
+msgid "Download time done"
+msgstr ""
+
+#: clock.py:910
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans,Monospace Bold 96\"><span "
+"foreground=\"#005FE4\">%I</span>:<span foreground=\"#00B20D\">%M</span>:"
+"<span foreground=\"#E6000A\">%S</span>%p</span></markup>"
+msgstr ""
+
+#: clock.py:1017
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground=\"white"
+"\" background=\"black\"> AM </span><span foreground=\"lightgray\"> PM </"
+"span></span></markup>"
+msgstr ""
+
+#: clock.py:1021
+msgid ""
+"<markup><span lang=\"en\" font_desc=\"Sans Bold 28\"><span foreground="
+"\"lightgray\"> AM </span><span foreground=\"white\" background=\"black\"> PM "
+"</span></span></markup>"
+msgstr ""
+
+#. TRANS: The format of the font used to print hour
+#. numbers, from 1 to 12.
+#: clock.py:1094
+#, python-format
+msgid "<markup><span lang=\"en\" font_desc=\"Sans Bold 40\">%d</span></markup>"
+msgstr ""
